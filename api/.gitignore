@@ -1,0 +1,36 @@
+# Python
+*.pyc
+*.pyo
+__pycache__/
+
+# Django
+*.sqlite3
+*.log
+db.sqlite3
+local_settings.py
+
+# Virtual Environment
+venv/
+env/
+
+# Environment Variables
+.env
+
+# Debugging and Testing
+.coverage
+.tox/
+.pytest_cache/
+.nox/
+.mypy_cache/
+nosetests.xml
+test-results.xml
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS Specific Files
+.DS_Store
+Thumbs.db
