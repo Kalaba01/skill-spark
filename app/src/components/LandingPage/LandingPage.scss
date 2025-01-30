@@ -1,0 +1,161 @@
+@import '../../styles/variables';
+
+/* General Landing Page Styles */
+.landing-page {
+  font-family: $primary-font;
+  color: $primary-text-color;
+}
+
+/* Top Bar */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: $primary-color;
+
+  .logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: white;
+    flex-grow: 1;
+    text-align: center;
+  }
+
+  .top-bar-icons {
+    display: flex;
+    gap: 1rem;
+
+    .icon {
+      color: white;
+      cursor: pointer;
+      transition: transform 0.3s;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+}
+
+/* Hero Section */
+.hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Hero sekcija zauzima ceo ekran */
+  text-align: center;
+  background: linear-gradient(135deg, $primary-color, $secondary-color);
+  color: white;
+
+  h1 {
+    font-size: 4rem;
+    font-weight: bold;
+  }
+}
+
+/* Features */
+.features {
+  padding: 4rem 2rem;
+
+  h2 {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .feature-item {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    margin-bottom: 4rem;
+
+    img {
+      width: 600px;
+      height: 400px;
+      border-radius: 8px;
+    }
+
+    div {
+      flex: 1;
+
+      h3 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+      }
+
+      p {
+        font-size: 1.2rem;
+        line-height: 1.6;
+      }
+    }
+  }
+
+  /* Alternating layout for images */
+  .reverse {
+    flex-direction: row-reverse;
+  }
+}
+
+/* FAQ Section */
+.faq {
+  padding: 4rem 2rem;
+  background-color: #f9f9f9;
+
+  h2 {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .faq-item {
+    background: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    cursor: pointer;
+    transition: all 0.4s ease-in-out;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+
+    .faq-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .arrow {
+      transition: transform 0.3s;
+    }
+
+    .rotate {
+      transform: rotate(180deg);
+    }
+
+    h3 {
+      font-size: 1.4rem;
+      margin: 0;
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease-in-out;
+    }
+
+    &.open {
+      background-color: #e3e3e3;
+
+      .faq-answer {
+        max-height: 500px;
+        padding-top: 1rem;
+      }
+    }
+  }
+}
+
+/* Footer */
+.footer {
+  background-color: $primary-color;
+  color: white;
+  padding: 1.5rem 2rem;
+  text-align: center;
+}
