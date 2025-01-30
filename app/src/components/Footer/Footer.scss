@@ -1,0 +1,10 @@
+@import '../../styles/variables';
+
+.footer {
+  background-color: $primary-color;
+  color: white;
+  padding: 1.5rem 2rem;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 500;
+}

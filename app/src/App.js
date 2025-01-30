@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { LandingPage, GoTop } from './components';
+import { LandingPage, GoTop, Footer } from './components';
 import './App.css';
 
 function App() {
@@ -9,7 +9,9 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
       </Routes>
+      
       <GoTop />
+      <Footer />
     </>
   );
 }

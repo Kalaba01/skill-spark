@@ -109,11 +109,6 @@ function LandingPage() {
           </div>
         ))}
       </section>
-
-      {/* Footer */}
-      <footer className="footer">
-        <div>© 2025 SkillSpark. All rights reserved.</div>
-      </footer>
     </div>
   );
 }
