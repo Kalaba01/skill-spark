@@ -1,0 +1,33 @@
+@import '../../styles/variables';
+
+.go-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  background-color: $primary-color;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: opacity 0.3s, transform 0.3s;
+  opacity: 0;
+  transform: translateY(10px);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+
+  .arrow-icon {
+    font-size: 1.5rem;
+  }
+
+  &:hover {
+    background-color: darken($primary-color, 10%);
+  }
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
