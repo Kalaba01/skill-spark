@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import "./LandingPage.scss";
 import { FaUserCircle, FaMoon, FaGlobe, FaChevronDown } from "react-icons/fa";
+import { Login } from "../index";
 
 function LandingPage() {
   const [faqOpen, setFaqOpen] = useState(null);
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
 
   const toggleFaq = (index) => {
     setFaqOpen(faqOpen === index ? null : index);
@@ -15,7 +17,7 @@ function LandingPage() {
       <header className="top-bar">
         <div className="logo">SkillSpark</div>
         <div className="top-bar-icons">
-          <FaUserCircle size={24} className="icon" />
+          <FaUserCircle size={24} className="icon" onClick={()=> setIsLoginOpen(true)} />
           <FaMoon size={24} className="icon" />
           <FaGlobe size={24} className="icon" />
         </div>
@@ -109,6 +111,10 @@ function LandingPage() {
           </div>
         ))}
       </section>
+
+      {/* Login Popup */}
+      <Login isOpen={isLoginOpen} onClose={() => setIsLoginOpen(false)} />
+
     </div>
   );
 }
