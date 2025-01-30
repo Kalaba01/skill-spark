@@ -1,14 +1,25 @@
 import React, { useState } from "react";
 import "./LandingPage.scss";
 import { FaUserCircle, FaMoon, FaGlobe, FaChevronDown } from "react-icons/fa";
-import { Login } from "../index";
+import { Login, Register } from "../index";
 
 function LandingPage() {
   const [faqOpen, setFaqOpen] = useState(null);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [isRegisterOpen, setIsRegisterOpen] = useState(false);
 
   const toggleFaq = (index) => {
     setFaqOpen(faqOpen === index ? null : index);
+  };
+
+  const openLogin = () => {
+    setIsRegisterOpen(false);
+    setIsLoginOpen(true);
+  };
+
+  const openRegister = () => {
+    setIsLoginOpen(false);
+    setIsRegisterOpen(true);
   };
 
   return (
@@ -17,7 +28,7 @@ function LandingPage() {
       <header className="top-bar">
         <div className="logo">SkillSpark</div>
         <div className="top-bar-icons">
-          <FaUserCircle size={24} className="icon" onClick={()=> setIsLoginOpen(true)} />
+          <FaUserCircle size={24} className="icon" onClick={openLogin} />
           <FaMoon size={24} className="icon" />
           <FaGlobe size={24} className="icon" />
         </div>
@@ -112,8 +123,9 @@ function LandingPage() {
         ))}
       </section>
 
-      {/* Login Popup */}
-      <Login isOpen={isLoginOpen} onClose={() => setIsLoginOpen(false)} />
+      {/* Login and Register Popups */}
+      <Login isOpen={isLoginOpen} onClose={() => setIsLoginOpen(false)} switchToRegister={openRegister} />
+      <Register isOpen={isRegisterOpen} onClose={() => setIsRegisterOpen(false)} switchToLogin={openLogin} />
 
     </div>
   );

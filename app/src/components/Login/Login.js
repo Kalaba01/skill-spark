@@ -1,7 +1,7 @@
 import React from "react";
 import "./Login.scss";
 
-function Login({ isOpen, onClose }) {
+function Login({ isOpen, onClose, switchToRegister }) {
   if (!isOpen) return null;
 
   return (
@@ -20,9 +20,9 @@ function Login({ isOpen, onClose }) {
           <button type="submit" className="login-btn">Login</button>
         </form>
         <p className="register-link">
-          Don't have an account? <span>Register</span>
+          Don't have an account? <span onClick={switchToRegister}>Register</span>
         </p>
-        <button className="close-btn" onClick={onClose}>X</button>
+        <button className="close-btn" onClick={onClose}>&times;</button>
       </div>
     </div>
   );
