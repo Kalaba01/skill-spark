@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { showToast } from "../ToastNotification/ToastNotification";
 import "./Register.scss";
 
 function Register({ isOpen, onClose, switchToLogin }) {
@@ -9,9 +10,6 @@ function Register({ isOpen, onClose, switchToLogin }) {
     password: "",
     confirm_password: ""
   });
-
-  const [error, setError] = useState(null);
-  const [successMessage, setSuccessMessage] = useState(null);
 
   const handleChange = (e) => {
     setFormData({
@@ -24,7 +22,7 @@ function Register({ isOpen, onClose, switchToLogin }) {
     e.preventDefault();
 
     if (formData.password !== formData.confirm_password) {
-      setError("Passwords do not match!");
+      showToast("Passwords do not match!", "error");
       return;
     }
 
@@ -35,8 +33,7 @@ function Register({ isOpen, onClose, switchToLogin }) {
         password: formData.password
       });
 
-      setSuccessMessage(response.data.message);
-      setError(null);
+      showToast(response.data.message, "success");
 
       setFormData({
         company_name: "",
@@ -49,7 +46,7 @@ function Register({ isOpen, onClose, switchToLogin }) {
         switchToLogin();
       }, 2000);
     } catch (err) {
-      setError(err.response?.data?.message || "Registration failed");
+      showToast(err.response?.data?.message || "Registration failed", "error");
     }
   };
 
@@ -59,12 +56,6 @@ function Register({ isOpen, onClose, switchToLogin }) {
     <div className="register-overlay" onClick={onClose}>
       <div className="register-popup" onClick={(e) => e.stopPropagation()}>
         <h2>Register</h2>
-
-        {/* Prikaz uspešne poruke */}
-        {successMessage && <p className="success-message">{successMessage}</p>}
-
-        {/* Prikaz greške */}
-        {error && <p className="error-message">{error}</p>}
 
         <form onSubmit={handleSubmit}>
           <label>Company Name</label>

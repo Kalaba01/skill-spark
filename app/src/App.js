@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { LandingPage, GoTop, Footer } from './components';
+import { LandingPage, GoTop, Footer, ToastNotification } from './components';
 import './App.css';
 
 function App() {
@@ -10,6 +10,7 @@ function App() {
         <Route path="/" element={<LandingPage />} />
       </Routes>
       
+      <ToastNotification />
       <GoTop />
       <Footer />
     </>
