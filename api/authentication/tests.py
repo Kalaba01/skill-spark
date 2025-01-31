@@ -75,3 +75,47 @@ class RegisterCompanyAPITest(TestCase):
 
         response = self.client.post(self.register_url, data)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+class LoginAPITest(TestCase):
+    def setUp(self):
+        self.client = APIClient()
+        self.login_url = "/api/auth/login/"
+        
+        self.user = User.objects.create_user(
+            email="user@example.com",
+            password="TestPass123",
+            role=User.COMPANY
+        )
+
+    def test_login_success(self):
+        data = {
+            "email": "user@example.com",
+            "password": "TestPass123"
+        }
+
+        response = self.client.post(self.login_url, data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertIn("access", response.data)
+        self.assertIn("refresh", response.data)
+        self.assertEqual(response.data["user"]["email"], "user@example.com")
+        self.assertEqual(response.data["user"]["role"], self.user.role)
+
+    def test_login_invalid_password(self):
+        data = {
+            "email": "user@example.com",
+            "password": "WrongPass123"
+        }
+
+        response = self.client.post(self.login_url, data)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertIn("non_field_errors", response.data)
+
+    def test_login_nonexistent_user(self):
+        data = {
+            "email": "fakeuser@example.com",
+            "password": "FakePass123"
+        }
+
+        response = self.client.post(self.login_url, data)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertIn("non_field_errors", response.data)
