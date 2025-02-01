@@ -17,7 +17,7 @@
 
 /* Popup container */
 .login-popup {
-  background: white;
+  background: var(--background-color);
   padding: 2rem;
   width: 380px;
   border-radius: 12px;
@@ -26,11 +26,12 @@
   position: relative;
   transform: scale(0.9);
   animation: popupOpen 0.3s ease-in-out forwards;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 
   h2 {
     font-size: 2rem;
     margin-bottom: 1.5rem;
-    color: $primary-color;
+    color: var(--primary-color);
   }
 
   label {
@@ -38,26 +39,29 @@
     text-align: left;
     margin: 12px 0 5px;
     font-weight: bold;
+    color: var(--text-color);
   }
 
   input {
     width: 95%;
     padding: 12px;
-    border: 2px solid #ddd;
+    border: 2px solid var(--border-color);
     border-radius: 8px;
     margin-bottom: 12px;
     font-size: 1rem;
+    background: var(--background-color);
+    color: var(--text-color);
     transition: border-color 0.3s ease-in-out;
 
     &:focus {
-      border-color: $primary-color;
+      border-color: var(--primary-color);
       outline: none;
     }
   }
 
   .forgot-password {
     text-align: right;
-    color: $primary-color;
+    color: var(--primary-color);
     font-size: 0.9rem;
     cursor: pointer;
     margin-bottom: 1rem;
@@ -70,7 +74,7 @@
   .login-btn {
     width: 100%;
     padding: 12px;
-    background: $primary-color;
+    background: var(--primary-color);
     color: white;
     border: none;
     border-radius: 8px;
@@ -80,7 +84,7 @@
     transition: background 0.3s ease-in-out;
 
     &:hover {
-      background: darken($primary-color, 10%);
+      background: var(--secondary-color);
     }
   }
 
@@ -89,13 +93,13 @@
     font-size: 0.9rem;
 
     span {
-      color: $primary-color;
+      color: var(--primary-color);
       cursor: pointer;
       font-weight: bold;
       transition: color 0.3s ease-in-out;
 
       &:hover {
-        color: darken($primary-color, 10%);
+        color: var(--secondary-color);
         text-decoration: underline;
       }
     }
@@ -109,10 +113,11 @@
     border: none;
     font-size: 1.5rem;
     cursor: pointer;
-    color: #666;
+    color: var(--text-color);
+    transition: color 0.3s ease-in-out;
 
     &:hover {
-      color: $primary-color;
+      color: var(--primary-color);
     }
   }
 }

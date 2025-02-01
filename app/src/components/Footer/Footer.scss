@@ -1,10 +1,11 @@
 @import '../../styles/variables';
 
 .footer {
-  background-color: $primary-color;
-  color: white;
+  background-color: var(--primary-color);
+  color: var(--text-color);
   padding: 1.5rem 2rem;
   text-align: center;
   font-size: 1rem;
   font-weight: 500;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }

@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import "./LandingPage.scss";
-import { FaUserCircle, FaMoon, FaGlobe, FaChevronDown } from "react-icons/fa";
+import { FaUserCircle, FaSun, FaMoon, FaGlobe, FaChevronDown } from "react-icons/fa";
 import { Login, Register } from "../index";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleTheme } from "../../store/themeSlice";
 
 function LandingPage() {
   const [faqOpen, setFaqOpen] = useState(null);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
+
+  const dispatch = useDispatch();
+  const theme = useSelector((state) => state.theme.theme);
 
   const toggleFaq = (index) => {
     setFaqOpen(faqOpen === index ? null : index);
@@ -29,7 +34,11 @@ function LandingPage() {
         <div className="logo">SkillSpark</div>
         <div className="top-bar-icons">
           <FaUserCircle size={24} className="icon" onClick={openLogin} />
-          <FaMoon size={24} className="icon" />
+          {theme === "light" ? (
+            <FaMoon size={24} className="icon" onClick={() => dispatch(toggleTheme())} />
+          ) : (
+            <FaSun size={24} className="icon" onClick={() => dispatch(toggleTheme())} />
+          )}
           <FaGlobe size={24} className="icon" />
         </div>
       </header>
