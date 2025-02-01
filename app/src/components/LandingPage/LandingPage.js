@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import "./LandingPage.scss";
-import { FaUserCircle, FaSun, FaMoon, FaGlobe, FaChevronDown } from "react-icons/fa";
-import { Login, Register } from "../index";
+import { FaUserCircle, FaSun, FaMoon, FaChevronDown } from "react-icons/fa";
+import { Login, Register, Language } from "../index";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleTheme } from "../../store/themeSlice";
+import { useTranslation } from "react-i18next";
 
 function LandingPage() {
   const [faqOpen, setFaqOpen] = useState(null);
@@ -12,6 +13,7 @@ function LandingPage() {
 
   const dispatch = useDispatch();
   const theme = useSelector((state) => state.theme.theme);
+  const { t } = useTranslation();
 
   const toggleFaq = (index) => {
     setFaqOpen(faqOpen === index ? null : index);
@@ -39,81 +41,40 @@ function LandingPage() {
           ) : (
             <FaSun size={24} className="icon" onClick={() => dispatch(toggleTheme())} />
           )}
-          <FaGlobe size={24} className="icon" />
+          <Language />
         </div>
       </header>
 
       {/* Hero Section */}
       <section className="hero">
-        <h1>Revolutionize Employee Training</h1>
+        <h1>{t("landingPage.title")}</h1>
       </section>
 
       {/* Features Section */}
       <section id="features" className="features">
-        <h2>Why Choose SkillSpark?</h2>
+        <h2>{t("landingPage.whyChoose")}</h2>
 
         <div className="feature-item">
           <img src="https://placehold.co/600x400" alt="Feature 1" />
           <div>
-            <h3>Engaging and Interactive Quizzes</h3>
-            <p>
-              Traditional training methods often struggle to maintain employee
-              engagement, leading to lower knowledge retention. SkillSpark
-              transforms corporate training with interactive quizzes that make
-              learning more dynamic and effective. By integrating gamification,
-              employees stay motivated, improving participation and
-              comprehension. Our quizzes adapt to each employee's learning pace,
-              providing personalized challenges based on performance. Instant
-              feedback helps reinforce knowledge, ensuring employees grasp key
-              concepts in real-time. The platform is accessible across multiple
-              devices, allowing employees to complete training at their
-              convenience, whether in the office or working remotely. This
-              flexibility makes training more efficient and less disruptive.
-            </p>
+            <h3>{t("landingPage.feature1Title")}</h3>
+            <p>{t("landingPage.feature1Description")}</p>
           </div>
         </div>
 
         <div className="feature-item reverse">
           <img src="https://placehold.co/600x400" alt="Feature 2" />
           <div>
-            <h3>Data-Driven Training with Advanced Analytics</h3>
-            <p>
-              SkillSpark’s advanced analytics give businesses real-time insights
-              into employee progress, helping managers track training
-              effectiveness and identify areas for improvement. Companies can
-              monitor quiz completion rates and scores to detect employees who
-              may need additional support. By analyzing performance trends,
-              managers can refine training programs to focus on the most
-              relevant skill gaps. SkillSpark also offers customizable reporting
-              dashboards, making it easy for HR and leadership teams to generate
-              meaningful insights. These reports empower businesses to optimize
-              training strategies, ensuring measurable growth and alignment with
-              organizational goals.
-            </p>
+            <h3>{t("landingPage.feature2Title")}</h3>
+            <p>{t("landingPage.feature2Description")}</p>
           </div>
         </div>
       </section>
 
       {/* FAQ Section */}
       <section id="faq" className="faq">
-        <h2>Frequently Asked Questions</h2>
-        {[
-          {
-            question: "What is SkillSpark?",
-            answer:
-              "SkillSpark is a corporate training platform that enables businesses to create, manage, and track employee training through interactive quizzes. It helps companies improve knowledge retention, boost engagement, and measure learning outcomes effectively.",
-          },
-          {
-            question: "How does SkillSpark improve employee learning?",
-            answer:
-              "SkillSpark provides a structured learning path through quizzes tailored to each employee’s needs. Our real-time analytics highlight strengths and weaknesses, allowing managers to address knowledge gaps effectively. The platform also supports adaptive learning, where questions adjust in difficulty based on employee performance.",
-          },
-          {
-            question: "Can SkillSpark integrate with our existing HR or LMS systems?",
-            answer:
-              "Absolutely! SkillSpark is designed to integrate with popular HR and LMS systems, ensuring seamless synchronization of employee progress, training modules, and certification tracking. Our API allows businesses to automate training workflows effortlessly.",
-          }
-        ].map((faq, index) => (
+        <h2>{t("landingPage.faqTitle")}</h2>
+        {t("landingPage.faqItems", { returnObjects: true }).map((faq, index) => (
           <div
             key={index}
             className={`faq-item ${faqOpen === index ? "open" : ""}`}
@@ -121,9 +82,7 @@ function LandingPage() {
           >
             <div className="faq-header">
               <h3>{faq.question}</h3>
-              <FaChevronDown
-                className={`arrow ${faqOpen === index ? "rotate" : ""}`}
-              />
+              <FaChevronDown className={`arrow ${faqOpen === index ? "rotate" : ""}`} />
             </div>
             <div className="faq-answer">
               {faqOpen === index && <p>{faq.answer}</p>}

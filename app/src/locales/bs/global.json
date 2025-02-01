@@ -1,0 +1,62 @@
+{
+  "landingPage": {
+    "title": "Revolucija u obuci zaposlenih",
+    "whyChoose": "Zašto odabrati SkillSpark?",
+    "feature1Title": "Zabavni i interaktivni kvizovi",
+    "feature1Description": "Tradicionalni metodi obuke često imaju problem sa angažovanjem zaposlenih, što dovodi do slabijeg zadržavanja znanja. SkillSpark transformiše korporativnu obuku interaktivnim kvizovima koji uče na zabavan i efikasan način. Integrisanjem gamifikacije, zaposleni ostaju motivisani, poboljšavajući učešće i razumevanje. Naši kvizovi se prilagođavaju tempu učenja svakog zaposlenog, pružajući personalizovane izazove zasnovane na učinku. Trenutne povratne informacije pomažu u jačanju znanja, osiguravajući da zaposleni shvate ključne koncepte u realnom vremenu. Platforma je dostupna na više uređaja, omogućavajući zaposlenima da završe obuku bilo kada, bilo gde. Ova fleksibilnost čini obuku efikasnijom i manje ometajućom.",
+    "feature2Title": "Obuka zasnovana na podacima sa naprednom analitikom",
+    "feature2Description": "Napredna analitika SkillSpark-a pruža kompanijama uvid u stvarnom vremenu u napredak zaposlenih, pomažući menadžerima da prate efikasnost obuke i identifikuju oblasti za poboljšanje. Kompanije mogu pratiti stope završetka kvizova i rezultate kako bi prepoznale zaposlene kojima je potrebna dodatna podrška. Analizom trendova performansi, menadžeri mogu prilagoditi obuke tako da se fokusiraju na najrelevantnije nedostatke u znanju. SkillSpark takođe nudi prilagodljive izveštaje, omogućavajući HR i liderima da generišu korisne uvide. Ovi izveštaji pomažu kompanijama da optimizuju strategije obuke, osiguravajući merljiv rast i usklađenost sa organizacionim ciljevima.",
+    "faqTitle": "Često postavljana pitanja",
+    "faqItems": [
+      {
+        "question": "Šta je SkillSpark?",
+        "answer": "SkillSpark je korporativna platforma za obuku koja omogućava kompanijama da kreiraju, upravljaju i prate obuku zaposlenih putem interaktivnih kvizova. Pomaže kompanijama da poboljšaju zadržavanje znanja, povećaju angažovanje i efikasno mere ishode učenja."
+      },
+      {
+        "question": "Kako SkillSpark poboljšava učenje zaposlenih?",
+        "answer": "SkillSpark pruža strukturisani put učenja putem kvizova prilagođenih potrebama svakog zaposlenog. Naša analitika u realnom vremenu ističe snage i slabosti, omogućavajući menadžerima da efikasno rešavaju nedostatke u znanju. Platforma takođe podržava adaptivno učenje, gde se težina pitanja prilagođava učinku zaposlenih."
+      },
+      {
+        "question": "Može li se SkillSpark integrisati sa našim HR ili LMS sistemima?",
+        "answer": "Naravno! SkillSpark je dizajniran da se integriše sa popularnim HR i LMS sistemima, osiguravajući besprekornu sinhronizaciju napretka zaposlenih, modula obuke i praćenja sertifikacija. Naš API omogućava kompanijama da automatizuju tokove rada obuke bez napora."
+      }
+    ]
+  },
+  "footer": {
+    "rights": "Sva prava zadržana."
+  },
+  "login": {
+    "title": "Prijava",
+    "email": "Email",
+    "emailPlaceholder": "Unesite svoj email",
+    "password": "Lozinka",
+    "passwordPlaceholder": "Unesite svoju lozinku",
+    "forgotPassword": "Zaboravljena lozinka?",
+    "button": "Prijavi se",
+    "noAccount": "Nemate nalog?",
+    "register": "Registrujte se",
+    "success": "Prijava uspješna!",
+    "errors": {
+      "missingFields": "Molimo unesite email i lozinku!",
+      "invalidCredentials": "Neispravni podaci za prijavu"
+    }
+  },
+  "register": {
+    "title": "Registracija",
+    "companyName": "Naziv kompanije",
+    "companyPlaceholder": "Unesite naziv kompanije",
+    "email": "Email",
+    "emailPlaceholder": "Unesite svoj email",
+    "password": "Lozinka",
+    "passwordPlaceholder": "Kreirajte lozinku",
+    "confirmPassword": "Potvrdite lozinku",
+    "confirmPasswordPlaceholder": "Potvrdite svoju lozinku",
+    "button": "Registruj se",
+    "alreadyHaveAccount": "Već imate nalog?",
+    "login": "Prijavi se",
+    "errors": {
+      "passwordMismatch": "Lozinke se ne podudaraju!",
+      "failed": "Registracija nije uspjela"
+    }
+  }
+}

@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import axios from "axios";
 import { showToast } from "../ToastNotification/ToastNotification";
 import "./Register.scss";
+import { useTranslation } from "react-i18next";
 
 function Register({ isOpen, onClose, switchToLogin }) {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({
     company_name: "",
     email: "",
@@ -22,7 +24,7 @@ function Register({ isOpen, onClose, switchToLogin }) {
     e.preventDefault();
 
     if (formData.password !== formData.confirm_password) {
-      showToast("Passwords do not match!", "error");
+      showToast(t("register.errors.passwordMismatch"), "error");
       return;
     }
 
@@ -46,7 +48,7 @@ function Register({ isOpen, onClose, switchToLogin }) {
         switchToLogin();
       }, 2000);
     } catch (err) {
-      showToast(err.response?.data?.message || "Registration failed", "error");
+      showToast(err.response?.data?.message || t("register.errors.failed"), "error");
     }
   };
 
@@ -55,54 +57,54 @@ function Register({ isOpen, onClose, switchToLogin }) {
   return (
     <div className="register-overlay" onClick={onClose}>
       <div className="register-popup" onClick={(e) => e.stopPropagation()}>
-        <h2>Register</h2>
+        <h2>{t("register.title")}</h2>
 
         <form onSubmit={handleSubmit}>
-          <label>Company Name</label>
+          <label>{t("register.companyName")}</label>
           <input
             type="text"
             name="company_name"
-            placeholder="Enter company name"
+            placeholder={t("register.companyPlaceholder")}
             required
             value={formData.company_name}
             onChange={handleChange}
           />
 
-          <label>Email</label>
+          <label>{t("register.email")}</label>
           <input
             type="email"
             name="email"
-            placeholder="Enter your email"
+            placeholder={t("register.emailPlaceholder")}
             required
             value={formData.email}
             onChange={handleChange}
           />
 
-          <label>Password</label>
+          <label>{t("register.password")}</label>
           <input
             type="password"
             name="password"
-            placeholder="Create a password"
+            placeholder={t("register.passwordPlaceholder")}
             required
             value={formData.password}
             onChange={handleChange}
           />
 
-          <label>Confirm Password</label>
+          <label>{t("register.confirmPassword")}</label>
           <input
             type="password"
             name="confirm_password"
-            placeholder="Confirm your password"
+            placeholder={t("register.confirmPasswordPlaceholder")}
             required
             value={formData.confirm_password}
             onChange={handleChange}
           />
 
-          <button type="submit" className="register-btn">Register</button>
+          <button type="submit" className="register-btn">{t("register.button")}</button>
         </form>
 
         <p className="login-link">
-          Already have an account? <span onClick={switchToLogin}>Login</span>
+          {t("register.alreadyHaveAccount")} <span onClick={switchToLogin}>{t("register.login")}</span>
         </p>
 
         <button className="close-btn" onClick={onClose}>&times;</button>

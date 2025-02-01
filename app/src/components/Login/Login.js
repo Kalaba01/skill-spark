@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import axios from "axios";
 import { showToast } from "../ToastNotification/ToastNotification";
 import "./Login.scss";
+import { useTranslation } from "react-i18next";
 
 function Login({ isOpen, onClose, switchToRegister }) {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({
     email: "",
     password: ""
@@ -20,7 +22,7 @@ function Login({ isOpen, onClose, switchToRegister }) {
     e.preventDefault();
 
     if (!formData.email || !formData.password) {
-      showToast("Please enter both email and password!", "error");
+      showToast(t("login.errors.missingFields"), "error");
       return;
     }
 
@@ -30,14 +32,14 @@ function Login({ isOpen, onClose, switchToRegister }) {
         password: formData.password
       });
 
-      showToast("Login successful!", "success");
+      showToast(t("login.success"), "success");
 
       localStorage.setItem("access_token", response.data.access);
       localStorage.setItem("refresh_token", response.data.refresh);
 
       // TODO: Add user redirect after login
     } catch (err) {
-      showToast(err.response?.data?.message || "Invalid credentials", "error");
+      showToast(err.response?.data?.message || t("login.errors.invalidCredentials"), "error");
     }
   };
 
@@ -46,36 +48,36 @@ function Login({ isOpen, onClose, switchToRegister }) {
   return (
     <div className="login-overlay" onClick={onClose}>
       <div className="login-popup" onClick={(e) => e.stopPropagation()}>
-        <h2>Login</h2>
+        <h2>{t("login.title")}</h2>
 
         <form onSubmit={handleSubmit}>
-          <label>Email</label>
+          <label>{t("login.email")}</label>
           <input
             type="email"
             name="email"
-            placeholder="Enter your email"
+            placeholder={t("login.emailPlaceholder")}
             required
             value={formData.email}
             onChange={handleChange}
           />
 
-          <label>Password</label>
+          <label>{t("login.password")}</label>
           <input
             type="password"
             name="password"
-            placeholder="Enter your password"
+            placeholder={t("login.passwordPlaceholder")}
             required
             value={formData.password}
             onChange={handleChange}
           />
 
-          <p className="forgot-password">Forgot Password?</p>
+          <p className="forgot-password">{t("login.forgotPassword")}</p>
 
-          <button type="submit" className="login-btn">Login</button>
+          <button type="submit" className="login-btn">{t("login.button")}</button>
         </form>
 
         <p className="register-link">
-          Don't have an account? <span onClick={switchToRegister}>Register</span>
+          {t("login.noAccount")} <span onClick={switchToRegister}>{t("login.register")}</span>
         </p>
 
         <button className="close-btn" onClick={onClose}>&times;</button>
