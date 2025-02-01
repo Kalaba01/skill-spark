@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { showToast } from "../ToastNotification/ToastNotification";
 import "./Login.scss";
 import { useTranslation } from "react-i18next";
+import { jwtDecode } from "jwt-decode";
 
 function Login({ isOpen, onClose, switchToRegister }) {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     email: "",
     password: ""
@@ -37,7 +41,18 @@ function Login({ isOpen, onClose, switchToRegister }) {
       localStorage.setItem("access_token", response.data.access);
       localStorage.setItem("refresh_token", response.data.refresh);
 
-      // TODO: Add user redirect after login
+      const decodedToken = jwtDecode(response.data.access);
+      const userRole = decodedToken.user.role;
+
+      if (userRole === "admin") {
+        navigate("/admin");
+      } else if (userRole === "company") {
+        navigate("/company");
+      } else if (userRole === "employee") {
+        navigate("/employee");
+      } else {
+        navigate("/");
+      }
     } catch (err) {
       showToast(err.response?.data?.message || t("login.errors.invalidCredentials"), "error");
     }

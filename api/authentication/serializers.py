@@ -3,6 +3,11 @@ from django.contrib.auth import authenticate
 from rest_framework_simplejwt.tokens import RefreshToken
 from .models import User, Company
 
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ["id", "email", "role", "first_name", "last_name", "is_active", "date_joined"]
+
 class RegisterCompanySerializer(serializers.ModelSerializer):
     company_name = serializers.CharField(write_only=True)
 
@@ -38,12 +43,10 @@ class LoginSerializer(serializers.Serializer):
 
         refresh = RefreshToken.for_user(user)
 
+        refresh["user"] = UserSerializer(user).data
+
         return {
             "refresh": str(refresh),
             "access": str(refresh.access_token),
-            "user": {
-                "id": user.id,
-                "email": user.email,
-                "role": user.role
-            }
+            "user": UserSerializer(user).data
         }
