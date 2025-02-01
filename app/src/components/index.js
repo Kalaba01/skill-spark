@@ -7,5 +7,6 @@ import ToastNotification from "./ToastNotification/ToastNotification";
 import Language from "./Language/Language";
 import Admin from "./Admin/Admin";
 import Company from "./Company/Company";
+import Employee from "./Employee/Employee";
 
-export { LandingPage, GoTop, Footer, Login, Register, ToastNotification, Language, Admin, Company }
+export { LandingPage, GoTop, Footer, Login, Register, ToastNotification, Language, Admin, Company, Employee }
