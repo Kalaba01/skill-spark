@@ -10,5 +10,6 @@ import Company from "./Company/Company";
 import Employee from "./Employee/Employee";
 import TopBar from "./TopBar/TopBar";
 import Theme from "./Theme/Theme";
+import HamburgerMenu from "./HamburgerMenu/HamburgerMenu";
 
-export { LandingPage, GoTop, Footer, Login, Register, ToastNotification, Language, Admin, Company, Employee, TopBar, Theme }
+export { LandingPage, GoTop, Footer, Login, Register, ToastNotification, Language, Admin, Company, Employee, TopBar, Theme, HamburgerMenu }

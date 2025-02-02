@@ -1,6 +1,6 @@
 import React from "react";
 import { FaUserCircle, FaBell, FaComments, FaSignOutAlt } from "react-icons/fa";
-import { Language, Theme } from "../index";
+import { Language, Theme, HamburgerMenu } from "../index";
 import { jwtDecode } from "jwt-decode";
 import "./TopBar.scss";
 
@@ -19,6 +19,8 @@ function TopBar({ openLogin }) {
 
   return (
     <header className="top-bar">
+      {userRole && <HamburgerMenu userRole={userRole} />}
+
       <div className="logo">SkillSpark</div>
 
       <div className="top-bar-icons">
