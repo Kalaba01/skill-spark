@@ -1,6 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { LandingPage, GoTop, Footer, ToastNotification, Admin, Company, Employee } from './components';
+import ProtectedRoute from './middleware/ProtectedRoute';
 import './App.css';
 
 function App() {
@@ -8,9 +9,11 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/admin" element={<Admin />} />
-        <Route path="/company" element={<Company />} />
-        <Route path="/employee" element={<Employee />} />
+
+        <Route path="/admin" element={<ProtectedRoute allowedRoles={["admin"]}><Admin /></ProtectedRoute>} />
+        <Route path="/company" element={<ProtectedRoute allowedRoles={["company"]}><Company /></ProtectedRoute>} />
+        <Route path="/employee" element={<ProtectedRoute allowedRoles={["employee"]}><Employee /></ProtectedRoute>} />
+
       </Routes>
       
       <ToastNotification />
