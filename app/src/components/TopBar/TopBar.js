@@ -1,6 +1,6 @@
 import React from "react";
-import { FaUserCircle, FaBell, FaComments, FaSignOutAlt } from "react-icons/fa";
-import { Language, Theme, HamburgerMenu } from "../index";
+import { FaUserCircle, FaBell, FaComments } from "react-icons/fa";
+import { Language, Theme, HamburgerMenu, Logout } from "../index";
 import { jwtDecode } from "jwt-decode";
 import "./TopBar.scss";
 
@@ -36,7 +36,7 @@ function TopBar({ openLogin }) {
             <FaComments size={24} className="icon" />
             <Theme />
             <Language />
-            <FaSignOutAlt size={24} className="icon logout-icon" />
+            <Logout />
           </>
         )}
       </div>

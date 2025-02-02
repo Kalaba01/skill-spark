@@ -1,0 +1,13 @@
+@import "../../styles/variables";
+
+/* Logout */
+.logout-icon {
+  color: white;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out, transform 0.2s;
+
+  &:hover {
+    color: var(--secondary-color);
+    transform: scale(1.1);
+  }
+}
