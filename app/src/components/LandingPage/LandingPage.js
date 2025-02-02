@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import "./LandingPage.scss";
-import { FaUserCircle, FaSun, FaMoon, FaChevronDown } from "react-icons/fa";
-import { Login, Register, Language } from "../index";
-import { useDispatch, useSelector } from "react-redux";
-import { toggleTheme } from "../../store/themeSlice";
+import { FaChevronDown } from "react-icons/fa";
+import { Login, Register, TopBar } from "../index";
 import { useTranslation } from "react-i18next";
 
 function LandingPage() {
@@ -11,8 +9,6 @@ function LandingPage() {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
 
-  const dispatch = useDispatch();
-  const theme = useSelector((state) => state.theme.theme);
   const { t } = useTranslation();
 
   const toggleFaq = (index) => {
@@ -32,18 +28,7 @@ function LandingPage() {
   return (
     <div className="landing-page">
       {/* Top Bar */}
-      <header className="top-bar">
-        <div className="logo">SkillSpark</div>
-        <div className="top-bar-icons">
-          <FaUserCircle size={24} className="icon" onClick={openLogin} />
-          {theme === "light" ? (
-            <FaMoon size={24} className="icon" onClick={() => dispatch(toggleTheme())} />
-          ) : (
-            <FaSun size={24} className="icon" onClick={() => dispatch(toggleTheme())} />
-          )}
-          <Language />
-        </div>
-      </header>
+      <TopBar openLogin={openLogin} />
 
       {/* Hero Section */}
       <section className="hero">

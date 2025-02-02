@@ -1,0 +1,45 @@
+@import "../../styles/variables";
+
+/* Top Bar */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: var(--primary-color);
+  transition: background-color 0.3s ease-in-out;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+
+  .logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: white;
+    flex-grow: 1;
+    text-align: center;
+  }
+
+  .top-bar-icons {
+    display: flex;
+    gap: 1rem;
+
+    .icon {
+      color: white;
+      cursor: pointer;
+      transition: transform 0.3s, color 0.3s;
+
+      &:hover {
+        transform: scale(1.1);
+        color: var(--secondary-color);
+      }
+    }
+  }
+}
+
+/* Dark Mode */
+body.dark-mode {
+  .top-bar {
+    background-color: var(--primary-color);
+  }
+}

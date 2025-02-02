@@ -8,5 +8,6 @@ import Language from "./Language/Language";
 import Admin from "./Admin/Admin";
 import Company from "./Company/Company";
 import Employee from "./Employee/Employee";
+import TopBar from "./TopBar/TopBar";
 
-export { LandingPage, GoTop, Footer, Login, Register, ToastNotification, Language, Admin, Company, Employee }
+export { LandingPage, GoTop, Footer, Login, Register, ToastNotification, Language, Admin, Company, Employee, TopBar }
