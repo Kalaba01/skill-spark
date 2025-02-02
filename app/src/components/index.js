@@ -9,5 +9,6 @@ import Admin from "./Admin/Admin";
 import Company from "./Company/Company";
 import Employee from "./Employee/Employee";
 import TopBar from "./TopBar/TopBar";
+import Theme from "./Theme/Theme";
 
-export { LandingPage, GoTop, Footer, Login, Register, ToastNotification, Language, Admin, Company, Employee, TopBar }
+export { LandingPage, GoTop, Footer, Login, Register, ToastNotification, Language, Admin, Company, Employee, TopBar, Theme }

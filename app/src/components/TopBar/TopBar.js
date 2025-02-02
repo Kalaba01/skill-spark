@@ -1,15 +1,10 @@
 import React from "react";
-import { FaUserCircle, FaSun, FaMoon, FaBell, FaComments, FaSignOutAlt } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
-import { toggleTheme } from "../../store/themeSlice";
-import { Language } from "../index";
+import { FaUserCircle, FaBell, FaComments, FaSignOutAlt } from "react-icons/fa";
+import { Language, Theme } from "../index";
 import { jwtDecode } from "jwt-decode";
 import "./TopBar.scss";
 
 function TopBar({ openLogin }) {
-  const dispatch = useDispatch();
-  const theme = useSelector((state) => state.theme.theme);
-
   const accessToken = localStorage.getItem("access_token");
   let userRole = null;
   
@@ -30,22 +25,14 @@ function TopBar({ openLogin }) {
         {!userRole ? (
           <>
             <FaUserCircle size={24} className="icon" onClick={openLogin} />
-            {theme === "light" ? (
-              <FaMoon size={24} className="icon" onClick={() => dispatch(toggleTheme())} />
-            ) : (
-              <FaSun size={24} className="icon" onClick={() => dispatch(toggleTheme())} />
-            )}
+            <Theme />
             <Language />
           </>
         ) : (
           <>
             <FaBell size={24} className="icon" />
             <FaComments size={24} className="icon" />
-            {theme === "light" ? (
-              <FaMoon size={24} className="icon" onClick={() => dispatch(toggleTheme())} />
-            ) : (
-              <FaSun size={24} className="icon" onClick={() => dispatch(toggleTheme())} />
-            )}
+            <Theme />
             <Language />
             <FaSignOutAlt size={24} className="icon logout-icon" />
           </>
