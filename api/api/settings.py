@@ -19,7 +19,8 @@ INSTALLED_APPS = [
     'authentication',
     'rest_framework',
     'corsheaders',
-    'rest_framework_simplejwt'
+    'rest_framework_simplejwt',
+    "user_management"
 ]
 
 REST_FRAMEWORK = {
