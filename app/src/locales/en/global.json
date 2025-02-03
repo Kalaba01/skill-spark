@@ -58,5 +58,10 @@
       "passwordMismatch": "Passwords do not match!",
       "failed": "Registration failed"
     }
+  },
+  "unauthorized": {
+    "title": "Access Denied",
+    "description": "You do not have permission to view this page.",
+    "button": "Back to Home"
   }
 }

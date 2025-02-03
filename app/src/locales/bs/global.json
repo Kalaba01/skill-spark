@@ -58,5 +58,10 @@
       "passwordMismatch": "Lozinke se ne podudaraju!",
       "failed": "Registracija nije uspjela"
     }
+  },
+  "unauthorized": {
+    "title": "Pristup odbijen",
+    "description": "Nemate dozvolu za pregled ove stranice.",
+    "button": "Nazad na početnu"
   }
 }

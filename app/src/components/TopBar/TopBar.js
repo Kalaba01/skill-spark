@@ -4,10 +4,10 @@ import { Language, Theme, HamburgerMenu, Logout } from "../index";
 import { jwtDecode } from "jwt-decode";
 import "./TopBar.scss";
 
-function TopBar({ openLogin }) {
+function TopBar({ openLogin, variant = "default" }) {
   const accessToken = localStorage.getItem("access_token");
   let userRole = null;
-  
+
   if (accessToken) {
     try {
       const decoded = jwtDecode(accessToken);
@@ -19,12 +19,17 @@ function TopBar({ openLogin }) {
 
   return (
     <header className="top-bar">
-      {userRole && <HamburgerMenu userRole={userRole} />}
+      {variant !== "unauthorized" && userRole && <HamburgerMenu userRole={userRole} />}
 
       <div className="logo">SkillSpark</div>
 
       <div className="top-bar-icons">
-        {!userRole ? (
+        {variant === "unauthorized" ? (
+          <>
+            <Theme />
+            <Language />
+          </>
+        ) : !userRole ? (
           <>
             <FaUserCircle size={24} className="icon" onClick={openLogin} />
             <Theme />
