@@ -68,5 +68,22 @@
     "title": "Stranica nije pronađena",
     "description": "Stranica koju tražite možda je uklonjena ili ne postoji.",
     "button": "Nazad na početnu"
+  },
+  "employeeManagement": {
+    "title": "Upravljanje zaposlenima",
+    "searchPlaceholder": "Pretraži zaposlene...",
+    "addEmployee": "Dodaj zaposlenog",
+    "editEmployee": "Uredi zaposlenog",
+    "firstName": "Ime",
+    "lastName": "Prezime",
+    "email": "Email",
+    "password": "Lozinka",
+    "save": "Sačuvaj",
+    "confirmDelete": "Da li ste sigurni da želite obrisati ovog zaposlenog?",
+    "addSuccess": "Zaposleni uspješno dodan!",
+    "editSuccess": "Zaposleni uspješno ažuriran!",
+    "deleteSuccess": "Zaposleni uspješno obrisan!",
+    "error": "Došlo je do greške. Pokušajte ponovo.",
+    "noResults": "Nema pronađenih zaposlenih."
   }
 }

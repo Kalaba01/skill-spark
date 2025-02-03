@@ -14,5 +14,7 @@ import HamburgerMenu from "./HamburgerMenu/HamburgerMenu";
 import Logout from "./Logout/Logout";
 import Unauthorized from "./Unauthorized/Unauthorized";
 import NotFound from "./NotFound/NotFound";
+import EmployeeManagement from "./EmployeeManagement/EmployeeManagement";
+import EmployeePopup from "./EmployeePopup/EmployeePopup";
 
-export { LandingPage, GoTop, Footer, Login, Register, ToastNotification, Language, Admin, Company, Employee, TopBar, Theme, HamburgerMenu, Logout, Unauthorized, NotFound }
+export { LandingPage, GoTop, Footer, Login, Register, ToastNotification, Language, Admin, Company, Employee, TopBar, Theme, HamburgerMenu, Logout, Unauthorized, NotFound, EmployeeManagement, EmployeePopup }

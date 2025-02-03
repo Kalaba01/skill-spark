@@ -17,8 +17,7 @@ function HamburgerMenu({ userRole }) {
       { label: "Settings", path: "/admin/settings" }
     ],
     company: [
-      { label: "Company Dashboard", path: "/company" },
-      { label: "Employees", path: "/company/employees" },
+      { label: "Employees Management", path: "/company/employees-management" },
       { label: "Settings", path: "/company/settings" }
     ],
     employee: [
