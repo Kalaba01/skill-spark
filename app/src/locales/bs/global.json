@@ -63,5 +63,10 @@
     "title": "Pristup odbijen",
     "description": "Nemate dozvolu za pregled ove stranice.",
     "button": "Nazad na početnu"
+  },
+  "notFound": {
+    "title": "Stranica nije pronađena",
+    "description": "Stranica koju tražite možda je uklonjena ili ne postoji.",
+    "button": "Nazad na početnu"
   }
 }

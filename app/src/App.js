@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { LandingPage, GoTop, Footer, ToastNotification, Admin, Company, Employee, Unauthorized } from './components';
+import { LandingPage, GoTop, Footer, ToastNotification, Admin, Company, Employee, Unauthorized, NotFound } from './components';
 import ProtectedRoute from './middleware/ProtectedRoute';
 import './App.css';
 
@@ -15,6 +15,7 @@ function App() {
         <Route path="/employee" element={<ProtectedRoute allowedRoles={["employee"]}><Employee /></ProtectedRoute>} />
 
         <Route path="/unauthorized" element={<Unauthorized />} />
+        <Route path="*" element={<NotFound />} />
 
       </Routes>
       

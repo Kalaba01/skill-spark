@@ -19,12 +19,12 @@ function TopBar({ openLogin, variant = "default" }) {
 
   return (
     <header className="top-bar">
-      {variant !== "unauthorized" && userRole && <HamburgerMenu userRole={userRole} />}
+      {(variant !== "unauthorized" && variant !== "notfound") && userRole && <HamburgerMenu userRole={userRole} />}
 
       <div className="logo">SkillSpark</div>
 
       <div className="top-bar-icons">
-        {variant === "unauthorized" ? (
+        {(variant === "unauthorized" || variant === "notfound") ? (
           <>
             <Theme />
             <Language />

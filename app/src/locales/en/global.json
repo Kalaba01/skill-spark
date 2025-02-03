@@ -63,5 +63,10 @@
     "title": "Access Denied",
     "description": "You do not have permission to view this page.",
     "button": "Back to Home"
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "description": "The page you are looking for might have been removed or does not exist.",
+    "button": "Back to Home"
   }
 }
