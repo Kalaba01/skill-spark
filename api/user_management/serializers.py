@@ -39,7 +39,7 @@ class CreateEmployeeSerializer(serializers.ModelSerializer):
         return employee
 
 class UpdateEmployeeSerializer(serializers.ModelSerializer):
-    email = serializers.EmailField(required=False)  # Dodali email da može da se edituje
+    email = serializers.EmailField(required=False)
 
     class Meta:
         model = Employee
@@ -49,7 +49,7 @@ class UpdateEmployeeSerializer(serializers.ModelSerializer):
         user_data = validated_data.pop("email", None)
 
         if user_data:
-            instance.user.email = user_data  # Ažuriramo email u User modelu
+            instance.user.email = user_data
             instance.user.save()
 
         instance.first_name = validated_data.get("first_name", instance.first_name)
