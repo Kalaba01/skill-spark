@@ -85,5 +85,13 @@
     "deleteSuccess": "Employee deleted successfully!",
     "error": "An error occurred. Please try again.",
     "noResults": "No employees found."
+  },
+  "employeeManagementCard": {
+    "firstName": "First Name",
+    "lastName": "Last Name"
+  },
+  "confirmPopup": {
+    "yes": "Yes",
+    "no": "No"
   }
 }

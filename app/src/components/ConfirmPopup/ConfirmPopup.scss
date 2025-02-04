@@ -1,0 +1,86 @@
+@import "../../styles/variables";
+
+.confirm-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.confirm-popup-content {
+  background: var(--background-color);
+  padding: 1.8rem;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  width: 350px;
+  position: relative;
+  transform: scale(0.9);
+  animation: popupOpen 0.3s ease-in-out forwards;
+
+  p {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    margin-bottom: 1.2rem;
+  }
+
+  .confirm-popup-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+
+    button {
+      flex: 1;
+      padding: 10px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .confirm-btn {
+      background: var(--primary-color);
+      color: white;
+
+      &:hover {
+        background: var(--secondary-color);
+      }
+    }
+
+    .cancel-btn {
+      background: var(--border-color);
+      color: var(--text-color);
+
+      &:hover {
+        background: var(--hover-color);
+      }
+    }
+  }
+}
+
+/* Animacije */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes popupOpen {
+  from {
+    transform: scale(0.9);
+  }
+  to {
+    transform: scale(1);
+  }
+}

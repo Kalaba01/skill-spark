@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaPlus, FaSearch } from "react-icons/fa";
-import { TopBar, EmployeePopup, EmployeeManagementCard  } from "../index";
+import { TopBar, EmployeePopup, EmployeeManagementCard, ConfirmPopup } from "../index";
 import { useTranslation } from "react-i18next";
 import { showToast } from "../ToastNotification/ToastNotification";
 import axios from "axios";
@@ -12,6 +12,7 @@ const EmployeeManagement = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedEmployee, setSelectedEmployee] = useState(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [confirmPopup, setConfirmPopup] = useState({ show: false, employeeId: null });
 
   useEffect(() => {
     fetchEmployees();
@@ -46,22 +47,31 @@ const EmployeeManagement = () => {
     setIsPopupOpen(false);
   };
 
-  const deleteEmployee = async (id) => {
-    if (window.confirm(t("employeeManagement.confirmDelete"))) {
-      try {
-        const token = localStorage.getItem("access_token");
-        await axios.delete(
-          `http://127.0.0.1:8000/api/user-management/employees/${id}/`,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
-        showToast(t("employeeManagement.deleteSuccess"), "success");
-        fetchEmployees();
-      } catch (error) {
-        console.error("Error deleting employee:", error);
-        showToast(t("employeeManagement.error"), "error");
-      }
+  const confirmDelete = (id) => {
+    setConfirmPopup({ show: true, employeeId: id });
+  };
+
+  const cancelDelete = () => {
+    setConfirmPopup({ show: false, employeeId: null });
+  };
+
+  const deleteEmployee = async () => {
+    if (!confirmPopup.employeeId) return;
+    try {
+      const token = localStorage.getItem("access_token");
+      await axios.delete(
+        `http://127.0.0.1:8000/api/user-management/employees/${confirmPopup.employeeId}/`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      showToast(t("employeeManagement.deleteSuccess"), "success");
+      fetchEmployees();
+    } catch (error) {
+      console.error("Error deleting employee:", error);
+      showToast(t("employeeManagement.error"), "error");
+    } finally {
+      setConfirmPopup({ show: false, employeeId: null });
     }
   };
 
@@ -100,7 +110,7 @@ const EmployeeManagement = () => {
                 key={employee.id}
                 employee={employee}
                 onEdit={openPopup}
-                onDelete={deleteEmployee}
+                onDelete={() => confirmDelete(employee.id)}
               />
             ))
           ) : (
@@ -113,6 +123,14 @@ const EmployeeManagement = () => {
             employee={selectedEmployee}
             onClose={closePopup}
             refresh={fetchEmployees}
+          />
+        )}
+
+        {confirmPopup.show && (
+          <ConfirmPopup
+            message={t("employeeManagement.confirmDelete")}
+            onConfirm={deleteEmployee}
+            onCancel={cancelDelete}
           />
         )}
       </div>

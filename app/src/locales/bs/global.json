@@ -85,5 +85,13 @@
     "deleteSuccess": "Zaposleni uspješno obrisan!",
     "error": "Došlo je do greške. Pokušajte ponovo.",
     "noResults": "Nema pronađenih zaposlenih."
+  },
+  "employeeManagementCard": {
+    "firstName": "Ime",
+    "lastName": "Prezime"
+  },
+  "confirmPopup": {
+    "yes": "Da",
+    "no": "Ne"
   }
 }
