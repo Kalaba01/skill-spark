@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { FaPlus, FaSearch, FaEdit, FaTrash } from "react-icons/fa";
-import { EmployeePopup, TopBar } from "../index";
+import { FaPlus, FaSearch } from "react-icons/fa";
+import { TopBar, EmployeePopup, EmployeeManagementCard  } from "../index";
 import { useTranslation } from "react-i18next";
 import { showToast } from "../ToastNotification/ToastNotification";
 import axios from "axios";
@@ -96,23 +96,12 @@ const EmployeeManagement = () => {
         <div className="employee-list">
           {filteredEmployees.length > 0 ? (
             filteredEmployees.map((employee) => (
-              <div key={employee.id} className="employee-card">
-                <div className="employee-info">
-                  <p><strong>First Name:</strong> {employee.first_name}</p>
-                  <p><strong>Last Name:</strong> {employee.last_name}</p>
-                  <p><strong>Email:</strong> {employee.email}</p>
-                </div>
-                <div className="actions">
-                  <FaEdit
-                    className="edit-icon"
-                    onClick={() => openPopup(employee)}
-                  />
-                  <FaTrash
-                    className="delete-icon"
-                    onClick={() => deleteEmployee(employee.id)}
-                  />
-                </div>
-              </div>
+              <EmployeeManagementCard
+                key={employee.id}
+                employee={employee}
+                onEdit={openPopup}
+                onDelete={deleteEmployee}
+              />
             ))
           ) : (
             <p className="no-results">{t("employeeManagement.noResults")}</p>
