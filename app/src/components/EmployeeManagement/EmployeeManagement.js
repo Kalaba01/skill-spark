@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaPlus, FaSearch } from "react-icons/fa";
-import { TopBar, EmployeePopup, EmployeeManagementCard, ConfirmPopup } from "../index";
+import { TopBar, EmployeePopup, UserCard, ConfirmPopup } from "../index";
 import { useTranslation } from "react-i18next";
 import { showToast } from "../ToastNotification/ToastNotification";
 import axios from "axios";
@@ -106,11 +106,13 @@ const EmployeeManagement = () => {
         <div className="employee-list">
           {filteredEmployees.length > 0 ? (
             filteredEmployees.map((employee) => (
-              <EmployeeManagementCard
+              <UserCard
                 key={employee.id}
-                employee={employee}
+                data={employee}
+                fields={["first_name", "last_name", "email"]}
                 onEdit={openPopup}
                 onDelete={() => confirmDelete(employee.id)}
+                context="employeeManagement"
               />
             ))
           ) : (

@@ -93,5 +93,32 @@
   "confirmPopup": {
     "yes": "Da",
     "no": "Ne"
+  },
+  "userManagement": {
+    "title": "Upravljanje korisnicima",
+    "searchPlaceholder": "Pretraži korisnike...",
+    "addUser": "Dodaj korisnika",
+    "editUser": "Uredi korisnika",
+    "choseRole": "Izaberite Ulogu",
+    "firstName": "Ime",
+    "lastName": "Prezime",
+    "email": "Email",
+    "password": "Lozinka",
+    "role": "Uloga",
+    "companyName": "Naziv kompanije",
+    "workingAt": "Radi u",
+    "save": "Sačuvaj",
+    "deleteSuccess": "Korisnik uspješno obrisan!",
+    "addSuccess": "Korisnik uspješno kreiran!",
+    "editSuccess": "Korisnik uspješno ažuriran!",
+    "error": "Došlo je do greške. Pokušajte ponovo.",
+    "confirmDelete": "Da li ste sigurni da želite obrisati ovog korisnika?",
+    "noResults": "Nema pronađenih korisnika.",
+    "filterByRole": "Filtriraj po ulozi",
+    "selectCompany": "Odaberite Firmu",
+    "allRoles": "Sve uloge",
+    "admin": "Administrator",
+    "company": "Kompanija",
+    "employee": "Zaposleni"
   }
 }

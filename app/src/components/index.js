@@ -16,7 +16,9 @@ import Unauthorized from "./Unauthorized/Unauthorized";
 import NotFound from "./NotFound/NotFound";
 import EmployeeManagement from "./EmployeeManagement/EmployeeManagement";
 import EmployeePopup from "./EmployeePopup/EmployeePopup";
-import EmployeeManagementCard from "./EmployeeManagementCard/EmployeeManagementCard";
 import ConfirmPopup from "./ConfirmPopup/ConfirmPopup";
+import UserManagement from "./UserManagement/UserManagement";
+import CreateUserPopup from "./CreateUserPopup/CreateUserPopup";
+import UserCard from "./UserCard/UserCard";
 
-export { LandingPage, GoTop, Footer, Login, Register, ToastNotification, Language, Admin, Company, Employee, TopBar, Theme, HamburgerMenu, Logout, Unauthorized, NotFound, EmployeeManagement, EmployeePopup, EmployeeManagementCard, ConfirmPopup }
+export { LandingPage, GoTop, Footer, Login, Register, ToastNotification, Language, Admin, Company, Employee, TopBar, Theme, HamburgerMenu, Logout, Unauthorized, NotFound, EmployeeManagement, EmployeePopup, ConfirmPopup, UserManagement, CreateUserPopup, UserCard }

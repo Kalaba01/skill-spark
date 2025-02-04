@@ -1,6 +1,6 @@
 @import "../../styles/variables";
 
-.employee-card {
+.user-card {
   background: white;
   padding: 1.5rem;
   border-radius: 10px;
@@ -9,15 +9,17 @@
   transition: all 0.3s ease-in-out;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  min-height: fit-content;
+  align-items: flex-start;
 
   &:hover {
     transform: translateY(-5px);
     box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.2);
   }
 
-  .employee-info {
+  .user-info {
+    flex-grow: 1;
+    width: 100%;
+    
     p {
       font-size: 1rem;
       color: var(--text-color);
@@ -29,7 +31,8 @@
     display: flex;
     justify-content: flex-end;
     gap: 15px;
-    margin-top: 1rem;
+    margin-top: auto;
+    width: 100%;
 
     .edit-icon,
     .delete-icon {

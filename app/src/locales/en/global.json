@@ -93,5 +93,32 @@
   "confirmPopup": {
     "yes": "Yes",
     "no": "No"
+  },
+  "userManagement": {
+    "title": "User Management",
+    "searchPlaceholder": "Search users...",
+    "addUser": "Add User",
+    "editUser": "Edit User",
+    "choseRole": "Chose Role",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "password": "Password",
+    "role": "Role",
+    "companyName": "Company Name",
+    "workingAt": "Working At",
+    "save": "Save",
+    "deleteSuccess": "User successfully deleted!",
+    "addSuccess": "User successfully created!",
+    "editSuccess": "User successfully updated!",
+    "error": "An error occurred. Please try again.",
+    "confirmDelete": "Are you sure you want to delete this user?",
+    "noResults": "No users found.",
+    "filterByRole": "Filter by Role",
+    "selectCompany": "Select Company",
+    "allRoles": "All Roles",
+    "admin": "Admin",
+    "company": "Company",
+    "employee": "Employee"
   }
 }

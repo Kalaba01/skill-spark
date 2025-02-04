@@ -12,8 +12,7 @@ function HamburgerMenu({ userRole }) {
 
   const menuItems = {
     admin: [
-      { label: "Dashboard", path: "/admin" },
-      { label: "Manage Users", path: "/admin/users" },
+      { label: "Users Management", path: "/admin/users-management" },
       { label: "Settings", path: "/admin/settings" }
     ],
     company: [
