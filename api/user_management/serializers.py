@@ -119,6 +119,11 @@ class UpdateUserSerializer(serializers.ModelSerializer):
         instance.first_name = validated_data.get("first_name", instance.first_name)
         instance.last_name = validated_data.get("last_name", instance.last_name)
 
+        if instance.role == User.EMPLOYEE and hasattr(instance, "employee_profile"):
+            instance.employee_profile.first_name = validated_data.get("first_name", instance.employee_profile.first_name)
+            instance.employee_profile.last_name = validated_data.get("last_name", instance.employee_profile.last_name)
+            instance.employee_profile.save()
+
         if instance.role == User.COMPANY and "company_name" in validated_data:
             if hasattr(instance, "company_profile"):
                 instance.company_profile.company_name = validated_data["company_name"]
