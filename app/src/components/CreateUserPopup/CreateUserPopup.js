@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import axios from "axios";
 import { showToast } from "../ToastNotification/ToastNotification";
+import axios from "axios";
 import "./CreateUserPopup.scss";
 
 const CreateUserPopup = ({ user, onClose, refresh, companies }) => {
@@ -9,12 +9,12 @@ const CreateUserPopup = ({ user, onClose, refresh, companies }) => {
   const isEditing = Boolean(user);
 
   const [formData, setFormData] = useState({
-    first_name: user?.first_name || "",
-    last_name: user?.last_name || "",
     email: user?.email || "",
     password: "",
     role: user?.role || "",
-    company_name: user?.company_name || (isEditing && user?.role === "employee" ? user.company_name : "")
+    first_name: user?.first_name || "",
+    last_name: user?.last_name || "",
+    company_name: user?.company_name || (isEditing && user?.role === "employee" ? user.working_at : "")
   });
 
   const [roleSelected, setRoleSelected] = useState(isEditing);
@@ -22,12 +22,12 @@ const CreateUserPopup = ({ user, onClose, refresh, companies }) => {
   useEffect(() => {
     if (isEditing) {
       setFormData({
-        first_name: user.first_name || "",
-        last_name: user.last_name || "",
         email: user.email || "",
         password: "",
         role: user.role || "",
-        company_name: user.role === "employee" ? user.working_at || "" : ""
+        first_name: user.first_name || "",
+        last_name: user.last_name || "",
+        company_name: user.role === "employee" ? user.working_at || "" : user.company_name || ""
       });
     }
   }, [isEditing, user]);
@@ -44,23 +44,29 @@ const CreateUserPopup = ({ user, onClose, refresh, companies }) => {
     e.preventDefault();
     const token = localStorage.getItem("access_token");
 
+    let filteredData = { ...formData };
+
+    if (formData.role !== "company" && formData.role !== "employee") {
+        delete filteredData.company_name;
+    }
+
     try {
-      if (isEditing) {
-        await axios.put(`http://127.0.0.1:8000/api/user-management/users/${user.id}/`, formData, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        showToast(t("userManagement.editSuccess"), "success");
-      } else {
-        await axios.post("http://127.0.0.1:8000/api/user-management/users/", formData, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        showToast(t("userManagement.addSuccess"), "success");
-      }
-      refresh();
-      onClose();
+        if (isEditing) {
+            await axios.put(`http://127.0.0.1:8000/api/user-management/users/${user.id}/`, filteredData, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+            showToast(t("userManagement.editSuccess"), "success");
+        } else {
+            await axios.post("http://127.0.0.1:8000/api/user-management/users/", filteredData, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+            showToast(t("userManagement.addSuccess"), "success");
+        }
+        refresh();
+        onClose();
     } catch (error) {
-      console.error("Error saving user:", error);
-      showToast(t("userManagement.error"), "error");
+        console.error("Error saving user:", error);
+        showToast(t("userManagement.error"), "error");
     }
   };
 
@@ -80,7 +86,61 @@ const CreateUserPopup = ({ user, onClose, refresh, companies }) => {
             </select>
           )}
 
-          {roleSelected && (
+          {roleSelected && formData.role === "admin" && (
+            <>
+              <input
+                type="email"
+                name="email"
+                placeholder={t("userManagement.email")}
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+              {!isEditing && (
+                <input
+                  type="password"
+                  name="password"
+                  placeholder={t("userManagement.password")}
+                  value={formData.password}
+                  onChange={handleChange}
+                  required
+                />
+              )}
+            </>
+          )}
+
+          {roleSelected && formData.role === "company" && (
+            <>
+              <input
+                type="text"
+                name="company_name"
+                placeholder={t("userManagement.companyName")}
+                value={formData.company_name}
+                onChange={handleChange}
+                required
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder={t("userManagement.email")}
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+              {!isEditing && (
+                <input
+                  type="password"
+                  name="password"
+                  placeholder={t("userManagement.password")}
+                  value={formData.password}
+                  onChange={handleChange}
+                  required
+                />
+              )}
+            </>
+          )}
+
+          {roleSelected && formData.role === "employee" && (
             <>
               <input
                 type="text"
@@ -116,38 +176,18 @@ const CreateUserPopup = ({ user, onClose, refresh, companies }) => {
                   required
                 />
               )}
-
-              {formData.role === "company" && (
-                <input
-                  type="text"
-                  name="company_name"
-                  placeholder={t("userManagement.companyName")}
-                  value={formData.company_name}
-                  onChange={handleChange}
-                  required
-                />
-              )}
-
-              {formData.role === "employee" && (
-                <select
-                    name="company_name"
-                    value={formData.company_name}
-                    onChange={handleChange}
-                    required
-                >
-                    <option value="">{t("userManagement.selectCompany")}</option>
-                    {companies.map((company, index) => (
-                    <option key={index} value={company}>
-                        {company}
-                    </option>
-                    ))}
-                </select>
-                )}
-
-
-              <button type="submit">{t("userManagement.save")}</button>
+              <select name="company_name" value={formData.company_name} onChange={handleChange} required>
+                <option value="">{t("userManagement.selectCompany")}</option>
+                {companies.map((company, index) => (
+                  <option key={index} value={company}>
+                    {company}
+                  </option>
+                ))}
+              </select>
             </>
           )}
+
+          <button type="submit">{t("userManagement.save")}</button>
         </form>
       </div>
     </div>

@@ -88,6 +88,9 @@ class CreateUserSerializer(serializers.ModelSerializer):
         role = validated_data.get("role")
         company_name = validated_data.pop("company_name", None)
 
+        if company_name == "":
+            company_name = None
+
         user = User.objects.create_user(**validated_data, password=password)
 
         if role == User.ADMIN:
@@ -105,38 +108,30 @@ class CreateUserSerializer(serializers.ModelSerializer):
         return user
 
 class UpdateUserSerializer(serializers.ModelSerializer):
+    company_name = serializers.CharField(required=False)
+
     class Meta:
         model = User
-        fields = ["email", "first_name", "last_name", "role"]
+        fields = ["email", "first_name", "last_name", "company_name"]
 
     def update(self, instance, validated_data):
-        old_role = instance.role
-        new_role = validated_data.get("role", instance.role)
-
         instance.email = validated_data.get("email", instance.email)
         instance.first_name = validated_data.get("first_name", instance.first_name)
         instance.last_name = validated_data.get("last_name", instance.last_name)
-        instance.role = new_role
+
+        if instance.role == User.COMPANY and "company_name" in validated_data:
+            if hasattr(instance, "company_profile"):
+                instance.company_profile.company_name = validated_data["company_name"]
+                instance.company_profile.save()
+
+        if instance.role == User.EMPLOYEE and "company_name" in validated_data:
+            company = Company.objects.filter(company_name=validated_data["company_name"]).first()
+            if company:
+                if hasattr(instance, "employee_profile"):
+                    instance.employee_profile.company = company
+                    instance.employee_profile.save()
+            else:
+                raise serializers.ValidationError({"company_name": "Selected company does not exist."})
+
         instance.save()
-
-        if old_role != new_role:
-            if old_role == User.ADMIN:
-                Admin.objects.filter(user=instance).delete()
-            elif old_role == User.COMPANY:
-                Company.objects.filter(user=instance).delete()
-            elif old_role == User.EMPLOYEE:
-                Employee.objects.filter(user=instance).delete()
-
-            if new_role == User.ADMIN:
-                Admin.objects.create(user=instance)
-            elif new_role == User.COMPANY:
-                Company.objects.create(user=instance, company_name=f"Company of {instance.first_name} {instance.last_name}")
-            elif new_role == User.EMPLOYEE:
-                request = self.context.get("request")
-                if request and hasattr(request.user, "company_profile"):
-                    company = request.user.company_profile
-                    Employee.objects.create(user=instance, company=company, first_name=instance.first_name, last_name=instance.last_name)
-                else:
-                    raise serializers.ValidationError("Employees can only be created by a company.")
-
         return instance
