@@ -12,12 +12,24 @@
   left: 0;
   z-index: 1000;
 
-  .logo {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: white;
-    flex-grow: 1;
-    text-align: center;
+  .logo-container {
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    gap: 10px;
+    transition: transform 0.2s ease-in-out;
+
+    .logo-img {
+      height: 40px;
+      width: auto;
+      cursor: pointer;
+    }
+
+    .logo-text {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: white;
+    }
   }
 
   .top-bar-icons {
@@ -34,12 +46,5 @@
         color: var(--secondary-color);
       }
     }
-  }
-}
-
-/* Dark Mode */
-body.dark-mode {
-  .top-bar {
-    background-color: var(--primary-color);
   }
 }
