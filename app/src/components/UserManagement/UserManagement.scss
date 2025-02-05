@@ -17,17 +17,17 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: var(--hover-color);
+    background: var(--background-color);
     padding: 12px;
     border-radius: 8px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--box-shadow);
     max-width: 80%;
     margin: 0 auto 2rem auto;
 
     .search-container {
       display: flex;
       align-items: center;
-      background: white;
+      background: var(--background-color);
       padding: 8px;
       border-radius: 6px;
       flex-grow: 1;
@@ -45,6 +45,12 @@
         border: none;
         outline: none;
         font-size: 1rem;
+        background: var(--background-color);
+
+        &::placeholder{
+          color: var(--text-color);
+        }
+
       }
     }
 
@@ -53,7 +59,8 @@
       border-radius: 6px;
       font-size: 1rem;
       border: 1px solid var(--border-color);
-      background: white;
+      background: var(--background-color);
+      color: var(--text-color);
       cursor: pointer;
       margin-left: 1rem;
     }

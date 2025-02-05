@@ -1,20 +1,22 @@
 $primary-font: 'Arial, sans-serif';
 
-// 🌞 Light Mode
+// Light Mode
 $light-bg: #ffffff;
 $light-text: #121212;
 $light-primary: #007bff;
 $light-secondary: #6610f2;
 $light-border: #e0e0e0;
 $light-hover: #f5f5f5;
+$light-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
 
-// 🌙 Dark Mode
+// Dark Mode
 $dark-bg: #121212;
 $dark-text: #ffffff;
-$dark-primary: #0d6efd;
-$dark-secondary: #004085;
+$dark-primary: #3211aa;
+$dark-secondary: #160c6b;
 $dark-border: #444;
 $dark-hover: #222;
+$dark-shadow: 0px 4px 15px rgba(255, 255, 255, 0.1);
 
 // Light Mode
 :root {
@@ -24,9 +26,10 @@ $dark-hover: #222;
   --secondary-color: #{$light-secondary};
   --border-color: #{$light-border};
   --hover-color: #{$light-hover};
+  --box-shadow: #{$light-shadow};
 }
 
-// 🚀 Dark Mode
+// Dark Mode
 body.dark-mode {
   --background-color: #{$dark-bg};
   --text-color: #{$dark-text};
@@ -34,4 +37,5 @@ body.dark-mode {
   --secondary-color: #{$dark-secondary};
   --border-color: #{$dark-border};
   --hover-color: #{$dark-hover};
+  --box-shadow: #{$dark-shadow};
 }
