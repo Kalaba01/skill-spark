@@ -1,5 +1,6 @@
 from django.test import TestCase
 from django.contrib.auth import get_user_model
+from django.core import mail
 from .models import Company
 from rest_framework.test import APIClient
 from rest_framework import status
@@ -42,7 +43,7 @@ class RegisterCompanyAPITest(TestCase):
         self.client = APIClient()
         self.register_url = "/api/auth/register/"
 
-    def test_register_company_success(self):
+    def test_register_company_success_and_sends_email(self):
         data = {
             "email": "newcompany@example.com",
             "password": "StrongPass123",
@@ -52,17 +53,25 @@ class RegisterCompanyAPITest(TestCase):
         response = self.client.post(self.register_url, data)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertIn("message", response.data)
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertIn("Welcome to SkillSpark", mail.outbox[0].subject)
+
+        html_body = mail.outbox[0].alternatives[0][0]
+
+        self.assertIn("New Company", html_body)
+        self.assertIn("http://localhost:3000/", html_body)
 
     def test_register_company_missing_field(self):
         data = {
             "email": "newcompany@example.com",
             "password": "StrongPass123"
-            # Missing company_name
         }
 
         response = self.client.post(self.register_url, data)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertIn("company_name", response.data)
+
+        self.assertEqual(len(mail.outbox), 0)
 
     def test_register_company_duplicate_email(self):
         User.objects.create_user(email="existing@example.com", password="TestPass123", role=User.COMPANY)
@@ -75,6 +84,8 @@ class RegisterCompanyAPITest(TestCase):
 
         response = self.client.post(self.register_url, data)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+        self.assertEqual(len(mail.outbox), 0)
 
 class LoginAPITest(TestCase):
     def setUp(self):
