@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { ProtectedRoute, RedirectHome } from './middleware';
-import { GoTop, Footer, ToastNotification, Admin, Company, Employee, Unauthorized, NotFound, EmployeeManagement, UserManagement } from './components';
+import { GoTop, Footer, ToastNotification, Admin, Company, Employee, Unauthorized, NotFound, EmployeeManagement, UserManagement, ResetPassword } from './components';
 import './App.css';
 
 function App() {
@@ -9,6 +9,7 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<RedirectHome />} />
+        <Route path="/reset-password/:uidb64/:token" element={<ResetPassword />} />
 
         <Route path="/admin" element={<ProtectedRoute allowedRoles={["admin"]}><Admin /></ProtectedRoute>} />
         <Route path="/admin/users-management" element={<ProtectedRoute allowedRoles={["admin"]}><UserManagement /></ProtectedRoute>} />

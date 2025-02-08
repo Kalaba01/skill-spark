@@ -20,5 +20,7 @@ import ConfirmPopup from "./ConfirmPopup/ConfirmPopup";
 import UserManagement from "./UserManagement/UserManagement";
 import CreateUserPopup from "./CreateUserPopup/CreateUserPopup";
 import UserCard from "./UserCard/UserCard";
+import ForgotPassword from "./ForgotPassword/ForgotPassword";
+import ResetPassword from "./ResetPassword/ResetPassword";
 
-export { LandingPage, GoTop, Footer, Login, Register, ToastNotification, Language, Admin, Company, Employee, TopBar, Theme, HamburgerMenu, Logout, Unauthorized, NotFound, EmployeeManagement, EmployeePopup, ConfirmPopup, UserManagement, CreateUserPopup, UserCard }
+export { LandingPage, GoTop, Footer, Login, Register, ToastNotification, Language, Admin, Company, Employee, TopBar, Theme, HamburgerMenu, Logout, Unauthorized, NotFound, EmployeeManagement, EmployeePopup, ConfirmPopup, UserManagement, CreateUserPopup, UserCard, ForgotPassword, ResetPassword }

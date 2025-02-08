@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import "./LandingPage.scss";
 import { FaChevronDown } from "react-icons/fa";
-import { Login, Register, TopBar } from "../index";
+import { Login, Register, ForgotPassword, TopBar } from "../index";
 import { useTranslation } from "react-i18next";
 
 function LandingPage() {
   const [faqOpen, setFaqOpen] = useState(null);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
+  const [isForgotPasswordOpen, setIsForgotPasswordOpen] = useState(false);
 
   const { t } = useTranslation();
 
@@ -23,6 +24,12 @@ function LandingPage() {
   const openRegister = () => {
     setIsLoginOpen(false);
     setIsRegisterOpen(true);
+  };
+
+  const openForgotPassword = () => {
+    setIsLoginOpen(false);
+    setIsRegisterOpen(false);
+    setIsForgotPasswordOpen(true);
   };
 
   return (
@@ -76,10 +83,10 @@ function LandingPage() {
         ))}
       </section>
 
-      {/* Login and Register Popups */}
-      <Login isOpen={isLoginOpen} onClose={() => setIsLoginOpen(false)} switchToRegister={openRegister} />
+      {/* Login, Register and Forgot Password popups */}
+      <Login isOpen={isLoginOpen} onClose={() => setIsLoginOpen(false)} switchToRegister={openRegister} switchToForgotPassword={openForgotPassword} />
       <Register isOpen={isRegisterOpen} onClose={() => setIsRegisterOpen(false)} switchToLogin={openLogin} />
-
+      <ForgotPassword isOpen={isForgotPasswordOpen} onClose={() => setIsForgotPasswordOpen(false)} />
     </div>
   );
 }

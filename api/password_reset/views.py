@@ -1,13 +1,18 @@
 from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import send_mail
-from django.utils.http import urlsafe_base64_encode
+from django.core.mail import EmailMultiAlternatives
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes
+from django.template.loader import render_to_string
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.conf import settings
+from django.contrib.auth import get_user_model
 from .serializers import PasswordResetRequestSerializer
 
+
+User = get_user_model()
 
 class RequestPasswordResetView(APIView):
     def post(self, request):
@@ -20,11 +25,14 @@ class RequestPasswordResetView(APIView):
             uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
             reset_link = f"http://localhost:3000/reset-password/{uidb64}/{token}"
 
+            email_content = render_to_string("password_reset_email.html", {"reset_link": reset_link})
+
             send_mail(
                 "Reset Your Password",
-                f"Click the following link to reset your password: {reset_link}",
+                "",
                 settings.DEFAULT_FROM_EMAIL,
                 [user.email],
+                html_message=email_content,
                 fail_silently=False
             )
 

@@ -120,5 +120,31 @@
     "admin": "Admin",
     "company": "Company",
     "employee": "Employee"
+  },
+  "forgotPassword": {
+    "title": "Forgot Password",
+    "email": "Email Address",
+    "emailPlaceholder": "Enter your email",
+    "submitButton": "Reset Password",
+    "successMessage": "If an account with this email exists, a reset link has been sent.",
+    "errors": {
+      "missingEmail": "Please enter your email address.",
+      "failedRequest": "An error occurred while sending the reset request. Please try again."
+    }
+  },
+  "resetPassword": {
+    "title": "Reset Your Password",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm Password",
+    "newPasswordPlaceholder": "Enter your new password",
+    "confirmPasswordPlaceholder": "Confirm your new password",
+    "submitButton": "Reset Password",
+    "loading": "Resetting...",
+    "successMessage": "Your password has been successfully reset!",
+    "errors": {
+      "missingFields": "Please fill in all fields.",
+      "passwordMismatch": "Passwords do not match.",
+      "invalidToken": "Invalid or expired reset link. Please request a new one."
+    }
   }
 }

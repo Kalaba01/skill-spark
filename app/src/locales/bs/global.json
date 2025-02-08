@@ -120,5 +120,31 @@
     "admin": "Administrator",
     "company": "Kompanija",
     "employee": "Zaposleni"
+  },
+  "forgotPassword": {
+    "title": "Zaboravljena lozinka",
+    "email": "Email adresa",
+    "emailPlaceholder": "Unesite svoj email",
+    "submitButton": "Restartujte lozinku",
+    "successMessage": "Ako nalog s ovom email adresom postoji, poslan je link za resetovanje lozinke.",
+    "errors": {
+      "missingEmail": "Molimo unesite svoju email adresu.",
+      "failedRequest": "Došlo je do greške prilikom slanja zahtjeva za reset. Pokušajte ponovo."
+    }
+  },
+  "resetPassword": {
+    "title": "Resetujte svoju lozinku",
+    "newPassword": "Nova lozinka",
+    "confirmPassword": "Potvrdite lozinku",
+    "newPasswordPlaceholder": "Unesite novu lozinku",
+    "confirmPasswordPlaceholder": "Potvrdite novu lozinku",
+    "submitButton": "Resetuj lozinku",
+    "loading": "Resetovanje...",
+    "successMessage": "Vaša lozinka je uspješno resetovana!",
+    "errors": {
+      "missingFields": "Molimo popunite sva polja.",
+      "passwordMismatch": "Lozinke se ne podudaraju.",
+      "invalidToken": "Nevažeći ili istekao link za reset. Zatražite novi."
+    }
   }
 }

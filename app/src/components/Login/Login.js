@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { showToast } from "../ToastNotification/ToastNotification";
-import "./Login.scss";
 import { useTranslation } from "react-i18next";
 import { jwtDecode } from "jwt-decode";
+import "./Login.scss";
 
-function Login({ isOpen, onClose, switchToRegister }) {
+function Login({ isOpen, onClose, switchToRegister, switchToForgotPassword }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -86,7 +86,7 @@ function Login({ isOpen, onClose, switchToRegister }) {
             onChange={handleChange}
           />
 
-          <p className="forgot-password">{t("login.forgotPassword")}</p>
+          <p className="forgot-password" onClick={switchToForgotPassword}>{t("login.forgotPassword")}</p>
 
           <button type="submit" className="login-btn">{t("login.button")}</button>
         </form>
