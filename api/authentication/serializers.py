@@ -1,3 +1,6 @@
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from django.conf import settings
 from rest_framework import serializers
 from django.contrib.auth import authenticate
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -25,8 +28,24 @@ class RegisterCompanySerializer(serializers.ModelSerializer):
             role=User.COMPANY
         )
         
-        Company.objects.create(user=user, company_name=company_name)
+        company = Company.objects.create(user=user, company_name=company_name)
+
+        self.send_welcome_email(user.email, company_name)
+
         return user
+
+    def send_welcome_email(self, email, company_name):
+        subject = "Welcome to SkillSpark!"
+        email_content = render_to_string("welcome_email.html", {"company_name": company_name})
+        
+        send_mail(
+            subject,
+            "",
+            settings.DEFAULT_FROM_EMAIL,
+            [email],
+            html_message=email_content,
+            fail_silently=False
+        )
 
 class LoginSerializer(serializers.Serializer):
     email = serializers.EmailField()

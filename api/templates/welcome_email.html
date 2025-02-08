@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to SkillSpark</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 20px;
+        }
+        .email-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        h2 {
+            color: #007bff;
+        }
+        p {
+            color: #333;
+        }
+        .button {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 12px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <h2>Welcome to SkillSpark!</h2>
+        <p>Dear {{ company_name }},</p>
+        <p>Thank you for joining SkillSpark! We’re thrilled to have you on board.</p>
+        <p>With SkillSpark, you can manage your employees, track their progress, and optimize performance.</p>
+        <p>Get started by logging into your account and setting up your company profile.</p>
+        <a href="http://localhost:3000/" class="button">Login to SkillSpark</a>
+        <p>If you have any questions, feel free to contact our support team.</p>
+        <p>Best Regards, <br> SkillSpark Team</p>
+    </div>
+</body>
+</html>
