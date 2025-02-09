@@ -28,7 +28,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework_simplejwt',
     "user_management",
-    "password_reset"
+    "password_reset",
+    "quizzes"
 ]
 
 REST_FRAMEWORK = {
