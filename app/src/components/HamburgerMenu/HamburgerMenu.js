@@ -12,17 +12,14 @@ function HamburgerMenu({ userRole }) {
 
   const menuItems = {
     admin: [
-      { label: "Users Management", path: "/admin/users-management" },
-      { label: "Settings", path: "/admin/settings" }
+      { label: "Users Management", path: "/admin/users-management" }
     ],
     company: [
       { label: "Employees Management", path: "/company/employees-management" },
-      { label: "Settings", path: "/company/settings" }
+      { label: "Quizzes", path: "/company/quizzes" }
     ],
     employee: [
-      { label: "My Dashboard", path: "/employee" },
-      { label: "My Training", path: "/employee/training" },
-      { label: "Profile", path: "/employee/profile" }
+      { label: "My Dashboard", path: "/employee" }
     ]
   };
 

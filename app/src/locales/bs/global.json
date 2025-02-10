@@ -146,5 +146,52 @@
       "passwordMismatch": "Lozinke se ne podudaraju.",
       "invalidToken": "Nevažeći ili istekao link za reset. Zatražite novi."
     }
+  },
+  "quizzes": {
+    "your_quizzes": "Vaši kvizovi",
+    "search_placeholder": "Pretraži po naslovu...",
+    "filter_label": "Sve težine",
+    "difficulty_easy": "Lako",
+    "difficulty_medium": "Srednje",
+    "difficulty_hard": "Teško",
+    "add_quiz": "+ Dodaj novi kviz",
+    "edit": "Uredi",
+    "delete": "Obriši",
+    "load_error": "Neuspjelo učitavanje kvizova.",
+    "delete_success": "Kviz je uspješno obrisan.",
+    "delete_error": "Neuspjelo brisanje kviza.",
+    "no_quizzes": "Još niste kreirali nijedan kviz.",
+    "no_quizzes_found": "Nema kvizova koji odgovaraju pretrazi.",
+    "delete_message": "Da li ste sigurni da želite obrisati ovaj kviz?"
+  },
+  "quiz_form": {
+    "edit_quiz": "Uredi kviz",
+    "create_quiz": "Kreiraj novi kviz",
+    "title": "Naslov",
+    "description": "Opis",
+    "difficulty": "Težina",
+    "difficulty_easy": "Lako",
+    "difficulty_medium": "Srednje",
+    "difficulty_hard": "Teško",
+    "questions": "Pitanja",
+    "edit": "Uredi",
+    "delete": "Obriši",
+    "add_question": "+ Dodaj pitanje",
+    "update_quiz": "Ažuriraj kviz",
+    "update_success": "Kviz je uspješno ažuriran.",
+    "create_success": "Kviz je uspješno kreiran.",
+    "save_error": "Neuspjelo spremanje kviza."
+  },
+  "question_form": {
+    "edit_question": "Uredi pitanje",
+    "add_question": "Dodaj novo pitanje",
+    "question_text": "Tekst pitanja",
+    "enter_question": "Unesite svoje pitanje",
+    "answers": "Odgovori",
+    "answer_text": "Tekst odgovora",
+    "add_answer": "+ Dodaj odgovor",
+    "save_question": "Sačuvaj pitanje",
+    "cancel": "Otkaži",
+    "fill_all_fields": "Sva polja moraju biti popunjena!"
   }
 }

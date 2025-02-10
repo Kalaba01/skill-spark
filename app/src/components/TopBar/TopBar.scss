@@ -15,7 +15,8 @@
   .logo-container {
     display: flex;
     align-items: center;
-    margin: 0 auto;
+    justify-content: center;
+    margin-right: -10rem;
     gap: 10px;
     transition: transform 0.2s ease-in-out;
 
