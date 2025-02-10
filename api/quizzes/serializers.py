@@ -41,6 +41,11 @@ class QuizSerializer(serializers.ModelSerializer):
         model = Quiz
         fields = ["id", "title", "description", "difficulty", "questions"]
 
+    def validate_questions(self, value):
+        if not value:
+            raise serializers.ValidationError("Quiz must contain at least one question.")
+        return value
+
     def create(self, validated_data):
         questions_data = validated_data.pop("questions")
         quiz = Quiz.objects.create(**validated_data)
