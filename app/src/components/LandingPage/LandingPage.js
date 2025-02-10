@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import "./LandingPage.scss";
-import { FaChevronDown } from "react-icons/fa";
 import { Login, Register, ForgotPassword, TopBar } from "../index";
 import { useTranslation } from "react-i18next";
+import { FaChevronDown } from "react-icons/fa";
+import { ReactTyped } from "react-typed";
+import "./LandingPage.scss";
 
 function LandingPage() {
   const [faqOpen, setFaqOpen] = useState(null);
@@ -39,7 +40,14 @@ function LandingPage() {
 
       {/* Hero Section */}
       <section className="hero">
-        <h1>{t("landingPage.title")}</h1>
+      <h1>
+          <ReactTyped
+            strings={[t("landingPage.title")]}
+            typeSpeed={50}
+            loop={false}
+            showCursor={true}
+          />
+        </h1>
       </section>
 
       {/* Features Section */}
