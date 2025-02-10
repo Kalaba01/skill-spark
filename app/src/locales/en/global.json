@@ -193,5 +193,10 @@
     "save_question": "Save Question",
     "cancel": "Cancel",
     "fill_all_fields": "All fields must be filled!"
+  },
+  "hamburgerMenu": {
+    "users_management": "Users Management",
+    "employees_management": "Employees Management",
+    "quizzes": "Quizzes"
   }
 }

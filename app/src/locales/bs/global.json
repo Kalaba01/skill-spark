@@ -193,5 +193,10 @@
     "save_question": "Sačuvaj pitanje",
     "cancel": "Otkaži",
     "fill_all_fields": "Sva polja moraju biti popunjena!"
+  },
+  "hamburgerMenu": {
+    "users_management": "Upravljanje korisnicima",
+    "employees_management": "Upravljanje zaposlenima",
+    "quizzes": "Kvizovi"
   }
 }

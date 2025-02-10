@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import "./HamburgerMenu.scss";
 
 function HamburgerMenu({ userRole }) {
+  const { t } = useTranslation();
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -12,14 +14,14 @@ function HamburgerMenu({ userRole }) {
 
   const menuItems = {
     admin: [
-      { label: "Users Management", path: "/admin/users-management" }
+      { label: t("hamburgerMenu.users_management"), path: "/admin/users-management" }
     ],
     company: [
-      { label: "Employees Management", path: "/company/employees-management" },
-      { label: "Quizzes", path: "/company/quizzes" }
+      { label: t("hamburgerMenu.employees_management"), path: "/company/employees-management" },
+      { label: t("hamburgerMenu.quizzes"), path: "/company/quizzes" }
     ],
     employee: [
-      { label: "My Dashboard", path: "/employee" }
+      { label: t("hamburgerMenu.quizzes"), path: "/employee/quizzes" }
     ]
   };
 
