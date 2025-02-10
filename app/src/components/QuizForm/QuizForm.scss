@@ -1,16 +1,5 @@
 @import "../../styles/variables";
 
-* {
-  &::-webkit-scrollbar {
-    width: 8px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: var(--primary-color);
-    border-radius: 4px;
-  }
-}
-
 .quiz-form-overlay {
   position: fixed;
   top: 0;

@@ -2,7 +2,7 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { ProtectedRoute, RedirectHome } from './middleware';
 import { GoTop, Footer, ToastNotification, Admin, Company, Employee, Unauthorized, NotFound, EmployeeManagement, UserManagement, ResetPassword, Quizzes } from './components';
-import './App.css';
+import './App.scss';
 
 function App() {
   return (
