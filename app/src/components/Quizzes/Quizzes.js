@@ -46,7 +46,7 @@ function Quizzes() {
     try {
       const token = localStorage.getItem("access_token");
       await axios.delete(
-        `http://127.0.0.1:8000/api/quizzes/quizzes/${confirmDelete.quizId}/`,
+        `http://127.0.0.1:8000/api/quizzes/${confirmDelete.quizId}/`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       showToast(t("quizzes.delete_success"), "success");
