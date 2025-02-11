@@ -18,7 +18,7 @@ function Quizzes() {
     try {
       const token = localStorage.getItem("access_token");
       const response = await axios.get(
-        "http://127.0.0.1:8000/api/quizzes/quizzes/",
+        "http://127.0.0.1:8000/api/quizzes/",
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setQuizzes(response.data);
@@ -101,14 +101,12 @@ function Quizzes() {
                 <span className={`difficulty ${quiz.difficulty}`}>
                   {t(`quizzes.difficulty_${quiz.difficulty}`)}
                 </span>
+                <p><strong>{t("quizzes.duration")}:</strong> {quiz.duration} min</p>
                 <div className="actions">
                   <button className="edit-btn" onClick={() => handleEdit(quiz)}>
                     {t("quizzes.edit")}
                   </button>
-                  <button
-                    className="delete-btn"
-                    onClick={() => handleDeleteClick(quiz.id)}
-                  >
+                  <button className="delete-btn" onClick={() => handleDeleteClick(quiz.id)}>
                     {t("quizzes.delete")}
                   </button>
                 </div>

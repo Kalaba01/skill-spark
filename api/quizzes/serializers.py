@@ -37,18 +37,10 @@ class QuestionSerializer(serializers.ModelSerializer):
 
 class QuizSerializer(serializers.ModelSerializer):
     questions = QuestionSerializer(many=True)
-    document = serializers.SerializerMethodField()
-    document_name = serializers.CharField(required=False, allow_null=True)
 
     class Meta:
         model = Quiz
-        fields = ["id", "title", "description", "difficulty", "questions", "document", "document_name", "duration"]
-
-    def get_document(self, obj):
-        """Konvertuje binarni fajl u base64 string za frontend."""
-        if obj.document:
-            return base64.b64encode(obj.document).decode('utf-8')
-        return None
+        fields = ["id", "title", "description", "difficulty", "questions", "duration"]
 
     def validate_questions(self, value):
         if not value:
@@ -57,14 +49,6 @@ class QuizSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         questions_data = validated_data.pop("questions")
-        document_base64 = validated_data.pop("document", None)
-        document_name = validated_data.pop("document_name", None)
-
-        # Konvertovanje base64 nazad u binarni format ako je dokument poslat
-        if document_base64:
-            validated_data["document"] = base64.b64decode(document_base64)
-        
-        validated_data["document_name"] = document_name
         quiz = Quiz.objects.create(**validated_data)
 
         for question_data in questions_data:
@@ -78,21 +62,11 @@ class QuizSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         questions_data = validated_data.pop("questions", [])
-        document_base64 = validated_data.pop("document", None)
-        document_name = validated_data.pop("document_name", None)
 
         instance.title = validated_data.get("title", instance.title)
         instance.description = validated_data.get("description", instance.description)
         instance.difficulty = validated_data.get("difficulty", instance.difficulty)
         instance.duration = validated_data.get("duration", instance.duration)
-
-        # Ako je nov dokument poslat, ažuriraj ga
-        if document_base64:
-            instance.document = base64.b64decode(document_base64)
-
-        if document_name:
-            instance.document_name = document_name
-
         instance.save()
 
         instance.questions.all().delete()

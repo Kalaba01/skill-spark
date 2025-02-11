@@ -155,6 +155,7 @@
     "difficulty_medium": "Srednje",
     "difficulty_hard": "Teško",
     "add_quiz": "+ Dodaj novi kviz",
+    "duration": "Trajanje (u minutama)",
     "edit": "Uredi",
     "delete": "Obriši",
     "load_error": "Neuspjelo učitavanje kvizova.",
@@ -180,7 +181,12 @@
     "update_quiz": "Ažuriraj kviz",
     "update_success": "Kviz je uspješno ažuriran.",
     "create_success": "Kviz je uspješno kreiran.",
-    "save_error": "Neuspjelo spremanje kviza."
+    "save_error": "Neuspjelo spremanje kviza.",
+    "duration": "Trajanje (u minutama)",
+    "upload_document": "Dodajte dokument za učenje",
+    "drag_drop": "Prevucite i ispustite svoj fajl ovde",
+    "or_click": "ili kliknite za upload",
+    "uploaded_file": "Dodat fajl:"
   },
   "question_form": {
     "edit_question": "Uredi pitanje",

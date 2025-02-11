@@ -155,6 +155,7 @@
     "difficulty_medium": "Medium",
     "difficulty_hard": "Hard",
     "add_quiz": "+ Add New Quiz",
+    "duration": "Duration (minutes)",
     "edit": "Edit",
     "delete": "Delete",
     "load_error": "Failed to load quizzes.",
@@ -180,7 +181,12 @@
     "update_quiz": "Update Quiz",
     "update_success": "Quiz updated successfully.",
     "create_success": "Quiz created successfully.",
-    "save_error": "Failed to save quiz."
+    "save_error": "Failed to save quiz.",
+    "duration": "Duration (minutes)",
+    "upload_document": "Upload Study Document",
+    "drag_drop": "Drag and drop your file here",
+    "or_click": "or click to upload",
+    "uploaded_file": "Uploaded File:"
   },
   "question_form": {
     "edit_question": "Edit Question",

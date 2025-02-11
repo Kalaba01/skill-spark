@@ -51,7 +51,11 @@
       border: 1px solid var(--border-color);
       background: var(--background-color);
       color: var(--text-color);
+    }
+
+    textarea {
       resize: vertical;
+      height: 4rem;
     }
 
     button {
@@ -71,15 +75,13 @@
   }
 
   .questions {
-    margin-top: 1.5rem;
-    text-align: left;
     max-height: 200px;
     overflow-y: auto;
 
     h3 {
       color: var(--primary-color);
       font-size: 1.3rem;
-      margin-bottom: 10px;
+      margin-bottom: 0.8rem;
     }
 
     .question-card {
@@ -155,5 +157,15 @@
         }
       }
     }
+  }
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+
+  .form-group {
+    flex: 1;
   }
 }

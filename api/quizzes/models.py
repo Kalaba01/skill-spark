@@ -16,11 +16,8 @@ class Quiz(models.Model):
     description = models.TextField(blank=True, null=True)
     difficulty = models.CharField(max_length=10, choices=DIFFICULTY_CHOICES, default=EASY)
     company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name="quizzes")
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    document = models.BinaryField(blank=True, null=True)
-    document_name = models.CharField(max_length=255, blank=True, null=True)
     duration = models.PositiveIntegerField(default=30)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"{self.title} ({self.company.company_name})"

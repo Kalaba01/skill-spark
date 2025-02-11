@@ -7,10 +7,12 @@ import "./QuizForm.scss";
 
 function QuizForm({ quiz, onClose }) {
   const { t } = useTranslation();
+
   const [formData, setFormData] = useState({
     title: quiz?.title || "",
     description: quiz?.description || "",
     difficulty: quiz?.difficulty || "easy",
+    duration: quiz?.duration || 30,
     questions: quiz?.questions || [],
   });
 
@@ -53,19 +55,32 @@ function QuizForm({ quiz, onClose }) {
     e.preventDefault();
     try {
       const token = localStorage.getItem("access_token");
+
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json"
+        }
+      };
+
       if (quiz) {
-        await axios.put(`http://127.0.0.1:8000/api/quizzes/quizzes/${quiz.id}/`, formData, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        await axios.put(
+          `http://127.0.0.1:8000/api/quizzes//${quiz.id}/`,
+          formData,
+          config
+        );
         showToast(t("quiz_form.update_success"), "success");
       } else {
-        await axios.post("http://127.0.0.1:8000/api/quizzes/quizzes/", formData, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        await axios.post(
+          "http://127.0.0.1:8000/api/quizzes/",
+          formData,
+          config
+        );
         showToast(t("quiz_form.create_success"), "success");
       }
       onClose();
     } catch (error) {
+      console.error("Error sending data:", error.response?.data || error);
       showToast(t("quiz_form.save_error"), "error");
     }
   };
@@ -73,7 +88,9 @@ function QuizForm({ quiz, onClose }) {
   return (
     <div className="quiz-form-overlay" onClick={onClose}>
       <div className="quiz-form-popup" onClick={(e) => e.stopPropagation()}>
-        <button className="close-btn" onClick={onClose}>&times;</button>
+        <button className="close-btn" onClick={onClose}>
+          &times;
+        </button>
         <h2>{quiz ? t("quiz_form.edit_quiz") : t("quiz_form.create_quiz")}</h2>
         <form onSubmit={handleSubmit}>
           <label>{t("quiz_form.title")}</label>
@@ -82,12 +99,21 @@ function QuizForm({ quiz, onClose }) {
           <label>{t("quiz_form.description")}</label>
           <textarea name="description" value={formData.description} onChange={handleChange} required />
 
-          <label>{t("quiz_form.difficulty")}</label>
-          <select name="difficulty" value={formData.difficulty} onChange={handleChange}>
-            <option value="easy">{t("quiz_form.difficulty_easy")}</option>
-            <option value="medium">{t("quiz_form.difficulty_medium")}</option>
-            <option value="hard">{t("quiz_form.difficulty_hard")}</option>
-          </select>
+          <div className="form-row">
+            <div className="form-group">
+              <label>{t("quiz_form.difficulty")}</label>
+              <select name="difficulty" value={formData.difficulty} onChange={handleChange}>
+                <option value="easy">{t("quiz_form.difficulty_easy")}</option>
+                <option value="medium">{t("quiz_form.difficulty_medium")}</option>
+                <option value="hard">{t("quiz_form.difficulty_hard")}</option>
+              </select>
+            </div>
+
+            <div className="form-group">
+              <label>{t("quiz_form.duration")}</label>
+              <input type="number" name="duration" value={formData.duration} onChange={handleChange} min="1" required />
+            </div>
+          </div>
 
           <div className="questions">
             <h3>{t("quiz_form.questions")}</h3>
@@ -103,16 +129,25 @@ function QuizForm({ quiz, onClose }) {
                     ))}
                   </ul>
                   <div className="question-actions">
-                    <button type="button" className="edit-btn" onClick={() => handleEditQuestion(index)}>{t("quiz_form.edit")}</button>
-                    <button type="button" className="delete-btn" onClick={() => handleDeleteQuestion(index)}>{t("quiz_form.delete")}</button>
+                    <button type="button" className="edit-btn" onClick={() => handleEditQuestion(index)}>
+                      {t("quiz_form.edit")}
+                    </button>
+                    <button type="button" className="delete-btn" onClick={() => handleDeleteQuestion(index)}>
+                      {t("quiz_form.delete")}
+                    </button>
                   </div>
                 </div>
               ))}
             </div>
-            <button type="button" onClick={() => {
-              setEditingQuestionIndex(null);
-              setIsQuestionFormOpen(true);
-            }}>{t("quiz_form.add_question")}</button>
+            <button
+              type="button"
+              onClick={() => {
+                setEditingQuestionIndex(null);
+                setIsQuestionFormOpen(true);
+              }}
+            >
+              {t("quiz_form.add_question")}
+            </button>
           </div>
 
           <button type="submit">{quiz ? t("quiz_form.update_quiz") : t("quiz_form.create_quiz")}</button>
