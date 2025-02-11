@@ -19,3 +19,10 @@ class QuizDetailView(generics.RetrieveUpdateDestroyAPIView):
 
     def get_queryset(self):
         return Quiz.objects.filter(company=self.request.user.company_profile)
+
+class EmployeeQuizListView(generics.ListAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = QuizSerializer
+
+    def get_queryset(self):
+        return Quiz.objects.filter(company=self.request.user.employee_profile.company)
