@@ -204,5 +204,17 @@
     "users_management": "Upravljanje korisnicima",
     "employees_management": "Upravljanje zaposlenima",
     "quizzes": "Kvizovi"
+  },
+  "employee_quizzes": {
+    "title": "Kvizovi zaposlenih",
+    "search_placeholder": "Pretraži kvizove...",
+    "all_durations": "Sve dužine trajanja",
+    "duration_short": "Kraće od 10 min",
+    "duration_medium": "10-30 min",
+    "duration_long": "Duže od 30 min",
+    "difficulty": "Težina",
+    "duration": "Trajanje",
+    "view_button": "Pregled",
+    "no_quizzes": "Nema dostupnih kvizova."
   }
 }

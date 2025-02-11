@@ -25,5 +25,6 @@ import ResetPassword from "./ResetPassword/ResetPassword";
 import Quizzes from "./Quizzes/Quizzes";
 import QuizForm from "./QuizForm/QuizForm";
 import QuestionForm from "./QuestionForm/QuestionForm";
+import EmployeeQuizzes from "./EmployeeQuizzes/EmployeeQuizzes";
 
-export { LandingPage, GoTop, Footer, Login, Register, ToastNotification, Language, Admin, Company, Employee, TopBar, Theme, HamburgerMenu, Logout, Unauthorized, NotFound, EmployeeManagement, EmployeePopup, ConfirmPopup, UserManagement, CreateUserPopup, UserCard, ForgotPassword, ResetPassword, Quizzes, QuizForm, QuestionForm }
+export { LandingPage, GoTop, Footer, Login, Register, ToastNotification, Language, Admin, Company, Employee, TopBar, Theme, HamburgerMenu, Logout, Unauthorized, NotFound, EmployeeManagement, EmployeePopup, ConfirmPopup, UserManagement, CreateUserPopup, UserCard, ForgotPassword, ResetPassword, Quizzes, QuizForm, QuestionForm, EmployeeQuizzes }

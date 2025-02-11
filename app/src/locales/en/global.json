@@ -204,5 +204,17 @@
     "users_management": "Users Management",
     "employees_management": "Employees Management",
     "quizzes": "Quizzes"
+  },
+  "employee_quizzes": {
+    "title": "Employee Quizzes",
+    "search_placeholder": "Search quizzes...",
+    "all_durations": "All Durations",
+    "duration_short": "Less than 10 min",
+    "duration_medium": "10-30 min",
+    "duration_long": "More than 30 min",
+    "difficulty": "Difficulty",
+    "duration": "Duration",
+    "view_button": "View",
+    "no_quizzes": "No quizzes available."
   }
 }
