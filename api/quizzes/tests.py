@@ -65,6 +65,7 @@ class QuizAPITest(TestCase):
         self.quiz_url = "/api/quizzes/"
         self.quiz_detail_url = f"/api/quizzes/{self.quiz.id}/"
         self.employee_quizzes_url = "/api/quizzes/employee-quizzes/"
+        self.employee_quiz_detail_url = f"/api/quizzes/{self.quiz.id}/detail/"
 
     def test_create_quiz(self):
         response = self.client.post(self.quiz_url, self.quiz_data, format="json")
@@ -137,3 +138,54 @@ class QuizAPITest(TestCase):
         self.assertEqual(len(response.data), 1)
         self.assertEqual(response.data[0]["title"], self.quiz.title)
         self.assertEqual(response.data[0]["duration"], self.quiz.duration)
+
+    def test_employee_can_get_quiz_detail(self):
+        self.client.force_authenticate(user=self.employee_user)
+        response = self.client.get(self.employee_quiz_detail_url)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data["title"], self.quiz.title)
+        self.assertEqual(response.data["description"], self.quiz.description)
+        self.assertEqual(response.data["difficulty"], self.quiz.difficulty)
+        self.assertEqual(response.data["duration"], self.quiz.duration)
+        self.assertEqual(response.data["question_count"], 1)
+
+    def test_employee_cannot_access_other_company_quizzes(self):
+        other_company_user = User.objects.create_user(
+            email="othercompany@example.com",
+            password="TestPass123",
+            role=User.COMPANY
+        )
+        other_company = Company.objects.create(user=other_company_user, company_name="Other Company")
+
+        other_employee_user = User.objects.create_user(
+            email="otheremployee@example.com",
+            password="TestPass123",
+            role=User.EMPLOYEE
+        )
+        other_employee = Employee.objects.create(
+            user=other_employee_user,
+            first_name="Jane",
+            last_name="Smith",
+            company=other_company
+        )
+
+        other_quiz = Quiz.objects.create(
+            title="Other Company Quiz",
+            description="A quiz from another company",
+            difficulty="hard",
+            duration=45,
+            company=other_company
+        )
+
+        self.client.force_authenticate(user=other_employee_user)
+        response = self.client.get(self.employee_quiz_detail_url)
+        
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+
+    def test_unauthorized_user_cannot_access_quiz_detail(self):
+        self.client.logout()
+        response = self.client.get(self.employee_quiz_detail_url)
+
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
