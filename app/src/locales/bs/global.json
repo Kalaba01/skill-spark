@@ -216,5 +216,17 @@
     "duration": "Trajanje",
     "view_button": "Pregled",
     "no_quizzes": "Nema dostupnih kvizova."
+  },
+  "employee_quiz_detail": {
+    "loading": "Učitavanje detalja kviza...",
+    "not_found": "Kviz nije pronađen.",
+    "description": "Opis",
+    "difficulty": "Težina",
+    "difficulty_easy": "Lako",
+    "difficulty_medium": "Srednje",
+    "difficulty_hard": "Teško",
+    "duration": "Trajanje",
+    "questions_count": "Broj pitanja",
+    "start_quiz": "Započni kviz"
   }
 }

@@ -216,5 +216,17 @@
     "duration": "Duration",
     "view_button": "View",
     "no_quizzes": "No quizzes available."
+  },
+  "employee_quiz_detail": {
+    "loading": "Loading quiz details...",
+    "not_found": "Quiz not found.",
+    "description": "Description",
+    "difficulty": "Difficulty",
+    "difficulty_easy": "Easy",
+    "difficulty_medium": "Medium",
+    "difficulty_hard": "Hard",
+    "duration": "Duration",
+    "questions_count": "Number of Questions",
+    "start_quiz": "Start Quiz"
   }
 }

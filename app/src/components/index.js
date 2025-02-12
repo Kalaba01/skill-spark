@@ -27,5 +27,6 @@ import QuizForm from "./QuizForm/QuizForm";
 import QuestionForm from "./QuestionForm/QuestionForm";
 import EmployeeQuizzes from "./EmployeeQuizzes/EmployeeQuizzes";
 import QuizCard from "./QuizCard/QuizCard";
+import EmployeeQuizDetail from "./EmployeeQuizDetail/EmployeeQuizDetail";
 
-export { LandingPage, GoTop, Footer, Login, Register, ToastNotification, Language, Admin, Company, Employee, TopBar, Theme, HamburgerMenu, Logout, Unauthorized, NotFound, EmployeeManagement, EmployeePopup, ConfirmPopup, UserManagement, CreateUserPopup, UserCard, ForgotPassword, ResetPassword, Quizzes, QuizForm, QuestionForm, EmployeeQuizzes, QuizCard }
+export { LandingPage, GoTop, Footer, Login, Register, ToastNotification, Language, Admin, Company, Employee, TopBar, Theme, HamburgerMenu, Logout, Unauthorized, NotFound, EmployeeManagement, EmployeePopup, ConfirmPopup, UserManagement, CreateUserPopup, UserCard, ForgotPassword, ResetPassword, Quizzes, QuizForm, QuestionForm, EmployeeQuizzes, QuizCard, EmployeeQuizDetail }

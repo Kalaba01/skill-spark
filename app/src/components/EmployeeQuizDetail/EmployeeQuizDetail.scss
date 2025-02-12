@@ -1,0 +1,97 @@
+@import "../../styles/variables";
+
+.quiz-detail-container {
+  width: 90%;
+  max-width: 900px;
+  margin: 2rem auto;
+  background: var(--background-color);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: var(--box-shadow);
+  text-align: center;
+
+  .quiz-title {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    text-align: center;
+  }
+
+  .quiz-description {
+    font-size: 1.3rem;
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    text-align: center;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+
+    strong {
+        color: var(--primary-color);
+    }
+
+  }
+
+  .quiz-info {
+    background: var(--secondary-background);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    text-align: left;
+
+    p {
+      font-size: 1.1rem;
+      margin: 0.5rem 0;
+
+      strong {
+        color: var(--primary-color);
+      }
+    }
+
+    .difficulty {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 5px;
+      font-weight: bold;
+      text-transform: capitalize;
+
+      &.easy {
+        background: #d4edda;
+        color: #155724;
+      }
+
+      &.medium {
+        background: #fff3cd;
+        color: #856404;
+      }
+
+      &.hard {
+        background: #f8d7da;
+        color: #721c24;
+      }
+    }
+  }
+
+  .start-quiz-btn {
+    display: block;
+    width: fit-content;
+    margin: 0 auto;
+    padding: 14px 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out, transform 0.2s;
+
+    &:hover {
+      background: var(--secondary-color);
+      transform: scale(1.05);
+    }
+  }
+}

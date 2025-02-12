@@ -86,7 +86,7 @@ const EmployeeQuizzes = () => {
                 key={quiz.id}
                 quiz={quiz}
                 actions={
-                  <Link to={`/quiz/${quiz.id}`} className="view-btn">
+                  <Link to={`/employee/quiz/${quiz.id}`} className="view-btn">
                     {t("employee_quizzes.view_button")}
                   </Link>
                 }
