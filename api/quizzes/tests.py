@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 from rest_framework.test import APIClient
 from rest_framework import status
 from .models import Quiz, Question, Answer, Company
+from authentication.models import Employee
 
 User = get_user_model()
 
@@ -10,13 +11,28 @@ User = get_user_model()
 class QuizAPITest(TestCase):
     def setUp(self):
         self.client = APIClient()
-        self.user = User.objects.create_user(
+        
+        self.company_user = User.objects.create_user(
             email="company@example.com",
             password="TestPass123",
             role=User.COMPANY
         )
-        self.company = Company.objects.create(user=self.user, company_name="Test Company")
-        self.client.force_authenticate(user=self.user)
+        self.company = Company.objects.create(user=self.company_user, company_name="Test Company")
+
+        self.employee_user = User.objects.create_user(
+            email="employee@example.com",
+            password="TestPass123",
+            role=User.EMPLOYEE
+        )
+
+        self.employee = Employee.objects.create(
+            user=self.employee_user,
+            first_name="John",
+            last_name="Doe",
+            company=self.company
+        )
+
+        self.client.force_authenticate(user=self.company_user)
 
         self.quiz_data = {
             "title": "Sample Quiz",
@@ -48,6 +64,7 @@ class QuizAPITest(TestCase):
 
         self.quiz_url = "/api/quizzes/"
         self.quiz_detail_url = f"/api/quizzes/{self.quiz.id}/"
+        self.employee_quizzes_url = "/api/quizzes/employee-quizzes/"
 
     def test_create_quiz(self):
         response = self.client.post(self.quiz_url, self.quiz_data, format="json")
@@ -112,3 +129,11 @@ class QuizAPITest(TestCase):
         self.client.logout()
         response = self.client.get(self.quiz_url)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+    def test_employee_can_get_company_quizzes(self):
+        self.client.force_authenticate(user=self.employee_user)
+        response = self.client.get(self.employee_quizzes_url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 1)
+        self.assertEqual(response.data[0]["title"], self.quiz.title)
+        self.assertEqual(response.data[0]["duration"], self.quiz.duration)
