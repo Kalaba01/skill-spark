@@ -1,4 +1,3 @@
-import base64
 from rest_framework import serializers
 from .models import Quiz, Question, Answer
 
@@ -78,3 +77,13 @@ class QuizSerializer(serializers.ModelSerializer):
                 Answer.objects.create(question=question, **answer_data)
 
         return instance
+
+class QuizDetailSerializer(serializers.ModelSerializer):
+    question_count = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Quiz
+        fields = ["id", "title", "description", "difficulty", "duration", "question_count"]
+
+    def get_question_count(self, obj):
+        return obj.questions.count()

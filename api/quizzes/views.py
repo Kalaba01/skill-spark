@@ -1,6 +1,6 @@
 from rest_framework import generics, permissions
 from .models import Quiz
-from .serializers import QuizSerializer
+from .serializers import QuizSerializer, QuizDetailSerializer
 
 class QuizListCreateView(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticated]
@@ -26,3 +26,8 @@ class EmployeeQuizListView(generics.ListAPIView):
 
     def get_queryset(self):
         return Quiz.objects.filter(company=self.request.user.employee_profile.company)
+
+class QuizDetailPublicView(generics.RetrieveAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = QuizDetailSerializer
+    queryset = Quiz.objects.all()
