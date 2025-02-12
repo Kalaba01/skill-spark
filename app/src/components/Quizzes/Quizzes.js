@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { TopBar, QuizForm, ConfirmPopup } from "../";
+import { TopBar, QuizForm, ConfirmPopup, QuizCard } from "../";
 import { useTranslation } from "react-i18next";
 import { showToast } from "../ToastNotification/ToastNotification";
 import axios from "axios";
@@ -95,22 +95,20 @@ function Quizzes() {
         <div className="quiz-cards">
           {filteredQuizzes.length > 0 ? (
             filteredQuizzes.map((quiz) => (
-              <div key={quiz.id} className="quiz-card">
-                <h3>{quiz.title}</h3>
-                <p>{quiz.description}</p>
-                <span className={`difficulty ${quiz.difficulty}`}>
-                  {t(`quizzes.difficulty_${quiz.difficulty}`)}
-                </span>
-                <p><strong>{t("quizzes.duration")}:</strong> {quiz.duration} min</p>
-                <div className="actions">
-                  <button className="edit-btn" onClick={() => handleEdit(quiz)}>
-                    {t("quizzes.edit")}
-                  </button>
-                  <button className="delete-btn" onClick={() => handleDeleteClick(quiz.id)}>
-                    {t("quizzes.delete")}
-                  </button>
-                </div>
-              </div>
+              <QuizCard
+                key={quiz.id}
+                quiz={quiz}
+                actions={
+                  <div className="actions">
+                    <button className="edit-btn" onClick={() => handleEdit(quiz)}>
+                      {t("quizzes.edit")}
+                    </button>
+                    <button className="delete-btn" onClick={() => handleDeleteClick(quiz.id)}>
+                      {t("quizzes.delete")}
+                    </button>
+                  </div>
+                }
+              />
             ))
           ) : (
             <p className="no-quizzes">

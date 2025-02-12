@@ -1,12 +1,11 @@
 @import "../../styles/variables";
 
 .quizzes {
-  width: 95%;
+  width: 95.3%;
   height: 100%;
   text-align: center;
   background: var(--background-color);
   padding: 2rem;
-  box-shadow: var(--box-shadow);
   color: var(--text-color);
 
   h2 {
@@ -30,6 +29,11 @@
       color: var(--text-color);
       font-size: 1rem;
       flex: 1;
+
+      &::placeholder {
+        color: var(--text-color);
+      }
+
     }
 
     select {
@@ -56,91 +60,6 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 20px;
-  }
-
-  .quiz-card {
-    background: var(--secondary-background);
-    padding: 1.5rem;
-    border-radius: 10px;
-    box-shadow: var(--box-shadow);
-    transition: transform 0.3s ease-in-out;
-    text-align: left;
-    position: relative;
-    max-width: 350px;
-
-    &:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--box-shadow-hover);
-    }
-
-    h3 {
-      font-size: 1.3rem;
-      margin-bottom: 5px;
-      color: var(--primary-color);
-    }
-
-    p {
-      font-size: 1rem;
-      color: var(--text-color);
-      margin-bottom: 10px;
-    }
-
-    .difficulty {
-      font-size: 0.9rem;
-      font-weight: bold;
-      padding: 5px 10px;
-      border-radius: 6px;
-      display: inline-block;
-      text-transform: capitalize;
-
-      &.easy {
-        background: #d4edda;
-        color: #155724;
-      }
-
-      &.medium {
-        background: #fff3cd;
-        color: #856404;
-      }
-
-      &.hard {
-        background: #f8d7da;
-        color: #721c24;
-      }
-    }
-
-    .actions {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 1rem;
-
-      button {
-        padding: 8px 12px;
-        border: none;
-        border-radius: 6px;
-        cursor: pointer;
-        font-size: 0.9rem;
-        transition: background 0.3s ease-in-out;
-
-        &.edit-btn {
-          background: var(--primary-color);
-          color: white;
-
-          &:hover {
-            background: var(--secondary-color);
-          }
-        }
-
-        &.delete-btn {
-          background: #ff4d4d;
-          color: white;
-
-          &:hover {
-            background: #cc0000;
-          }
-        }
-      }
-    }
   }
 
   .no-quizzes {

@@ -1,0 +1,103 @@
+@import "../../styles/variables";
+
+.quiz-card {
+  background: var(--background-color);
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: var(--box-shadow);
+  text-align: center;
+  transition: transform 0.2s ease-in-out;
+  overflow: hidden;
+  max-width: 350px;
+
+  &:hover {
+    transform: scale(1.02);
+  }
+
+  h3 {
+    color: var(--primary-color);
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+  }
+
+  p {
+    color: var(--text-color);
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+  }
+
+  .difficulty {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+
+    &.easy {
+      background: #d4edda;
+      color: #155724;
+    }
+
+    &.medium {
+      background: #fff3cd;
+      color: #856404;
+    }
+
+    &.hard {
+      background: #f8d7da;
+      color: #721c24;
+    }
+  }
+
+  .actions {
+    margin-top: 1rem;
+
+    .view-btn,
+    .edit-btn,
+    .delete-btn {
+      display: inline-block;
+      padding: 8px 12px;
+      border-radius: 5px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background 0.3s ease-in-out;
+      border: none;
+      text-decoration: none;
+      color: white;
+      margin: 0 1rem;
+
+      &.view-btn {
+        background: var(--primary-color);
+
+        &:hover {
+          background: var(--secondary-color);
+        }
+      }
+
+      &.edit-btn {
+        background: #007bff;
+
+        &:hover {
+          background: #0056b3;
+        }
+      }
+
+      &.delete-btn {
+        background: #dc3545;
+
+        &:hover {
+          background: #a71d2a;
+        }
+      }
+    }
+  }
+}

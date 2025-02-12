@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { TopBar } from "../";
+import { TopBar, QuizCard } from "../";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -52,7 +52,7 @@ const EmployeeQuizzes = () => {
 
   return (
     <>
-    <TopBar />
+      <TopBar />
       <div className="employee-quizzes">
         <h1>{t("employee_quizzes.title")}</h1>
 
@@ -82,21 +82,15 @@ const EmployeeQuizzes = () => {
         <div className="quiz-list">
           {filteredQuizzes.length > 0 ? (
             filteredQuizzes.map((quiz) => (
-              <div key={quiz.id} className="quiz-card">
-                <h2>{quiz.title}</h2>
-                <p>{quiz.description}</p>
-                <p>
-                  <strong>{t("employee_quizzes.difficulty")}:</strong>{" "}
-                  {quiz.difficulty}
-                </p>
-                <p>
-                  <strong>{t("employee_quizzes.duration")}:</strong>{" "}
-                  {quiz.duration} min
-                </p>
-                <Link to={`/quiz/${quiz.id}`} className="view-btn">
-                  {t("employee_quizzes.view_button")}
-                </Link>
-              </div>
+              <QuizCard
+                key={quiz.id}
+                quiz={quiz}
+                actions={
+                  <Link to={`/quiz/${quiz.id}`} className="view-btn">
+                    {t("employee_quizzes.view_button")}
+                  </Link>
+                }
+              />
             ))
           ) : (
             <p className="no-quizzes">{t("employee_quizzes.no_quizzes")}</p>
