@@ -218,8 +218,6 @@
     "no_quizzes": "Nema dostupnih kvizova."
   },
   "employee_quiz_detail": {
-    "loading": "Učitavanje detalja kviza...",
-    "not_found": "Kviz nije pronađen.",
     "description": "Opis",
     "difficulty": "Težina",
     "difficulty_easy": "Lako",

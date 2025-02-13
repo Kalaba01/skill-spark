@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { TopBar } from "../";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
@@ -8,8 +8,8 @@ import "./EmployeeQuizDetail.scss";
 const EmployeeQuizDetail = () => {
   const { t } = useTranslation();
   const { id } = useParams();
+  const navigate = useNavigate();
   const [quiz, setQuiz] = useState(null);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchQuiz = async () => {
@@ -23,29 +23,19 @@ const EmployeeQuizDetail = () => {
         );
         setQuiz(response.data);
       } catch (error) {
-        console.error("Error fetching quiz details:", error);
-      } finally {
-        setLoading(false);
+        if (error.response && error.response.status === 403) {
+          navigate("/unauthorized");
+        } else {
+          console.error("Error fetching quiz details:", error);
+        }
       }
     };
 
     fetchQuiz();
-  }, [id]);
-
-  if (loading) {
-    return (
-      <div className="loading-container">
-        <p>{t("employee_quiz_detail.loading")}</p>
-      </div>
-    );
-  }
+  }, [id, navigate]);
 
   if (!quiz) {
-    return (
-      <div className="error-container">
-        <p>{t("employee_quiz_detail.not_found")}</p>
-      </div>
-    );
+    return null;
   }
 
   return (
