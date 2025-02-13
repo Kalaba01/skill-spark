@@ -87,3 +87,21 @@ class QuizDetailSerializer(serializers.ModelSerializer):
 
     def get_question_count(self, obj):
         return obj.questions.count()
+
+class QuizTakeSerializer(serializers.ModelSerializer):
+    questions = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Quiz
+        fields = ["id", "title", "duration", "questions"]
+
+    def get_questions(self, obj):
+        """Vraća samo ID, tekst pitanja i odgovore bez tačnih rešenja."""
+        return [
+            {
+                "id": question.id,
+                "text": question.text,
+                "answers": [{"id": answer.id, "text": answer.text} for answer in question.answers.all()]
+            }
+            for question in obj.questions.all()
+        ]
