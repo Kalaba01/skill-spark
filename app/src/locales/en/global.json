@@ -229,5 +229,12 @@
   },
   "loading": {
     "text": "Loading..."
+  },
+  "quiz_taking": {
+    "time_left": "Time Left",
+    "result": "Quiz Result",
+    "correct_answers": "Correct Answers",
+    "return_dashboard": "Return to Dashboard",
+    "submit": "Submit Quiz"
   }
 }

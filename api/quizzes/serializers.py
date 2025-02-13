@@ -96,7 +96,6 @@ class QuizTakeSerializer(serializers.ModelSerializer):
         fields = ["id", "title", "duration", "questions"]
 
     def get_questions(self, obj):
-        """Vraća samo ID, tekst pitanja i odgovore bez tačnih rešenja."""
         return [
             {
                 "id": question.id,

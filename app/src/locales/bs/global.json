@@ -229,5 +229,12 @@
   },
   "loading": {
     "text": "Učitavanje..."
+  },
+  "quiz_taking": {
+    "time_left": "Preostalo vrijeme",
+    "result": "Rezultat kviza",
+    "correct_answers": "Tačni odgovori",
+    "return_dashboard": "Vrati se na dashboard",
+    "submit": "Pošalji kviz"
   }
 }

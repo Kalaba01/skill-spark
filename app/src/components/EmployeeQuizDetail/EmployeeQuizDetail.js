@@ -77,7 +77,7 @@ const EmployeeQuizDetail = () => {
           </p>
         </div>
 
-        <button className="start-quiz-btn">{t("employee_quiz_detail.start_quiz")}</button>
+        <button className="start-quiz-btn" onClick={() => navigate(`/employee/quiz/${id}/take`)}>{t("employee_quiz_detail.start_quiz")}</button>
       </div>
     </>
   );
