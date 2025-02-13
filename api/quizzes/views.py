@@ -1,6 +1,6 @@
 from rest_framework import generics, permissions, status
 from rest_framework.response import Response
-from rest_framework.exceptions import NotFound, PermissionDenied
+from rest_framework.exceptions import NotFound, PermissionDenied, ValidationError
 from authentication.models import User
 from .models import Quiz, Question, Answer
 from .serializers import QuizSerializer, QuizDetailSerializer, QuizTakeSerializer
@@ -83,6 +83,11 @@ class QuizTakeView(generics.GenericAPIView):
 
         for question in quiz.questions.all():
             selected_answers = data.get(str(question.id), [])
+
+            valid_answer_ids = set(question.answers.values_list("id", flat=True))
+            if not set(selected_answers).issubset(valid_answer_ids):
+                raise ValidationError({"error": "Invalid answer selected."})
+
             correct_choices = list(question.answers.filter(is_correct=True).values_list("id", flat=True))
 
             if set(selected_answers) == set(correct_choices):
