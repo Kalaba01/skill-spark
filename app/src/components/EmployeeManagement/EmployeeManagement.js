@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaPlus, FaSearch } from "react-icons/fa";
-import { TopBar, EmployeePopup, UserCard, ConfirmPopup } from "../index";
+import { TopBar, EmployeePopup, UserCard, ConfirmPopup, Loading } from "../index";
 import { useTranslation } from "react-i18next";
 import { showToast } from "../ToastNotification/ToastNotification";
 import axios from "axios";
@@ -13,6 +13,7 @@ const EmployeeManagement = () => {
   const [selectedEmployee, setSelectedEmployee] = useState(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [confirmPopup, setConfirmPopup] = useState({ show: false, employeeId: null });
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchEmployees();
@@ -30,6 +31,8 @@ const EmployeeManagement = () => {
       setEmployees(response.data);
     } catch (error) {
       console.error("Error fetching employees:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -80,6 +83,15 @@ const EmployeeManagement = () => {
       .toLowerCase()
       .includes(searchQuery.toLowerCase())
   );
+
+  if (loading) {
+      return (
+        <>
+          <TopBar />;
+          <Loading />;
+        </>
+      )
+  }
 
   return (
     <>

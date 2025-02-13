@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { TopBar, QuizCard } from "../";
+import { TopBar, QuizCard, Loading } from "../";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -11,6 +11,7 @@ const EmployeeQuizzes = () => {
   const [filteredQuizzes, setFilteredQuizzes] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [durationFilter, setDurationFilter] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchQuizzes = async () => {
@@ -26,6 +27,8 @@ const EmployeeQuizzes = () => {
         setFilteredQuizzes(response.data);
       } catch (error) {
         console.error("Error fetching quizzes:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -49,6 +52,15 @@ const EmployeeQuizzes = () => {
 
     setFilteredQuizzes(filtered);
   }, [searchTerm, durationFilter, quizzes]);
+
+  if (loading) {
+    return (
+      <>
+        <TopBar />
+        <Loading />;
+      </>
+    );
+  }
 
   return (
     <>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { TopBar } from "../";
+import { TopBar, Loading } from "../";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
 import "./EmployeeQuizDetail.scss";
@@ -10,6 +10,7 @@ const EmployeeQuizDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [quiz, setQuiz] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchQuiz = async () => {
@@ -28,11 +29,22 @@ const EmployeeQuizDetail = () => {
         } else {
           console.error("Error fetching quiz details:", error);
         }
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchQuiz();
   }, [id, navigate]);
+
+  if (loading) {
+    return (
+      <>
+        <TopBar />
+        <Loading />;
+      </>
+    )
+  }
 
   if (!quiz) {
     return null;

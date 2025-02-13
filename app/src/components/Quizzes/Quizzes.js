@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { TopBar, QuizForm, ConfirmPopup, QuizCard } from "../";
+import { TopBar, QuizForm, ConfirmPopup, QuizCard, Loading } from "../";
 import { useTranslation } from "react-i18next";
 import { showToast } from "../ToastNotification/ToastNotification";
 import axios from "axios";
@@ -12,24 +12,29 @@ function Quizzes() {
   const [selectedQuiz, setSelectedQuiz] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [difficultyFilter, setDifficultyFilter] = useState("");
-  const [confirmDelete, setConfirmDelete] = useState({ isOpen: false, quizId: null });
-
-  const fetchQuizzes = async () => {
-    try {
-      const token = localStorage.getItem("access_token");
-      const response = await axios.get(
-        "http://127.0.0.1:8000/api/quizzes/",
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-      setQuizzes(response.data);
-    } catch (error) {
-      showToast(t("quizzes.load_error"), "error");
-    }
-  };
+  const [confirmDelete, setConfirmDelete] = useState({
+    isOpen: false,
+    quizId: null
+  });
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchQuizzes();
   }, []);
+
+  const fetchQuizzes = async () => {
+    try {
+      const token = localStorage.getItem("access_token");
+      const response = await axios.get("http://127.0.0.1:8000/api/quizzes/", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setQuizzes(response.data);
+    } catch (error) {
+      showToast(t("quizzes.load_error"), "error");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleEdit = (quiz) => {
     setSelectedQuiz(quiz);
@@ -64,6 +69,15 @@ function Quizzes() {
       (difficultyFilter === "" || quiz.difficulty === difficultyFilter)
     );
   });
+
+  if (loading) {
+    return (
+      <>
+        <TopBar />
+        <Loading />;
+      </>
+    );
+  }
 
   return (
     <>
@@ -100,10 +114,16 @@ function Quizzes() {
                 quiz={quiz}
                 actions={
                   <div className="actions">
-                    <button className="edit-btn" onClick={() => handleEdit(quiz)}>
+                    <button
+                      className="edit-btn"
+                      onClick={() => handleEdit(quiz)}
+                    >
                       {t("quizzes.edit")}
                     </button>
-                    <button className="delete-btn" onClick={() => handleDeleteClick(quiz.id)}>
+                    <button
+                      className="delete-btn"
+                      onClick={() => handleDeleteClick(quiz.id)}
+                    >
                       {t("quizzes.delete")}
                     </button>
                   </div>

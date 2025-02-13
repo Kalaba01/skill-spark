@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaPlus, FaSearch } from "react-icons/fa";
-import { TopBar, UserCard, CreateUserPopup, ConfirmPopup } from "../index";
+import { TopBar, UserCard, CreateUserPopup, ConfirmPopup, Loading } from "../index";
 import { useTranslation } from "react-i18next";
 import { showToast } from "../ToastNotification/ToastNotification";
 import axios from "axios";
@@ -15,6 +15,7 @@ const UserManagement = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(null);
   const [uniqueCompanies, setUniqueCompanies] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchUsers();
@@ -28,7 +29,6 @@ const UserManagement = () => {
       });
       setUsers(response.data);
 
-      // Ekstrahovanje jedinstvenih kompanija
       const companies = response.data
         .map((user) => user.company_name)
         .filter((company) => company !== null);
@@ -36,6 +36,8 @@ const UserManagement = () => {
 
     } catch (error) {
       console.error("Error fetching users:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -76,6 +78,15 @@ const UserManagement = () => {
     const matchesRole = roleFilter === "all" || user.role === roleFilter;
     return matchesSearch && matchesRole;
   });
+
+  if (loading) {
+      return (
+        <>
+          <TopBar />
+          <Loading />;
+        </>
+      );
+    }
 
   return (
     <>

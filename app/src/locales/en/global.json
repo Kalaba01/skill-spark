@@ -226,5 +226,8 @@
     "duration": "Duration",
     "questions_count": "Number of Questions",
     "start_quiz": "Start Quiz"
+  },
+  "loading": {
+    "text": "Loading..."
   }
 }

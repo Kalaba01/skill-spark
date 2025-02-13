@@ -226,5 +226,8 @@
     "duration": "Trajanje",
     "questions_count": "Broj pitanja",
     "start_quiz": "Započni kviz"
+  },
+  "loading": {
+    "text": "Učitavanje..."
   }
 }
