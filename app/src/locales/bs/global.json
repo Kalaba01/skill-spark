@@ -234,6 +234,8 @@
     "time_left": "Preostalo vrijeme",
     "result": "Rezultat kviza",
     "correct_answers": "Tačni odgovori",
+    "passed": "Čestitamo! Položili ste kviz!",
+    "failed": "Nažalost, niste položili kviz.",
     "return_dashboard": "Vrati se na dashboard",
     "submit": "Pošalji kviz"
   }

@@ -93,4 +93,11 @@ class QuizTakeView(generics.GenericAPIView):
             if set(selected_answers) == set(correct_choices):
                 correct_answers += 1
 
-        return Response({"correct_answers": correct_answers, "total_questions": total_questions}, status=status.HTTP_200_OK)
+        passing_threshold = int((70 / 100) * total_questions)
+        passed = correct_answers >= passing_threshold
+
+        return Response({
+            "correct_answers": correct_answers,
+            "total_questions": total_questions,
+            "passed": passed
+        }, status=status.HTTP_200_OK)

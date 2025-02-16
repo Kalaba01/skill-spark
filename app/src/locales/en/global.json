@@ -234,6 +234,8 @@
     "time_left": "Time Left",
     "result": "Quiz Result",
     "correct_answers": "Correct Answers",
+    "passed": "Congratulations! You passed the quiz!",
+    "failed": "Sorry, you did not pass the quiz.",
     "return_dashboard": "Return to Dashboard",
     "submit": "Submit Quiz"
   }

@@ -9,6 +9,7 @@ const QuizTaking = () => {
   const { t } = useTranslation();
   const { id } = useParams();
   const navigate = useNavigate();
+
   const [quiz, setQuiz] = useState(null);
   const [loading, setLoading] = useState(true);
   const [answers, setAnswers] = useState({});
@@ -123,10 +124,11 @@ const QuizTaking = () => {
         </div>
 
         {result ? (
-          <div className="result">
+          <div className={`result ${result.passed ? "passed" : "failed"}`}>
             <h2>{t("quiz_taking.result")}</h2>
-            <p>
-              {t("quiz_taking.correct_answers")}: {result.correct_answers} / {result.total_questions}
+            <p>{t("quiz_taking.correct_answers")}: {result.correct_answers} / {result.total_questions}</p>
+            <p className="status-message">
+              {result.passed ? t("quiz_taking.passed") : t("quiz_taking.failed")}
             </p>
             <button onClick={() => navigate("/employee")}>{t("quiz_taking.return_dashboard")}</button>
           </div>

@@ -100,9 +100,32 @@
       color: var(--primary-color);
     }
 
-    p {
-      font-size: 1.2rem;
-      margin-bottom: 10px;
+    .status-message {
+      font-size: 1.4rem;
+      font-weight: bold;
+      padding: 10px;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+
+    &.passed {
+      background: var(--background-color);
+      color: #2d862d;
+
+      .status-message {
+        background: #2d862d;
+        color: white;
+      }
+    }
+
+    &.failed {
+      background: var(--background-color);
+      color: #cc0000;
+
+      .status-message {
+        background: #cc0000;
+        color: white;
+      }
     }
 
     button {
