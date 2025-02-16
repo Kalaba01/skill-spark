@@ -1,5 +1,5 @@
 from django.db import models
-from authentication.models import Company
+from authentication.models import Company, Employee
 
 class Quiz(models.Model):
     EASY = "easy"
@@ -36,3 +36,10 @@ class Answer(models.Model):
 
     def __str__(self):
         return f"Answer: {self.text} (Tačan: {self.is_correct})"
+
+class PassedQuizzes(models.Model):
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name="passed_quizzes")
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name="passed_by_employees")
+
+    class Meta:
+        unique_together = ("employee", "quiz")

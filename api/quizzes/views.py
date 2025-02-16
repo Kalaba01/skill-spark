@@ -2,7 +2,7 @@ from rest_framework import generics, permissions, status
 from rest_framework.response import Response
 from rest_framework.exceptions import NotFound, PermissionDenied, ValidationError
 from authentication.models import User
-from .models import Quiz, Question, Answer
+from .models import Quiz, Question, Answer, PassedQuizzes
 from .serializers import QuizSerializer, QuizDetailSerializer, QuizTakeSerializer
 
 class QuizListCreateView(generics.ListCreateAPIView):
@@ -95,6 +95,9 @@ class QuizTakeView(generics.GenericAPIView):
 
         passing_threshold = int((70 / 100) * total_questions)
         passed = correct_answers >= passing_threshold
+
+        if passed:
+            PassedQuizzes.objects.get_or_create(employee=request.user.employee_profile, quiz=quiz)
 
         return Response({
             "correct_answers": correct_answers,
