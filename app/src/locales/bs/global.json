@@ -238,5 +238,12 @@
     "failed": "Nažalost, niste položili kviz.",
     "return_dashboard": "Vrati se na dashboard",
     "submit": "Pošalji kviz"
+  },
+  "passedQuizzes": {
+    "title": "Položeni kvizovi",
+    "noPassedQuizzes": "Još uvijek nema položenih kvizova."
+  },
+  "userCard": {
+    "passedQuizzes": "Položeni Kvizovi"
   }
 }

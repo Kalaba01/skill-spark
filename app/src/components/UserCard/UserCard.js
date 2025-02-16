@@ -1,9 +1,9 @@
 import React from "react";
-import { FaEdit, FaTrash } from "react-icons/fa";
+import { FaEdit, FaTrash, FaClipboard } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 import "./UserCard.scss";
 
-const UserCard = ({ data, fields, onEdit, onDelete, context }) => {
+const UserCard = ({ data, fields, onEdit, onDelete, context, onShowPassedQuizzes }) => {
   const { t } = useTranslation();
 
   const translationMap = {
@@ -25,6 +25,10 @@ const UserCard = ({ data, fields, onEdit, onDelete, context }) => {
         ))}
       </div>
       <div className="actions">
+        <FaClipboard className="quiz-btn" onClick={() => onShowPassedQuizzes(data.passed_quizzes || [])} />
+        {/* <button className="quiz-btn" onClick={() => onShowPassedQuizzes(data.passed_quizzes || [])}>
+          <FaClipboard /> {t("userCard.passedQuizzes")}
+        </button> */}
         <FaEdit className="edit-icon" onClick={() => onEdit(data)} />
         <FaTrash className="delete-icon" onClick={() => onDelete(data.id)} />
       </div>

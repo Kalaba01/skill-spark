@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaPlus, FaSearch } from "react-icons/fa";
-import { TopBar, EmployeePopup, UserCard, ConfirmPopup, Loading } from "../index";
+import { TopBar, EmployeePopup, UserCard, ConfirmPopup, Loading, PassedQuizzes } from "../index";
 import { useTranslation } from "react-i18next";
 import { showToast } from "../ToastNotification/ToastNotification";
 import axios from "axios";
@@ -14,6 +14,7 @@ const EmployeeManagement = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [confirmPopup, setConfirmPopup] = useState({ show: false, employeeId: null });
   const [loading, setLoading] = useState(true);
+  const [passedQuizzes, setPassedQuizzes] = useState(null);
 
   useEffect(() => {
     fetchEmployees();
@@ -125,6 +126,7 @@ const EmployeeManagement = () => {
                 onEdit={openPopup}
                 onDelete={() => confirmDelete(employee.id)}
                 context="employeeManagement"
+                onShowPassedQuizzes={setPassedQuizzes}
               />
             ))
           ) : (
@@ -147,6 +149,14 @@ const EmployeeManagement = () => {
             onCancel={cancelDelete}
           />
         )}
+
+        {passedQuizzes !== null && 
+          <PassedQuizzes 
+            quizzes={passedQuizzes} 
+            onClose={() => setPassedQuizzes(null)} 
+            />
+        }
+
       </div>
     </>
   );

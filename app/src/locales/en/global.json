@@ -238,5 +238,12 @@
     "failed": "Sorry, you did not pass the quiz.",
     "return_dashboard": "Return to Dashboard",
     "submit": "Submit Quiz"
+  },
+  "passedQuizzes": {
+    "title": "Passed Quizzes",
+    "noPassedQuizzes": "No quizzes have been passed yet."
+  },
+  "userCard": {
+    "passedQuizzes": "Passed Quizzes"
   }
 }

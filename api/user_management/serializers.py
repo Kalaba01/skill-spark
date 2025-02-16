@@ -1,12 +1,20 @@
 from rest_framework import serializers
 from authentication.models import User, Employee, Company, Admin
+from quizzes.models import PassedQuizzes, Quiz
 
 class EmployeeSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(source="user.email", read_only=True)
+    passed_quizzes = serializers.SerializerMethodField()
 
     class Meta:
         model = Employee
-        fields = ["id", "first_name", "last_name", "email"]
+        fields = ["id", "first_name", "last_name", "email", "passed_quizzes"]
+
+    def get_passed_quizzes(self, obj):
+        quizzes = Quiz.objects.filter(
+            passed_by_employees__employee=obj
+        ).values("id", "title")
+        return list(quizzes)
 
 class CreateEmployeeSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(write_only=True)
