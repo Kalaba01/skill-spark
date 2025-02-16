@@ -1,3 +1,7 @@
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+from django.conf import settings
 from rest_framework import generics, permissions, status
 from rest_framework.response import Response
 from rest_framework.exceptions import NotFound, PermissionDenied, ValidationError
@@ -77,6 +81,7 @@ class QuizTakeView(generics.GenericAPIView):
     def post(self, request, *args, **kwargs):
         quiz = self.get_object()
         data = request.data
+        employee = request.user.employee_profile
 
         correct_answers = 0
         total_questions = quiz.questions.count()
@@ -96,8 +101,28 @@ class QuizTakeView(generics.GenericAPIView):
         passing_threshold = int((70 / 100) * total_questions)
         passed = correct_answers >= passing_threshold
 
+        subject = "Quiz Results - " + quiz.title
+        context = {
+            "employee_name": f"{employee.first_name} {employee.last_name}",
+            "quiz_title": quiz.title,
+            "correct_answers": correct_answers,
+            "total_questions": total_questions,
+            "passed": passed,
+        }
+
         if passed:
             PassedQuizzes.objects.get_or_create(employee=request.user.employee_profile, quiz=quiz)
+        
+        email_html = render_to_string(f"quiz_{"passed" if passed else "failed"}.html", context)
+        email_text = strip_tags(email_html)
+
+        send_mail(
+            subject,
+            email_text,
+            settings.DEFAULT_FROM_EMAIL,
+            [employee.user.email],
+            html_message=email_html
+        )
 
         return Response({
             "correct_answers": correct_answers,
