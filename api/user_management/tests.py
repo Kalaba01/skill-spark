@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 from rest_framework.test import APIClient
 from rest_framework import status
 from authentication.models import Company, Employee, Admin
+from quizzes.models import PassedQuizzes, Quiz
 
 User = get_user_model()
 
@@ -18,6 +19,10 @@ class EmployeeManagementTests(TestCase):
 
         self.employee_user = User.objects.create_user(email="employee1@test.com", password="testpass", role=User.EMPLOYEE)
         self.employee1 = Employee.objects.create(user=self.employee_user, first_name="John", last_name="Doe", company=self.company1)
+
+        self.quiz = Quiz.objects.create(title="Test Quiz", company=self.company1, duration=30, difficulty="easy")
+
+        PassedQuizzes.objects.create(employee=self.employee1, quiz=self.quiz)
 
         self.client.force_authenticate(user=self.company1_user)
 
@@ -71,6 +76,28 @@ class EmployeeManagementTests(TestCase):
         self.client.force_authenticate(user=self.company2_user)
         response = self.client.delete(f"/api/user-management/employees/{self.employee1.id}/")
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+    
+    def test_employee_has_passed_quizzes(self):
+        response = self.client.get("/api/user-management/employees/")
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 1)
+
+        self.assertIn("passed_quizzes", response.data[0])
+        self.assertEqual(len(response.data[0]["passed_quizzes"]), 1)
+
+        self.assertEqual(response.data[0]["passed_quizzes"][0]["title"], "Test Quiz")
+
+    def test_employee_with_no_passed_quizzes(self):
+        new_employee_user = User.objects.create_user(email="employee2@test.com", password="testpass", role=User.EMPLOYEE)
+        new_employee = Employee.objects.create(user=new_employee_user, first_name="Jane", last_name="Doe", company=self.company1)
+
+        response = self.client.get("/api/user-management/employees/")
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        employee_data = next(emp for emp in response.data if emp["first_name"] == "Jane")
+
+        self.assertIn("passed_quizzes", employee_data)
+        self.assertEqual(len(employee_data["passed_quizzes"]), 0)
 
 class UserManagementTests(TestCase):
     def setUp(self):
