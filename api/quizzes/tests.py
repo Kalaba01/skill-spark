@@ -1,3 +1,5 @@
+from unittest.mock import patch
+from django.core.mail import send_mail
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 from rest_framework.test import APIClient
@@ -232,7 +234,8 @@ class QuizAPITest(TestCase):
 
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
-    def test_employee_can_submit_quiz_answers(self):
+    @patch("quizzes.views.send_mail")
+    def test_employee_can_submit_quiz_answers(self, mock_send_mail):
         self.client.force_authenticate(user=self.employee_user)
 
         quiz_answers = {
@@ -245,6 +248,31 @@ class QuizAPITest(TestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data["correct_answers"], 2)
         self.assertEqual(response.data["total_questions"], 2)
+        self.assertTrue(response.data["passed"])
+
+        mock_send_mail.assert_called()
+
+
+    @patch("quizzes.views.send_mail")
+    def test_employee_receives_email_even_when_failing_quiz(self, mock_send_mail):
+        self.client.force_authenticate(user=self.employee_user)
+
+        quiz_answers = {
+            str(self.question1.id): [self.answer1.id],
+            str(self.question2.id): [self.answer4.id]
+        }
+
+        response = self.client.post(self.quiz_take_url, quiz_answers, format="json")
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        correct_answers = response.data["correct_answers"]
+        self.assertGreaterEqual(correct_answers, 0)
+
+        self.assertEqual(response.data["total_questions"], 2)
+        self.assertFalse(response.data["passed"])
+
+        mock_send_mail.assert_called()
 
     def test_employee_receives_correct_count_when_some_answers_are_wrong(self):
         self.client.force_authenticate(user=self.employee_user)
@@ -260,7 +288,8 @@ class QuizAPITest(TestCase):
         self.assertEqual(response.data["correct_answers"], 0)
         self.assertEqual(response.data["total_questions"], 2)
 
-    def test_employee_cannot_submit_invalid_quiz_answers(self):
+    @patch("quizzes.views.send_mail")
+    def test_employee_cannot_submit_invalid_quiz_answers(self, mock_send_mail):
         self.client.force_authenticate(user=self.employee_user)
 
         invalid_quiz_answers = {
@@ -271,6 +300,9 @@ class QuizAPITest(TestCase):
         response = self.client.post(self.quiz_take_url, invalid_quiz_answers, format="json")
 
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+        mock_send_mail.assert_not_called()
+
 
     def test_unauthorized_user_cannot_take_quiz(self):
         self.client.logout()

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Quiz, Question, Answer
+from .models import Quiz, Question, Answer, PassedQuizzes
 
 class AnswerInline(admin.TabularInline):
     model = Answer
@@ -24,6 +24,12 @@ class AnswerAdmin(admin.ModelAdmin):
     list_display = ("text", "question", "is_correct")
     list_filter = ("is_correct",)
 
+class PassedQuizzesAdmin(admin.ModelAdmin):
+    list_display = ("employee", "quiz")
+    search_fields = ("employee__first_name", "employee__last_name", "quiz__title")
+    list_filter = ("quiz", "employee")
+
 admin.site.register(Quiz, QuizAdmin)
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(Answer, AnswerAdmin)
+admin.site.register(PassedQuizzes, PassedQuizzesAdmin)
