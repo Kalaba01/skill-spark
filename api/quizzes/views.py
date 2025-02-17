@@ -32,7 +32,10 @@ class EmployeeQuizListView(generics.ListAPIView):
     serializer_class = QuizSerializer
 
     def get_queryset(self):
-        return Quiz.objects.filter(company=self.request.user.employee_profile.company)
+        employee = self.request.user.employee_profile
+        passed_quizzes = PassedQuizzes.objects.filter(employee=employee).values_list("quiz_id", flat=True)
+
+        return Quiz.objects.filter(company=employee.company).exclude(id__in=passed_quizzes)
 
 class QuizDetailPublicView(generics.RetrieveAPIView):
     permission_classes = [permissions.IsAuthenticated]
