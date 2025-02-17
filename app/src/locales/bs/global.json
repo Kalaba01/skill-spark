@@ -203,7 +203,8 @@
   "hamburgerMenu": {
     "users_management": "Upravljanje korisnicima",
     "employees_management": "Upravljanje zaposlenima",
-    "quizzes": "Kvizovi"
+    "quizzes": "Kvizovi",
+    "profile": "Profil"
   },
   "employee_quizzes": {
     "title": "Kvizovi zaposlenih",
@@ -245,5 +246,20 @@
   },
   "userCard": {
     "passedQuizzes": "Položeni Kvizovi"
+  },
+  "employeeProfile": {
+    "title": "Profil zaposlenog",
+    "firstName": "Ime",
+    "lastName": "Prezime",
+    "email": "Email",
+    "workingAt": "Radi u",
+    "editProfile": "Uredi profil"
+  },
+  "employeeProfileEdit": {
+    "title": "Uredi profil",
+    "saving": "Čuvanje...",
+    "saveChanges": "Sačuvaj promjene",
+    "updateError": "Greška pri ažuriranju profila. Pokušajte ponovo.",
+    "successMessage": "Profil uspješno ažuriran!"
   }
 }

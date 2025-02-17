@@ -203,7 +203,8 @@
   "hamburgerMenu": {
     "users_management": "Users Management",
     "employees_management": "Employees Management",
-    "quizzes": "Quizzes"
+    "quizzes": "Quizzes",
+    "profile": "Profile"
   },
   "employee_quizzes": {
     "title": "Employee Quizzes",
@@ -245,5 +246,20 @@
   },
   "userCard": {
     "passedQuizzes": "Passed Quizzes"
+  },
+  "employeeProfile": {
+    "title": "Employee Profile",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "workingAt": "Working At",
+    "editProfile": "Edit Profile"
+  },
+  "employeeProfileEdit": {
+    "title": "Edit Profile",
+    "saving": "Saving...",
+    "saveChanges": "Save Changes",
+    "updateError": "Error updating profile. Please try again.",
+    "successMessage": "Profile updated successfully!"
   }
 }

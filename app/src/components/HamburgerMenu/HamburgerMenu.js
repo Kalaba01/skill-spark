@@ -21,6 +21,7 @@ function HamburgerMenu({ userRole }) {
       { label: t("hamburgerMenu.quizzes"), path: "/company/quizzes" }
     ],
     employee: [
+      { label: t("hamburgerMenu.profile"), path: "/employee/profile" },
       { label: t("hamburgerMenu.quizzes"), path: "/employee/quizzes" }
     ]
   };
