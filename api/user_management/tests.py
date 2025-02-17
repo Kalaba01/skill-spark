@@ -199,3 +199,73 @@ class UserManagementTests(TestCase):
         }
         response = self.client.put(f"/api/user-management/users/{self.employee_user.id}/", update_data)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+class EmployeeProfileTests(TestCase):
+    def setUp(self):
+        self.client = APIClient()
+
+        self.company = Company.objects.create(
+            user=User.objects.create_user(
+                email="company@test.com", password="testpass", role=User.COMPANY
+            ),
+            company_name="Test Company"
+        )
+
+        self.employee_user = User.objects.create_user(
+            email="employee@test.com",
+            password="testpass",
+            role=User.EMPLOYEE
+        )
+
+        self.employee = Employee.objects.create(
+            user=self.employee_user,
+            first_name="John",
+            last_name="Doe",
+            company=self.company
+        )
+
+        self.client.force_authenticate(user=self.employee_user)
+
+    def test_get_employee_profile(self):
+        response = self.client.get("/api/user-management/profile/")
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        self.assertEqual(response.data["first_name"], "John")
+        self.assertEqual(response.data["last_name"], "Doe")
+        self.assertEqual(response.data["email"], "employee@test.com")
+        self.assertEqual(response.data["working_at"], "Test Company")
+
+    def test_update_employee_profile(self):
+        updated_data = {
+            "first_name": "Johnny",
+            "last_name": "Smith",
+            "email": "johnny.smith@test.com"
+        }
+
+        response = self.client.post("/api/user-management/profile/", updated_data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        self.employee.refresh_from_db()
+        self.employee.user.refresh_from_db()
+
+        self.assertEqual(self.employee.first_name, "Johnny")
+        self.assertEqual(self.employee.last_name, "Smith")
+        self.assertEqual(self.employee.user.email, "johnny.smith@test.com")
+
+    def test_update_employee_profile_invalid_email(self):
+        invalid_data = {
+            "first_name": "Johnny",
+            "last_name": "Smith",
+            "email": "invalid-email"
+        }
+
+        response = self.client.post("/api/user-management/profile/", invalid_data)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_unauthorized_access(self):
+        self.client.logout()
+        response = self.client.get("/api/user-management/profile/")
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+        response = self.client.post("/api/user-management/profile/", {"first_name": "New Name"})
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
