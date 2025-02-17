@@ -1,8 +1,10 @@
 from rest_framework import generics, permissions
+from rest_framework.response import Response
 from rest_framework.exceptions import PermissionDenied
 from authentication.models import Employee, User
 from .serializers import (
     EmployeeSerializer,
+    EmployeeProfileSerializer,
     CreateEmployeeSerializer,
     UpdateEmployeeSerializer,
     UserSerializer,
@@ -63,3 +65,24 @@ class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
         if self.request.user.role != User.ADMIN:
             raise PermissionDenied("Nemate dozvolu za pregled ovog korisnika.")
         return user
+
+class EmployeeProfileView(generics.RetrieveUpdateAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = EmployeeProfileSerializer
+
+    def get_object(self):
+        if not hasattr(self.request.user, "employee_profile"):
+            raise PermissionDenied("Nemate dozvolu za pristup ovom resursu.")
+        return self.request.user.employee_profile
+
+    def get(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data)
+
+    def post(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)

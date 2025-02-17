@@ -148,3 +148,22 @@ class UpdateUserSerializer(serializers.ModelSerializer):
 
         instance.save()
         return instance
+
+class EmployeeProfileSerializer(serializers.ModelSerializer):
+    email = serializers.EmailField(source="user.email", read_only=False)
+    working_at = serializers.CharField(source="company.company_name", read_only=True)
+
+    class Meta:
+        model = Employee
+        fields = ["first_name", "last_name", "email", "working_at"]
+
+    def update(self, instance, validated_data):
+        user_data = validated_data.pop("user", {})
+        if "email" in user_data:
+            instance.user.email = user_data["email"]
+            instance.user.save()
+
+        instance.first_name = validated_data.get("first_name", instance.first_name)
+        instance.last_name = validated_data.get("last_name", instance.last_name)
+        instance.save()
+        return instance

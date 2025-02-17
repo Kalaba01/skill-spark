@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import EmployeeListCreateView, EmployeeDetailView, UserListCreateView, UserDetailView
+from .views import EmployeeListCreateView, EmployeeDetailView, EmployeeProfileView, UserListCreateView, UserDetailView
 
 urlpatterns = [
     # Employee management routes (company)
@@ -8,5 +8,8 @@ urlpatterns = [
 
     # User management routes (admin)
     path("users/", UserListCreateView.as_view(), name="user-list"),
-    path("users/<int:pk>/", UserDetailView.as_view(), name="user-detail")
+    path("users/<int:pk>/", UserDetailView.as_view(), name="user-detail"),
+
+    # Employee profile route
+    path("profile/", EmployeeProfileView.as_view(), name="employee-profile")
 ]
