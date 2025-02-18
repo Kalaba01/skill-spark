@@ -1,7 +1,12 @@
+from django.http import HttpResponse
 from rest_framework import generics, permissions
 from rest_framework.response import Response
 from rest_framework.exceptions import PermissionDenied
+from rest_framework.views import APIView
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
 from authentication.models import Employee, User
+from quizzes.models import PassedQuizzes
 from .serializers import (
     EmployeeSerializer,
     EmployeeProfileSerializer,
@@ -86,3 +91,42 @@ class EmployeeProfileView(generics.RetrieveUpdateAPIView):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)
+
+class GenerateEmployeeReportView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request, pk):
+        try:
+            employee = Employee.objects.get(pk=pk, company=request.user.company_profile)
+        except Employee.DoesNotExist:
+            return HttpResponse("You do not have permission to access this resource.", status=403)
+
+        response = HttpResponse(content_type="application/pdf")
+        response["Content-Disposition"] = f'attachment; filename="{employee.first_name}_{employee.last_name}_report.pdf"'
+
+        p = canvas.Canvas(response, pagesize=letter)
+        width, height = letter
+
+        p.setFont("Helvetica-Bold", 16)
+        p.drawString(100, height - 50, "Employee report")
+
+        p.setFont("Helvetica", 12)
+        p.drawString(100, height - 100, f"First Name: {employee.first_name}")
+        p.drawString(100, height - 120, f"Last Name: {employee.last_name}")
+        p.drawString(100, height - 140, f"Email: {employee.user.email}")
+        p.drawString(100, height - 160, f"Company: {employee.company.company_name}")
+
+        passed_quizzes = PassedQuizzes.objects.filter(employee=employee).select_related("quiz")
+        p.drawString(100, height - 200, "Quizzes passed:")
+
+        if passed_quizzes.exists():
+            y_position = height - 220
+            for pq in passed_quizzes:
+                p.drawString(120, y_position, f"- {pq.quiz.title}")
+                y_position -= 20
+        else:
+            p.drawString(120, height - 220, "No quizzes passed.")
+
+        p.showPage()
+        p.save()
+        return response
