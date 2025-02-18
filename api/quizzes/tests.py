@@ -4,7 +4,7 @@ from django.test import TestCase
 from django.contrib.auth import get_user_model
 from rest_framework.test import APIClient
 from rest_framework import status
-from .models import Quiz, Question, Answer, Company
+from .models import Quiz, Question, Answer, Company, PassedQuizzes
 from authentication.models import Employee
 
 User = get_user_model()
@@ -143,11 +143,17 @@ class QuizAPITest(TestCase):
 
     def test_employee_can_get_company_quizzes(self):
         self.client.force_authenticate(user=self.employee_user)
+
         response = self.client.get(self.employee_quizzes_url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 1)
         self.assertEqual(response.data[0]["title"], self.quiz.title)
-        self.assertEqual(response.data[0]["duration"], self.quiz.duration)
+
+        PassedQuizzes.objects.create(employee=self.employee, quiz=self.quiz)
+
+        response = self.client.get(self.employee_quizzes_url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 0)
 
     def test_employee_can_get_quiz_detail(self):
         self.client.force_authenticate(user=self.employee_user)
