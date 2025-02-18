@@ -104,3 +104,8 @@ class QuizTakeSerializer(serializers.ModelSerializer):
             }
             for question in obj.questions.all()
         ]
+
+class PassedQuizSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Quiz
+        fields = ["id", "title", "description", "difficulty"]

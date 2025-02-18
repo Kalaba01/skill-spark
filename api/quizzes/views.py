@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from rest_framework.exceptions import NotFound, PermissionDenied, ValidationError
 from authentication.models import User
 from .models import Quiz, Question, Answer, PassedQuizzes
-from .serializers import QuizSerializer, QuizDetailSerializer, QuizTakeSerializer
+from .serializers import QuizSerializer, QuizDetailSerializer, QuizTakeSerializer, PassedQuizSerializer
 
 class QuizListCreateView(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticated]
@@ -132,3 +132,17 @@ class QuizTakeView(generics.GenericAPIView):
             "total_questions": total_questions,
             "passed": passed
         }, status=status.HTTP_200_OK)
+
+class EmployeePassedQuizzesView(generics.ListAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = PassedQuizSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+        if not hasattr(user, "employee_profile"):
+            raise PermissionDenied("You do not have permission to access this resource.")
+        
+        employee = self.request.user.employee_profile
+        passed_quizzes = PassedQuizzes.objects.filter(employee=employee).values_list("quiz_id", flat=True)
+        
+        return Quiz.objects.filter(id__in=passed_quizzes)
