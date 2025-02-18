@@ -245,7 +245,9 @@
     "noPassedQuizzes": "No quizzes have been passed yet."
   },
   "userCard": {
-    "passedQuizzes": "Passed Quizzes"
+    "passedQuizzes": "Passed Quizzes",
+    "reportSuccess": "PDF report generated successfully!",
+    "reportError": "Error generating PDF report!"
   },
   "employeeProfile": {
     "title": "Employee Profile",

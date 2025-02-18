@@ -35,10 +35,19 @@
 
     .edit-icon,
     .delete-icon,
-    .quiz-btn {
+    .quiz-btn,
+    .pdf-icon {
       cursor: pointer;
       font-size: 1.4rem;
-      transition: color 0.3s ease-in-out;
+      transition: transform 0.2s ease-in-out;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+
+    .pdf-icon {
+      color: #d9534f;
     }
 
     .edit-icon {

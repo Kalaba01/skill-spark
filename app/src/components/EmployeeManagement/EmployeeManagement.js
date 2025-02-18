@@ -37,6 +37,32 @@ const EmployeeManagement = () => {
     }
   };
 
+  const handleGenerateReport = async (employeeId, firstName, lastName) => {
+    try {
+      const token = localStorage.getItem("access_token");
+      const response = await axios.get(
+        `http://127.0.0.1:8000/api/user-management/employees/${employeeId}/report/`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+          responseType: "blob", // Ovo osigurava da dobijemo fajl, a ne JSON
+        }
+      );
+
+      // Kreiranje URL-a za preuzimanje fajla
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", `${firstName}_${lastName}_report.pdf`);
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      showToast(t("userCard.reportSuccess"), "success");
+    } catch (error) {
+      console.error("Error generating report:", error);
+      showToast(t("userCard.reportError"), "error");
+    }
+  };
+
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
   };
@@ -127,6 +153,7 @@ const EmployeeManagement = () => {
                 onDelete={() => confirmDelete(employee.id)}
                 context="employeeManagement"
                 onShowPassedQuizzes={setPassedQuizzes}
+                onGenerateReport={() => handleGenerateReport(employee.id, employee.first_name, employee.last_name)}
               />
             ))
           ) : (

@@ -245,7 +245,9 @@
     "noPassedQuizzes": "Još uvijek nema položenih kvizova."
   },
   "userCard": {
-    "passedQuizzes": "Položeni Kvizovi"
+    "passedQuizzes": "Položeni Kvizovi",
+    "reportSuccess": "PDF izveštaj generisan uspešno!",
+    "reportError": "Greška pri generisanju PDF izveštaja!"
   },
   "employeeProfile": {
     "title": "Profil zaposlenog",
