@@ -96,10 +96,13 @@ class GenerateEmployeeReportView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request, pk):
+        if not hasattr(request.user, "company_profile"):
+            return HttpResponse("You do not have permission to access this resource.", status=403)
+
         try:
             employee = Employee.objects.get(pk=pk, company=request.user.company_profile)
         except Employee.DoesNotExist:
-            return HttpResponse("You do not have permission to access this resource.", status=403)
+            return HttpResponse("Employee not found or you do not have access.", status=403)
 
         response = HttpResponse(content_type="application/pdf")
         response["Content-Disposition"] = f'attachment; filename="{employee.first_name}_{employee.last_name}_report.pdf"'
