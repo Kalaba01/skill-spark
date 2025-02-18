@@ -203,8 +203,9 @@
   "hamburgerMenu": {
     "users_management": "Users Management",
     "employees_management": "Employees Management",
+    "profile": "Profile",
     "quizzes": "Quizzes",
-    "profile": "Profile"
+    "passed_quizzes": "Passed Quizzes"
   },
   "employee_quizzes": {
     "title": "Employee Quizzes",
@@ -263,5 +264,16 @@
     "saveChanges": "Save Changes",
     "updateError": "Error updating profile. Please try again.",
     "successMessage": "Profile updated successfully!"
+  },
+  "employeePassedQuizzes": {
+    "title": "Passed Quizzes",
+    "loading": "Loading quizzes...",
+    "searchPlaceholder": "Search quizzes...",
+    "all": "All",
+    "easy": "Easy",
+    "medium": "Medium",
+    "hard": "Hard",
+    "passedDate": "Passed on",
+    "noResults": "No quizzes found."
   }
 }

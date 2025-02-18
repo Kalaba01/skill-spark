@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { ProtectedRoute, RedirectHome } from './middleware';
-import { GoTop, Footer, ToastNotification, Admin, Company, Employee, Unauthorized, NotFound, EmployeeManagement, UserManagement, ResetPassword, Quizzes, EmployeeQuizzes, EmployeeQuizDetail, QuizTaking, EmployeeProfile } from './components';
+import { GoTop, Footer, ToastNotification, Admin, Company, Employee, Unauthorized, NotFound, EmployeeManagement, UserManagement, ResetPassword, Quizzes, EmployeeQuizzes, EmployeeQuizDetail, QuizTaking, EmployeeProfile, EmployeePassedQuizzes } from './components';
 import './App.scss';
 
 function App() {
@@ -23,6 +23,7 @@ function App() {
         <Route path="/employee/quiz/:id" element={<ProtectedRoute allowedRoles={["employee"]}><EmployeeQuizDetail /></ProtectedRoute>} />
         <Route path="/employee/quiz/:id/take" element={<ProtectedRoute allowedRoles={["employee"]}><QuizTaking /></ProtectedRoute>} />
         <Route path="/employee/profile" element={<ProtectedRoute allowedRoles={["employee"]}><EmployeeProfile /></ProtectedRoute>} />
+        <Route path="/employee/passed-quizzes" element={<ProtectedRoute allowedRoles={["employee"]}><EmployeePassedQuizzes /></ProtectedRoute>} />
 
         <Route path="/unauthorized" element={<Unauthorized />} />
         <Route path="*" element={<NotFound />} />

@@ -145,4 +145,4 @@ class EmployeePassedQuizzesView(generics.ListAPIView):
         employee = self.request.user.employee_profile
         passed_quizzes = PassedQuizzes.objects.filter(employee=employee).values_list("quiz_id", flat=True)
         
-        return Quiz.objects.filter(id__in=passed_quizzes)
+        return PassedQuizzes.objects.filter(employee=employee).select_related("quiz").order_by("-passed_date")

@@ -22,7 +22,8 @@ function HamburgerMenu({ userRole }) {
     ],
     employee: [
       { label: t("hamburgerMenu.profile"), path: "/employee/profile" },
-      { label: t("hamburgerMenu.quizzes"), path: "/employee/quizzes" }
+      { label: t("hamburgerMenu.quizzes"), path: "/employee/quizzes" },
+      { label: t("hamburgerMenu.passed_quizzes"), path: "/employee/passed-quizzes" },
     ]
   };
 

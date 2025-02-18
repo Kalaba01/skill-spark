@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Quiz, Question, Answer
+from .models import Quiz, Question, Answer, PassedQuizzes
 
 class AnswerSerializer(serializers.ModelSerializer):
     class Meta:
@@ -106,6 +106,9 @@ class QuizTakeSerializer(serializers.ModelSerializer):
         ]
 
 class PassedQuizSerializer(serializers.ModelSerializer):
+    passed_date = serializers.DateTimeField(format="%Y-%m-%d", read_only=True)
+
     class Meta:
-        model = Quiz
-        fields = ["id", "title", "description", "difficulty"]
+        model = PassedQuizzes
+        fields = ["id", "quiz", "passed_date"]
+        depth = 1

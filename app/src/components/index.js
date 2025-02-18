@@ -33,5 +33,43 @@ import QuizTaking from "./QuizTaking/QuizTaking";
 import PassedQuizzes from "./PassedQuizzes/PassedQuizzes";
 import EmployeeProfile from "./EmployeeProfile/EmployeeProfile";
 import EmployeeProfileEdit from "./EmployeeProfileEdit/EmployeeProfileEdit";
+import EmployeePassedQuizzes from "./EmployeePassedQuizzes/EmployeePassedQuizzes";
 
-export { LandingPage, GoTop, Footer, Login, Register, ToastNotification, Language, Admin, Company, Employee, TopBar, Theme, HamburgerMenu, Logout, Unauthorized, NotFound, EmployeeManagement, EmployeePopup, ConfirmPopup, UserManagement, CreateUserPopup, UserCard, ForgotPassword, ResetPassword, Quizzes, QuizForm, QuestionForm, EmployeeQuizzes, QuizCard, EmployeeQuizDetail, Loading, QuizTaking, PassedQuizzes, EmployeeProfile, EmployeeProfileEdit }
+export {
+  LandingPage,
+  GoTop,
+  Footer,
+  Login,
+  Register,
+  ToastNotification,
+  Language,
+  Admin,
+  Company,
+  Employee,
+  TopBar,
+  Theme,
+  HamburgerMenu,
+  Logout,
+  Unauthorized,
+  NotFound,
+  EmployeeManagement,
+  EmployeePopup,
+  ConfirmPopup,
+  UserManagement,
+  CreateUserPopup,
+  UserCard,
+  ForgotPassword,
+  ResetPassword,
+  Quizzes,
+  QuizForm,
+  QuestionForm,
+  EmployeeQuizzes,
+  QuizCard,
+  EmployeeQuizDetail,
+  Loading,
+  QuizTaking,
+  PassedQuizzes,
+  EmployeeProfile,
+  EmployeeProfileEdit,
+  EmployeePassedQuizzes
+};

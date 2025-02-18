@@ -203,8 +203,9 @@
   "hamburgerMenu": {
     "users_management": "Upravljanje korisnicima",
     "employees_management": "Upravljanje zaposlenima",
+    "profile": "Profil",
     "quizzes": "Kvizovi",
-    "profile": "Profil"
+    "passed_quizzes": "Položeni kvizovi"
   },
   "employee_quizzes": {
     "title": "Kvizovi zaposlenih",
@@ -263,5 +264,16 @@
     "saveChanges": "Sačuvaj promjene",
     "updateError": "Greška pri ažuriranju profila. Pokušajte ponovo.",
     "successMessage": "Profil uspješno ažuriran!"
+  },
+  "employeePassedQuizzes": {
+    "title": "Položeni kvizovi",
+    "loading": "Učitavanje kvizova...",
+    "searchPlaceholder": "Pretraži kvizove...",
+    "all": "Svi",
+    "easy": "Lako",
+    "medium": "Srednje",
+    "hard": "Teško",
+    "passedDate": "Položeno",
+    "noResults": "Nema pronađenih kvizova."
   }
 }
