@@ -18,7 +18,7 @@ const EmployeeProfile = () => {
   const fetchProfile = async () => {
     try {
       const token = localStorage.getItem("access_token");
-      const response = await axios.get("http://127.0.0.1:8000/api/user-management/profile/", {
+      const response = await axios.get("http://127.0.0.1:8000/api/user-management/employee-profile/", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setProfile(response.data);

@@ -167,3 +167,29 @@ class EmployeeProfileSerializer(serializers.ModelSerializer):
         instance.last_name = validated_data.get("last_name", instance.last_name)
         instance.save()
         return instance
+
+class CompanyProfileSerializer(serializers.ModelSerializer):
+    email = serializers.EmailField(source="user.email", read_only=False)
+    employee_count = serializers.SerializerMethodField()
+    quiz_count = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Company
+        fields = ["company_name", "email", "employee_count", "quiz_count"]
+
+    def get_employee_count(self, obj):
+        return obj.employees.count()
+
+    def get_quiz_count(self, obj):
+        return Quiz.objects.filter(company=obj).count()
+
+    def update(self, instance, validated_data):
+        user_data = validated_data.pop("user", {})
+        
+        if "email" in user_data:
+            instance.user.email = user_data["email"]
+            instance.user.save()
+
+        instance.company_name = validated_data.get("company_name", instance.company_name)
+        instance.save()
+        return instance
