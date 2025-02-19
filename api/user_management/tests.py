@@ -21,7 +21,6 @@ class EmployeeManagementTests(TestCase):
         self.employee1 = Employee.objects.create(user=self.employee_user, first_name="John", last_name="Doe", company=self.company1)
 
         self.quiz = Quiz.objects.create(title="Test Quiz", company=self.company1, duration=30, difficulty="easy")
-
         PassedQuizzes.objects.create(employee=self.employee1, quiz=self.quiz)
 
         self.client.force_authenticate(user=self.company1_user)
@@ -81,10 +80,8 @@ class EmployeeManagementTests(TestCase):
         response = self.client.get("/api/user-management/employees/")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 1)
-
         self.assertIn("passed_quizzes", response.data[0])
         self.assertEqual(len(response.data[0]["passed_quizzes"]), 1)
-
         self.assertEqual(response.data[0]["passed_quizzes"][0]["title"], "Test Quiz")
 
     def test_employee_with_no_passed_quizzes(self):
@@ -95,9 +92,9 @@ class EmployeeManagementTests(TestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         employee_data = next(emp for emp in response.data if emp["first_name"] == "Jane")
-
         self.assertIn("passed_quizzes", employee_data)
         self.assertEqual(len(employee_data["passed_quizzes"]), 0)
+
 
 class UserManagementTests(TestCase):
     def setUp(self):
@@ -200,6 +197,7 @@ class UserManagementTests(TestCase):
         response = self.client.put(f"/api/user-management/users/{self.employee_user.id}/", update_data)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
+
 class EmployeeProfileTests(TestCase):
     def setUp(self):
         self.client = APIClient()
@@ -227,9 +225,8 @@ class EmployeeProfileTests(TestCase):
         self.client.force_authenticate(user=self.employee_user)
 
     def test_get_employee_profile(self):
-        response = self.client.get("/api/user-management/profile/")
+        response = self.client.get("/api/user-management/employee-profile/")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-
         self.assertEqual(response.data["first_name"], "John")
         self.assertEqual(response.data["last_name"], "Doe")
         self.assertEqual(response.data["email"], "employee@test.com")
@@ -241,13 +238,11 @@ class EmployeeProfileTests(TestCase):
             "last_name": "Smith",
             "email": "johnny.smith@test.com"
         }
-
-        response = self.client.post("/api/user-management/profile/", updated_data)
+        response = self.client.post("/api/user-management/employee-profile/", updated_data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         self.employee.refresh_from_db()
         self.employee.user.refresh_from_db()
-
         self.assertEqual(self.employee.first_name, "Johnny")
         self.assertEqual(self.employee.last_name, "Smith")
         self.assertEqual(self.employee.user.email, "johnny.smith@test.com")
@@ -258,17 +253,17 @@ class EmployeeProfileTests(TestCase):
             "last_name": "Smith",
             "email": "invalid-email"
         }
-
-        response = self.client.post("/api/user-management/profile/", invalid_data)
+        response = self.client.post("/api/user-management/employee-profile/", invalid_data)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_unauthorized_access(self):
         self.client.logout()
-        response = self.client.get("/api/user-management/profile/")
+        response = self.client.get("/api/user-management/employee-profile/")
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
-        response = self.client.post("/api/user-management/profile/", {"first_name": "New Name"})
+        response = self.client.post("/api/user-management/employee-profile/", {"first_name": "New Name"})
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
 
 class EmployeeReportTests(TestCase):
     def setUp(self):
@@ -299,3 +294,85 @@ class EmployeeReportTests(TestCase):
         self.client.force_authenticate(user=self.company2_user)
         response = self.client.get(f"/api/user-management/employees/{self.employee1.id}/report/")
         self.assertEqual(response.status_code, 403)
+
+
+class CompanyProfileTests(TestCase):
+    def setUp(self):
+        self.client = APIClient()
+
+        self.company_user = User.objects.create_user(
+            email="company@test.com",
+            password="testpass",
+            role=User.COMPANY
+        )
+        self.company = Company.objects.create(
+            user=self.company_user,
+            company_name="Test Company"
+        )
+
+        self.other_company_user = User.objects.create_user(
+            email="othercompany@test.com",
+            password="testpass",
+            role=User.COMPANY
+        )
+        self.other_company = Company.objects.create(
+            user=self.other_company_user,
+            company_name="Other Company"
+        )
+
+        self.admin_user = User.objects.create_user(
+            email="admin@test.com",
+            password="testpass",
+            role=User.ADMIN
+        )
+
+        self.employee_user = User.objects.create_user(
+            email="employee@test.com",
+            password="testpass",
+            role=User.EMPLOYEE
+        )
+
+        self.company_profile_url = "/api/user-management/company-profile/"
+
+    def test_company_can_get_profile(self):
+        self.client.force_authenticate(user=self.company_user)
+        response = self.client.get(self.company_profile_url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data["company_name"], "Test Company")
+        self.assertEqual(response.data["email"], "company@test.com")
+
+    def test_company_can_update_profile(self):
+        self.client.force_authenticate(user=self.company_user)
+        updated_data = {
+            "company_name": "Updated Company Name",
+            "email": "updatedcompany@test.com"
+        }
+        response = self.client.post(self.company_profile_url, updated_data, format="json")
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.company.refresh_from_db()
+        self.assertEqual(self.company.company_name, "Updated Company Name")
+        self.assertEqual(self.company.user.email, "updatedcompany@test.com")
+    
+    def test_admin_cannot_access_company_profile(self):
+        self.client.force_authenticate(user=self.admin_user)
+        response = self.client.get(self.company_profile_url)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_employee_cannot_access_company_profile(self):
+        self.client.force_authenticate(user=self.employee_user)
+        response = self.client.get(self.company_profile_url)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_unauthorized_user_cannot_access_company_profile(self):
+        self.client.logout()
+        response = self.client.get(self.company_profile_url)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+    def test_invalid_email_update(self):
+        self.client.force_authenticate(user=self.company_user)
+        invalid_data = {
+            "company_name": "Valid Name",
+            "email": "invalid-email"
+        }
+        response = self.client.post(self.company_profile_url, invalid_data, format="json")
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
