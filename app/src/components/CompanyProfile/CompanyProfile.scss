@@ -1,0 +1,105 @@
+@import "../../styles/variables";
+
+.company-profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: var(--background-color);
+  color: var(--text-color);
+
+  .profile-card {
+    width: 100%;
+    max-width: 700px;
+    background: var(--background-color);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: var(--box-shadow);
+    text-align: center;
+
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 25px;
+      font-weight: bold;
+      color: var(--primary-color);
+    }
+
+    .company-details {
+      .company-info {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        margin-bottom: 30px;
+
+        .info-item {
+          display: flex;
+          align-items: center;
+          gap: 15px;
+          padding: 15px;
+          background: var(--hover-color);
+          border-radius: 10px;
+          box-shadow: var(--box-shadow);
+          transition: 0.3s ease;
+
+          &:hover {
+            transform: scale(1.03);
+          }
+
+          .icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+          }
+
+          .info-text {
+            text-align: left;
+
+            h3 {
+              font-size: 1.1rem;
+              color: var(--primary-color);
+              margin-bottom: 5px;
+            }
+
+            p {
+              font-size: 1.3rem;
+              font-weight: bold;
+              color: var(--text-color);
+            }
+          }
+        }
+      }
+
+      .edit-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+        background: var(--primary-color);
+        color: white;
+        font-size: 1.2rem;
+        padding: 12px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 0.3s ease;
+        font-weight: bold;
+        box-shadow: var(--box-shadow);
+
+        &:hover {
+          background: var(--primary-color);
+          transform: scale(1.05);
+        }
+
+        .edit-icon {
+          font-size: 1.3rem;
+        }
+      }
+    }
+  }
+
+  .no-data {
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    margin-top: 20px;
+  }
+}

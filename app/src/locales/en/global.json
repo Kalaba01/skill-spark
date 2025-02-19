@@ -275,5 +275,23 @@
     "hard": "Hard",
     "passedDate": "Passed on",
     "noResults": "No quizzes found."
+  },
+  "companyProfile": {
+    "title": "Company Profile",
+    "companyName": "Company Name",
+    "email": "Email",
+    "employees": "Employees",
+    "quizzesCreated": "Quizzes Created",
+    "editProfile": "Edit Profile",
+    "noData": "Company data not available."
+  },
+  "companyProfileEdit": {
+    "title": "Edit Company Profile",
+    "companyName": "Company Name",
+    "email": "Email",
+    "save": "Save Changes",
+    "saving": "Saving...",
+    "successMessage": "Profile updated successfully!",
+    "errorMessage": "Failed to update profile!"
   }
 }

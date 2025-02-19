@@ -275,5 +275,23 @@
     "hard": "Teško",
     "passedDate": "Položeno",
     "noResults": "Nema pronađenih kvizova."
+  },
+  "companyProfile": {
+    "title": "Profil Kompanije",
+    "companyName": "Naziv Kompanije",
+    "email": "Email",
+    "employees": "Broj Zaposlenih",
+    "quizzesCreated": "Kreirani Kvizovi",
+    "editProfile": "Uredi Profil",
+    "noData": "Podaci o kompaniji nisu dostupni."
+  },
+  "companyProfileEdit": {
+    "title": "Uredi Profil Kompanije",
+    "companyName": "Naziv Kompanije",
+    "email": "Email",
+    "save": "Sačuvaj Promjene",
+    "saving": "Čuvanje...",
+    "successMessage": "Profil uspješno ažuriran!",
+    "errorMessage": "Ažuriranje profila nije uspjelo!"
   }
 }

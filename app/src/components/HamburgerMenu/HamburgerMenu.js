@@ -17,6 +17,7 @@ function HamburgerMenu({ userRole }) {
       { label: t("hamburgerMenu.users_management"), path: "/admin/users-management" }
     ],
     company: [
+      { label: t("hamburgerMenu.profile"), path: "/company/profile" },
       { label: t("hamburgerMenu.employees_management"), path: "/company/employees-management" },
       { label: t("hamburgerMenu.quizzes"), path: "/company/quizzes" }
     ],

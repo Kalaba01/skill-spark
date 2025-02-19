@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { ProtectedRoute, RedirectHome } from './middleware';
-import { GoTop, Footer, ToastNotification, Admin, Company, Employee, Unauthorized, NotFound, EmployeeManagement, UserManagement, ResetPassword, Quizzes, EmployeeQuizzes, EmployeeQuizDetail, QuizTaking, EmployeeProfile, EmployeePassedQuizzes } from './components';
+import { GoTop, Footer, ToastNotification, Admin, Company, Employee, Unauthorized, NotFound, EmployeeManagement, UserManagement, ResetPassword, Quizzes, EmployeeQuizzes, EmployeeQuizDetail, QuizTaking, EmployeeProfile, EmployeePassedQuizzes, CompanyProfile } from './components';
 import './App.scss';
 
 function App() {
@@ -17,6 +17,7 @@ function App() {
         <Route path="/company" element={<ProtectedRoute allowedRoles={["company"]}><Company /></ProtectedRoute>} />
         <Route path="/company/employees-management" element={<ProtectedRoute allowedRoles={["company"]}><EmployeeManagement /></ProtectedRoute>} />
         <Route path="/company/quizzes" element={<ProtectedRoute allowedRoles={["company"]}><Quizzes /></ProtectedRoute>} />
+        <Route path="/company/profile" element={<ProtectedRoute allowedRoles={["company"]}><CompanyProfile /></ProtectedRoute>} />
 
         <Route path="/employee" element={<ProtectedRoute allowedRoles={["employee"]}><Employee /></ProtectedRoute>} />
         <Route path="/employee/quizzes" element={<ProtectedRoute allowedRoles={["employee"]} ><EmployeeQuizzes /></ProtectedRoute>} />
