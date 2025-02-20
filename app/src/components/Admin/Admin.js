@@ -1,14 +1,16 @@
 import React from "react";
+import { TopBar, AdminStatistics } from "../";
 import "./Admin.scss";
-import TopBar from "../TopBar/TopBar";
 
 function Admin() {
-    return(
-        <>
-            <TopBar />
-            <h1>Admin</h1>
-        </>
-    )
+  return (
+    <>
+      <TopBar />
+      <div className="admin-dashboard">
+        <AdminStatistics />
+      </div>
+    </>
+  );
 }
 
 export default Admin;

@@ -303,5 +303,15 @@
     "easy": "Lako",
     "medium": "Srednje",
     "hard": "Teško"
+  },
+  "admin_statistics": {
+    "platform_statistics": "Statistika platforme",
+    "user_distribution": "Distribucija korisnika",
+    "total_quizzes": "Ukupno kvizova",
+    "users": "Korisnici",
+    "admins": "Administratori",
+    "companies": "Kompanije",
+    "employees": "Zaposlenici",
+    "quizzes": "Kvizovi"
   }
 }
