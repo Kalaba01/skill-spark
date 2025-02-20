@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { ProtectedRoute, RedirectHome } from './middleware';
-import { GoTop, Footer, ToastNotification, Admin, Company, Employee, Unauthorized, NotFound, EmployeeManagement, UserManagement, ResetPassword, Quizzes, EmployeeQuizzes, EmployeeQuizDetail, QuizTaking, EmployeeProfile, EmployeePassedQuizzes, CompanyProfile } from './components';
+import { GoTop, Footer, ToastNotification, Admin, Company, Employee, Unauthorized, NotFound, EmployeeManagement, UserManagement, ResetPassword, Quizzes, EmployeeQuizzes, EmployeeQuizDetail, QuizTaking, EmployeeProfile, EmployeePassedQuizzes, CompanyProfile, AdminQuizzes } from './components';
 import './App.scss';
 
 function App() {
@@ -13,6 +13,7 @@ function App() {
 
         <Route path="/admin" element={<ProtectedRoute allowedRoles={["admin"]}><Admin /></ProtectedRoute>} />
         <Route path="/admin/users-management" element={<ProtectedRoute allowedRoles={["admin"]}><UserManagement /></ProtectedRoute>} />
+        <Route path="/admin/all-quizzes" element={<ProtectedRoute allowedRoles={["admin"]}><AdminQuizzes /></ProtectedRoute>} />
 
         <Route path="/company" element={<ProtectedRoute allowedRoles={["company"]}><Company /></ProtectedRoute>} />
         <Route path="/company/employees-management" element={<ProtectedRoute allowedRoles={["company"]}><EmployeeManagement /></ProtectedRoute>} />

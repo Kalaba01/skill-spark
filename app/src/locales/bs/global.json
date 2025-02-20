@@ -293,5 +293,15 @@
     "saving": "Čuvanje...",
     "successMessage": "Profil uspješno ažuriran!",
     "errorMessage": "Ažuriranje profila nije uspjelo!"
+  },
+  "adminQuizzes": {
+    "title": "Svi kvizovi",
+    "searchPlaceholder": "Pretraži kvizove...",
+    "allCompanies": "Sve kompanije",
+    "noResults": "Nema pronađenih kvizova.",
+    "minutes": "min",
+    "easy": "Lako",
+    "medium": "Srednje",
+    "hard": "Teško"
   }
 }

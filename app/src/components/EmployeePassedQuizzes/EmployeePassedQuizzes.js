@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaSearch, FaFilter, FaCalendarAlt } from "react-icons/fa";
-import { TopBar } from "../";
+import { Loading, TopBar } from "../";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
 import "./EmployeePassedQuizzes.scss";
@@ -60,9 +60,7 @@ const EmployeePassedQuizzes = () => {
     return (
       <>
         <TopBar />
-        <div className="loading-container">
-          <p>{t("employeePassedQuizzes.loading")}</p>
-        </div>
+        <Loading />
       </>
     );
   }

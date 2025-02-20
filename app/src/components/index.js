@@ -36,6 +36,7 @@ import EmployeeProfileEdit from "./EmployeeProfileEdit/EmployeeProfileEdit";
 import EmployeePassedQuizzes from "./EmployeePassedQuizzes/EmployeePassedQuizzes";
 import CompanyProfile from "./CompanyProfile/CompanyProfile";
 import CompanyProfileEdit from "./CompanyProfileEdit/CompanyProfileEdit";
+import AdminQuizzes from "./AdminQuizzes/AdminQuizzes";
 
 export {
   LandingPage,
@@ -75,5 +76,6 @@ export {
   EmployeeProfileEdit,
   EmployeePassedQuizzes,
   CompanyProfile,
-  CompanyProfileEdit
+  CompanyProfileEdit,
+  AdminQuizzes
 };

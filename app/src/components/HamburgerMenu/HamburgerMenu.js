@@ -14,7 +14,8 @@ function HamburgerMenu({ userRole }) {
 
   const menuItems = {
     admin: [
-      { label: t("hamburgerMenu.users_management"), path: "/admin/users-management" }
+      { label: t("hamburgerMenu.users_management"), path: "/admin/users-management" },
+      { label: t("hamburgerMenu.quizzes"), path: "/admin/all-quizzes" }
     ],
     company: [
       { label: t("hamburgerMenu.profile"), path: "/company/profile" },

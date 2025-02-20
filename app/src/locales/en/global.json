@@ -267,7 +267,6 @@
   },
   "employeePassedQuizzes": {
     "title": "Passed Quizzes",
-    "loading": "Loading quizzes...",
     "searchPlaceholder": "Search quizzes...",
     "all": "All",
     "easy": "Easy",
@@ -293,5 +292,15 @@
     "saving": "Saving...",
     "successMessage": "Profile updated successfully!",
     "errorMessage": "Failed to update profile!"
+  },
+  "adminQuizzes": {
+    "title": "All Quizzes",
+    "searchPlaceholder": "Search quizzes...",
+    "allCompanies": "All Companies",
+    "noResults": "No quizzes found.",
+    "minutes": "min",
+    "easy": "Easy",
+    "medium": "Medium",
+    "hard": "Hard"
   }
 }
