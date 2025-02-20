@@ -409,3 +409,62 @@ class PassedQuizzesTests(BaseQuizTestCase):
         self.client.logout()
         response = self.client.get(self.passed_quizzes_url)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+class AdminQuizListTests(TestCase):
+    def setUp(self):
+        self.client = APIClient()
+
+        self.admin_user = User.objects.create_user(
+            email="admin@test.com",
+            password="testpass",
+            role=User.ADMIN
+        )
+
+        self.company_user = User.objects.create_user(
+            email="company@test.com",
+            password="testpass",
+            role=User.COMPANY
+        )
+        self.company = Company.objects.create(
+            user=self.company_user,
+            company_name="Test Company"
+        )
+
+        self.quiz1 = Quiz.objects.create(
+            title="Python Basics",
+            description="A quiz on Python fundamentals.",
+            difficulty="easy",
+            duration=30,
+            company=self.company
+        )
+
+        self.quiz2 = Quiz.objects.create(
+            title="Advanced Django",
+            description="A deep dive into Django framework.",
+            difficulty="hard",
+            duration=40,
+            company=self.company
+        )
+
+        self.admin_quiz_list_url = "/api/quizzes/admin/all-quizzes/"
+
+    def test_admin_can_get_all_quizzes(self):
+        self.client.force_authenticate(user=self.admin_user)
+        response = self.client.get(self.admin_quiz_list_url)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 2)
+        self.assertEqual(response.data[0]["title"], "Python Basics")
+        self.assertEqual(response.data[1]["title"], "Advanced Django")
+
+    def test_company_cannot_get_all_quizzes(self):
+        self.client.force_authenticate(user=self.company_user)
+        response = self.client.get(self.admin_quiz_list_url)
+
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_unauthorized_user_cannot_get_quizzes(self):
+        self.client.logout()
+        response = self.client.get(self.admin_quiz_list_url)
+
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
