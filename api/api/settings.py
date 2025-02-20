@@ -29,7 +29,8 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     "user_management",
     "password_reset",
-    "quizzes"
+    "quizzes",
+    "dashboard"
 ]
 
 REST_FRAMEWORK = {
