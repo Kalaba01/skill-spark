@@ -5,7 +5,8 @@ from .views import (
     EmployeeQuizListView,
     EmployeePassedQuizzesView,
     QuizDetailPublicView,
-    QuizTakeView
+    QuizTakeView,
+    AdminQuizListView
 )
 
 urlpatterns = [
@@ -14,5 +15,6 @@ urlpatterns = [
     path("employee-quizzes/", EmployeeQuizListView.as_view(), name="employee-quiz-list"),
     path("employee-passed-quizzes/", EmployeePassedQuizzesView.as_view(), name="employee-passed-quizzes"),
     path("<int:pk>/detail/", QuizDetailPublicView.as_view(), name="quiz-detail-public"),
-    path("<int:pk>/take/", QuizTakeView.as_view(), name="quiz-take")
+    path("<int:pk>/take/", QuizTakeView.as_view(), name="quiz-take"),
+    path("admin/all-quizzes/", AdminQuizListView.as_view(), name="admin-all-quizzes")
 ]

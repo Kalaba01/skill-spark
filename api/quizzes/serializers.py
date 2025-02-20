@@ -112,3 +112,10 @@ class PassedQuizSerializer(serializers.ModelSerializer):
         model = PassedQuizzes
         fields = ["id", "quiz", "passed_date"]
         depth = 1
+
+class AdminQuizSerializer(serializers.ModelSerializer):
+    company_name = serializers.CharField(source="company.company_name", read_only=True)
+
+    class Meta:
+        model = Quiz
+        fields = ["id", "title", "description", "difficulty", "duration", "company_name"]
