@@ -1,0 +1,26 @@
+@import "../../styles/variables";
+
+.stat-card {
+  background: var(--background-color);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: var(--box-shadow);
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
+  height: 400px;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+  }
+
+  .donut-chart {
+    max-height: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+}

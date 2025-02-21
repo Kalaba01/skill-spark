@@ -312,5 +312,13 @@
     "companies": "Companies",
     "employees": "Employees",
     "quizzes": "Quizzes"
+  },
+  "company_statistics": {
+    "company_statistics": "Company Statistics",
+    "employees": "Employees",
+    "quizzes": "Quizzes",
+    "total_employees": "Total Employees",
+    "total_quizzes": "Total Quizzes",
+    "employee_distribution": "Employee Distribution"
   }
 }

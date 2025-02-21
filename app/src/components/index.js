@@ -38,6 +38,10 @@ import CompanyProfile from "./CompanyProfile/CompanyProfile";
 import CompanyProfileEdit from "./CompanyProfileEdit/CompanyProfileEdit";
 import AdminQuizzes from "./AdminQuizzes/AdminQuizzes";
 import AdminStatistics from "./AdminStatistics/AdminStatistics";
+import BarCard from "./BarCard/BarCard";
+import PieCard from "./PieCard/PieCard";
+import CompanyStatistics from "./CompanyStatistics/CompanyStatistics";
+import DonutCard from "./DonutCard/DonutCard";
 
 export {
   LandingPage,
@@ -79,5 +83,9 @@ export {
   CompanyProfile,
   CompanyProfileEdit,
   AdminQuizzes,
-  AdminStatistics
+  AdminStatistics,
+  BarCard,
+  PieCard,
+  CompanyStatistics,
+  DonutCard
 };

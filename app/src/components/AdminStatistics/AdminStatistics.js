@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Loading } from "../";
-import { Bar, Pie } from "react-chartjs-2";
+import { Loading, BarCard, PieCard } from "../";
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement  } from "chart.js";
 import { useTranslation } from "react-i18next";
 import "./AdminStatistics.scss";
@@ -64,15 +63,8 @@ const AdminStatistics = () => {
       <h2>{t("admin_statistics.platform_statistics")}</h2>
 
       <div className="stats-container">
-        <div className="stat-card">
-        <h3>{t("admin_statistics.user_distribution")}</h3>
-          <Bar data={userData} options={{ responsive: true, plugins: { legend: { display: false } } }} />
-        </div>
-
-        <div className="stat-card">
-        <h3>{t("admin_statistics.total_quizzes")}</h3>
-          <Pie className="pie-chart" data={quizData} options={{ responsive: true, plugins: { legend: { position: "bottom" } } }} />
-        </div>
+        <BarCard title={t("admin_statistics.user_distribution")} data={userData} />
+        <PieCard title={t("admin_statistics.total_quizzes")} data={quizData} />
       </div>
     </div>
   );
