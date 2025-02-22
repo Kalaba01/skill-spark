@@ -1,13 +1,14 @@
 import React from 'react';
-import './Footer.scss';
 import { useTranslation } from "react-i18next";
+import './Footer.scss';
 
 function Footer() {
   const { t } = useTranslation();
+  const currentYear = new Date().getFullYear();
 
   return (
     <footer className="footer">
-      <div>© 2025 SkillSpark. {t("footer.rights")}</div>
+      <div>© {currentYear} SkillSpark. {t("footer.rights")}</div>
     </footer>
   );
 }
