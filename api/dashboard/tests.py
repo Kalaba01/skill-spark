@@ -87,3 +87,33 @@ class CompanyDashboardTests(BaseDashboardTestCase):
         self.client.logout()
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+class EmployeeDashboardTests(BaseDashboardTestCase):
+    def setUp(self):
+        super().setUp()
+        self.url = "/api/dashboard/employee-dashboard/"
+
+    def test_employee_can_get_statistics(self):
+        self.client.force_authenticate(user=self.employee_user)
+        response = self.client.get(self.url)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertIn("passed_quizzes", response.data)
+        self.assertIn("total_quizzes", response.data)
+        self.assertEqual(response.data["total_quizzes"], 2)
+        self.assertEqual(response.data["passed_quizzes"], 0)
+
+    def test_admin_cannot_access_employee_statistics(self):
+        self.client.force_authenticate(user=self.admin_user)
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_company_cannot_access_employee_statistics(self):
+        self.client.force_authenticate(user=self.company_user)
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_unauthenticated_user_cannot_access_employee_statistics(self):
+        self.client.logout()
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
