@@ -42,6 +42,7 @@ import BarCard from "./BarCard/BarCard";
 import PieCard from "./PieCard/PieCard";
 import CompanyStatistics from "./CompanyStatistics/CompanyStatistics";
 import DonutCard from "./DonutCard/DonutCard";
+import EmployeeStatistics from "./EmployeeStatistics/EmployeeStatistics";
 
 export {
   LandingPage,
@@ -87,5 +88,6 @@ export {
   BarCard,
   PieCard,
   CompanyStatistics,
-  DonutCard
+  DonutCard,
+  EmployeeStatistics
 };

@@ -54,15 +54,18 @@ class EmployeeDashboardStatsView(APIView):
         }
 
         all_quizzes = Quiz.objects.filter(company=employee.company)
+        total_quizzes = all_quizzes.count()
         passed_quiz_ids = passed_quizzes.values_list("quiz_id", flat=True)
         recommended_quiz = all_quizzes.exclude(id__in=passed_quiz_ids).first()
 
         recommended_quiz_data = {
-            "title": recommended_quiz.title if recommended_quiz else None
+            "title": recommended_quiz.title if recommended_quiz else None,
+            "description": recommended_quiz.description if recommended_quiz else None
         }
 
         stats = {
             "passed_quizzes": passed_quizzes.count(),
+            "total_quizzes": total_quizzes,
             "last_quiz": last_quiz_data,
             "recommended_quiz": recommended_quiz_data
         }

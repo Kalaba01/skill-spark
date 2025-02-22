@@ -1,16 +1,14 @@
 import React from "react";
-import { TopBar } from "../";
+import { TopBar, EmployeeStatistics } from "../";
 import "./Employee.scss";
 
 function Employee() {
-    return (
-        <>
-        <TopBar />
-        <div>
-            <h1>Employee</h1>
-        </div>
-        </>
-    )
+  return (
+    <>
+      <TopBar />
+      <EmployeeStatistics />
+    </>
+  );
 }
 
 export default Employee;

@@ -320,5 +320,15 @@
     "total_employees": "Total Employees",
     "total_quizzes": "Total Quizzes",
     "employee_distribution": "Employee Distribution"
+  },
+    "employee_statistics": {
+    "dashboard": "Employee Dashboard",
+    "quiz_progress": "Quiz Progress",
+    "passed": "Passed",
+    "remaining": "Remaining",
+    "quiz_summary": "Quiz Summary",
+    "last_quiz_passed": "Last Quiz Passed",
+    "date": "Date",
+    "recommended_quiz": "Recommended Quiz"
   }
 }
