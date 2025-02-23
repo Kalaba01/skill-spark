@@ -4,12 +4,19 @@ import { useTranslation } from "react-i18next";
 import axios from "axios";
 import "./EmployeeStatistics.scss";
 
+/**
+ * EmployeeStatistics component.
+ * - Displays the employee's quiz progress and performance statistics.
+ * - Fetches data from the API and visualizes it with a donut chart.
+ */
+
 const EmployeeStatistics = () => {
   const { t } = useTranslation();
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Fetches employee statistics from the backend
     const fetchStats = async () => {
       try {
         const token = localStorage.getItem("access_token");
@@ -27,6 +34,7 @@ const EmployeeStatistics = () => {
     fetchStats();
   }, []);
 
+  // Truncates long text to a specified maximum length
   const truncateText = (text, maxLength = 50) => {
     if (!text) return "";
     return text.length > maxLength ? text.substring(0, maxLength) + "..." : text;

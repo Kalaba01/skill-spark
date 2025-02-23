@@ -7,6 +7,12 @@ import "./CompanyStatistics.scss";
 
 ChartJS.register(CategoryScale, LinearScale, ArcElement, Title, Tooltip, Legend);
 
+/**
+ * CompanyStatistics component.
+ * - Fetches and displays company-specific statistics.
+ * - Uses pie and donut charts to visualize employee count and total quizzes.
+ */
+
 const CompanyStatistics = () => {
   const { t } = useTranslation();
   const [stats, setStats] = useState(null);
@@ -16,6 +22,7 @@ const CompanyStatistics = () => {
     fetchStatistics();
   }, []);
 
+  // Fetches company dashboard statistics from the backend
   const fetchStatistics = async () => {
     try {
       const token = localStorage.getItem("access_token");
@@ -30,10 +37,7 @@ const CompanyStatistics = () => {
     }
   };
 
-  if (loading) {
-    return <Loading />;
-  }
-
+  // Chart data configuration for employee distribution
   const employeeData = {
     labels: [t("company_statistics.employees")],
     datasets: [
@@ -46,6 +50,7 @@ const CompanyStatistics = () => {
     ]
   };
 
+  // Chart data configuration for total number of quizzes
   const quizData = {
     labels: [t("company_statistics.quizzes")],
     datasets: [
@@ -57,6 +62,10 @@ const CompanyStatistics = () => {
       }
     ]
   };
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div className="company-statistics">

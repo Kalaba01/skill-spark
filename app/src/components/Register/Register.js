@@ -1,11 +1,22 @@
 import React, { useState } from "react";
-import axios from "axios";
-import { showToast } from "../ToastNotification/ToastNotification";
-import "./Register.scss";
 import { useTranslation } from "react-i18next";
+import { showToast } from "../ToastNotification/ToastNotification";
+import axios from "axios";
+import "./Register.scss";
+
+/**
+ * Register Component
+ *
+ * - Provides a registration form for companies.
+ * - Handles validation, including password confirmation.
+ * - Sends registration data to the backend API.
+ * - Displays success or error messages.
+ * - Redirects to the login form after successful registration.
+ */
 
 function Register({ isOpen, onClose, switchToLogin }) {
   const { t } = useTranslation();
+
   const [formData, setFormData] = useState({
     company_name: "",
     email: "",
@@ -13,6 +24,7 @@ function Register({ isOpen, onClose, switchToLogin }) {
     confirm_password: ""
   });
 
+  // Handles input field changes
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -20,6 +32,7 @@ function Register({ isOpen, onClose, switchToLogin }) {
     });
   };
 
+  // Handles form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 

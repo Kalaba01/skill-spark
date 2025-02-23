@@ -1,10 +1,20 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { showToast } from "../ToastNotification/ToastNotification";
 import { useTranslation } from "react-i18next";
 import { jwtDecode } from "jwt-decode";
+import axios from "axios";
 import "./Login.scss";
+
+/**
+ * Login Component
+ *
+ * - Displays a login form for user authentication.
+ * - Uses Axios to send login credentials to the backend.
+ * - Stores JWT tokens in local storage upon successful login.
+ * - Decodes JWT to determine the user's role and redirects accordingly.
+ * - Supports switching to registration and password reset views.
+ */
 
 function Login({ isOpen, onClose, switchToRegister, switchToForgotPassword }) {
   const { t } = useTranslation();
@@ -15,6 +25,7 @@ function Login({ isOpen, onClose, switchToRegister, switchToForgotPassword }) {
     password: ""
   });
 
+  // Updates form data when the user types into input fields
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -22,6 +33,7 @@ function Login({ isOpen, onClose, switchToRegister, switchToForgotPassword }) {
     });
   };
 
+  // Handles form submission, sends login request, and processes response
   const handleSubmit = async (e) => {
     e.preventDefault();
 

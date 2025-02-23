@@ -4,6 +4,13 @@ import { showToast } from "../ToastNotification/ToastNotification";
 import axios from "axios";
 import "./EmployeePopup.scss";
 
+/**
+ * EmployeePopup component.
+ * - Handles adding and editing employees.
+ * - Uses a form to collect employee details.
+ * - Sends API requests to create or update employees.
+ */
+
 const EmployeePopup = ({ employee, onClose, refresh }) => {
   const { t } = useTranslation();
   const [formData, setFormData] = useState({
@@ -13,10 +20,12 @@ const EmployeePopup = ({ employee, onClose, refresh }) => {
     password: ""
   });
 
+  // Handles input changes and updates the form state
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // Handles form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem("access_token");
@@ -52,7 +61,6 @@ const EmployeePopup = ({ employee, onClose, refresh }) => {
   return (
     <div className="popup-overlay" onClick={onClose}>
       <div className="popup-content" onClick={(e) => e.stopPropagation()}>
-        {/* Dugme za zatvaranje */}
         <button className="close-btn" onClick={onClose}>&times;</button>
 
         <h2>{employee ? t("employeeManagement.editEmployee") : t("employeeManagement.addEmployee")}</h2>

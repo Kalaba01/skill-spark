@@ -5,6 +5,12 @@ import { useTranslation } from "react-i18next";
 import axios from "axios";
 import "./EmployeeQuizDetail.scss";
 
+/**
+ * EmployeeQuizDetail component.
+ * - Fetches and displays details of a specific quiz for an employee.
+ * - Provides a button to start the quiz.
+ */
+
 const EmployeeQuizDetail = () => {
   const { t } = useTranslation();
   const { id } = useParams();
@@ -13,6 +19,7 @@ const EmployeeQuizDetail = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Fetches quiz details from the backend
     const fetchQuiz = async () => {
       try {
         const token = localStorage.getItem("access_token");

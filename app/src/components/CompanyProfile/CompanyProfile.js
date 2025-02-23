@@ -5,6 +5,12 @@ import { useTranslation } from "react-i18next";
 import axios from "axios";
 import "./CompanyProfile.scss";
 
+/**
+ * CompanyProfile component.
+ * - Displays the profile details of the logged-in company.
+ * - Allows editing company profile information.
+ */
+
 const CompanyProfile = () => {
   const { t } = useTranslation();
   const [company, setCompany] = useState(null);
@@ -15,6 +21,7 @@ const CompanyProfile = () => {
     fetchCompanyProfile();
   }, []);
 
+  // Fetches the company profile data from the backend
   const fetchCompanyProfile = async () => {
     try {
       const token = localStorage.getItem("access_token");
@@ -91,6 +98,7 @@ const CompanyProfile = () => {
         </div>
       </div>
 
+      {/* Edit profile modal */}
       {isEditing && (
         <CompanyProfileEdit
           company={company}

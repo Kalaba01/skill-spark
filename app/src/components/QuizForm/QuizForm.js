@@ -5,6 +5,14 @@ import { showToast } from "../ToastNotification/ToastNotification";
 import axios from "axios";
 import "./QuizForm.scss";
 
+/**
+ * QuizForm Component
+ *
+ * - Allows users to create or edit a quiz.
+ * - Supports adding, editing, and removing questions.
+ * - Includes form validation and API calls for quiz creation/update.
+ */
+
 function QuizForm({ quiz, onClose }) {
   const { t } = useTranslation();
 
@@ -23,6 +31,7 @@ function QuizForm({ quiz, onClose }) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // Adds or updates a question in the quiz
   const handleAddQuestion = (question) => {
     let updatedQuestions = [...formData.questions];
 
@@ -37,20 +46,24 @@ function QuizForm({ quiz, onClose }) {
     setIsQuestionFormOpen(false);
   };
 
+  // Opens question editor for an existing question
   const handleEditQuestion = (index) => {
     setEditingQuestionIndex(index);
     setIsQuestionFormOpen(true);
   };
 
+  // Deletes a question from the quiz
   const handleDeleteQuestion = (index) => {
     const updatedQuestions = formData.questions.filter((_, i) => i !== index);
     setFormData({ ...formData, questions: updatedQuestions });
   };
 
+  // Truncates long text for display
   const truncateText = (text, maxLength) => {
     return text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
   };
 
+  // Submits the quiz
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -154,6 +167,7 @@ function QuizForm({ quiz, onClose }) {
         </form>
       </div>
 
+      {/* Question Form Popup */}
       {isQuestionFormOpen && (
         <QuestionForm
           onClose={() => setIsQuestionFormOpen(false)}

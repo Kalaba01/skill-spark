@@ -7,6 +7,12 @@ import axios from "axios";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, ArcElement, Title, Tooltip, Legend);
 
+/**
+ * AdminStatistics component.
+ * - Fetches and displays platform-wide statistics for the admin dashboard.
+ * - Uses bar and pie charts to visualize user distribution and total quizzes.
+ */
+
 const AdminStatistics = () => {
   const { t } = useTranslation();
   const [stats, setStats] = useState(null);
@@ -16,6 +22,7 @@ const AdminStatistics = () => {
     fetchStatistics();
   }, []);
 
+  // Fetches admin dashboard statistics from the backend
   const fetchStatistics = async () => {
     try {
       const token = localStorage.getItem("access_token");
@@ -30,10 +37,7 @@ const AdminStatistics = () => {
     }
   };
 
-  if (loading) {
-    return <Loading />;
-  }
-
+  // Chart data configuration for user distribution
   const userData = {
     labels: [t("admin_statistics.admins"), t("admin_statistics.companies"), t("admin_statistics.employees")],
     datasets: [
@@ -46,6 +50,7 @@ const AdminStatistics = () => {
     ]
   };
 
+  // Chart data configuration for total number of quizzes
   const quizData = {
     labels: [t("admin_statistics.quizzes")],
     datasets: [
@@ -57,6 +62,10 @@ const AdminStatistics = () => {
       }
     ]
   };
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div className="admin-statistics">

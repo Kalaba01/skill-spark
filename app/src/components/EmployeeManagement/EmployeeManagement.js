@@ -6,6 +6,13 @@ import { showToast } from "../ToastNotification/ToastNotification";
 import axios from "axios";
 import "./EmployeeManagement.scss";
 
+/**
+ * EmployeeManagement component.
+ * - Displays a list of employees for the logged-in company.
+ * - Allows adding, editing, deleting, and searching employees.
+ * - Generates employee reports and shows passed quizzes.
+ */
+
 const EmployeeManagement = () => {
   const { t } = useTranslation();
   const [employees, setEmployees] = useState([]);
@@ -20,6 +27,7 @@ const EmployeeManagement = () => {
     fetchEmployees();
   }, []);
 
+  // Fetches the list of employees for the logged-in company
   const fetchEmployees = async () => {
     try {
       const token = localStorage.getItem("access_token");
@@ -37,6 +45,7 @@ const EmployeeManagement = () => {
     }
   };
 
+  // Generates a PDF report for a specific employee
   const handleGenerateReport = async (employeeId, firstName, lastName) => {
     try {
       const token = localStorage.getItem("access_token");
@@ -44,11 +53,10 @@ const EmployeeManagement = () => {
         `http://127.0.0.1:8000/api/user-management/employees/${employeeId}/report/`,
         {
           headers: { Authorization: `Bearer ${token}` },
-          responseType: "blob", // Ovo osigurava da dobijemo fajl, a ne JSON
+          responseType: "blob"
         }
       );
 
-      // Kreiranje URL-a za preuzimanje fajla
       const url = window.URL.createObjectURL(new Blob([response.data]));
       const link = document.createElement("a");
       link.href = url;
@@ -63,6 +71,7 @@ const EmployeeManagement = () => {
     }
   };
 
+  // Handles search input and filters employees accordingly
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
   };
@@ -85,6 +94,7 @@ const EmployeeManagement = () => {
     setConfirmPopup({ show: false, employeeId: null });
   };
 
+  // Deletes an employee from the database
   const deleteEmployee = async () => {
     if (!confirmPopup.employeeId) return;
     try {
@@ -105,6 +115,7 @@ const EmployeeManagement = () => {
     }
   };
 
+  // Filters employees based on search query
   const filteredEmployees = employees.filter((emp) =>
     `${emp.first_name} ${emp.last_name}`
       .toLowerCase()
@@ -142,6 +153,7 @@ const EmployeeManagement = () => {
           </button>
         </div>
 
+        {/* Employee List */}
         <div className="employee-list">
           {filteredEmployees.length > 0 ? (
             filteredEmployees.map((employee) => (
@@ -161,6 +173,7 @@ const EmployeeManagement = () => {
           )}
         </div>
 
+        {/* Employee Popup (Add/Edit) */}
         {isPopupOpen && (
           <EmployeePopup
             employee={selectedEmployee}
@@ -169,6 +182,7 @@ const EmployeeManagement = () => {
           />
         )}
 
+        {/* Delete Confirmation Popup */}
         {confirmPopup.show && (
           <ConfirmPopup
             message={t("employeeManagement.confirmDelete")}
@@ -177,6 +191,7 @@ const EmployeeManagement = () => {
           />
         )}
 
+        {/* Passed Quizzes Modal */}
         {passedQuizzes !== null && 
           <PassedQuizzes 
             quizzes={passedQuizzes} 

@@ -2,6 +2,14 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import "./QuestionForm.scss";
 
+/**
+ * QuestionForm Component
+ *
+ * - Allows users to create or edit a quiz question.
+ * - Supports multiple answers with the ability to mark correct ones.
+ * - Provides form validation to ensure all fields are filled.
+ */
+
 function QuestionForm({ onClose, onSave, initialData }) {
   const { t } = useTranslation();
   
@@ -9,22 +17,26 @@ function QuestionForm({ onClose, onSave, initialData }) {
     initialData || { text: "", answers: [{ text: "", is_correct: false }] }
   );
 
+  // Handles question text change
   const handleQuestionChange = (e) => {
     setQuestion({ ...question, text: e.target.value });
   };
 
+  // Handles answer text change
   const handleAnswerChange = (index, value) => {
     const updatedAnswers = [...question.answers];
     updatedAnswers[index].text = value;
     setQuestion({ ...question, answers: updatedAnswers });
   };
 
+  // Toggles the correct answer selection
   const handleCorrectAnswerToggle = (index) => {
     const updatedAnswers = [...question.answers];
     updatedAnswers[index].is_correct = !updatedAnswers[index].is_correct;
     setQuestion({ ...question, answers: updatedAnswers });
   };
 
+  // Adds a new answer field
   const addAnswer = () => {
     setQuestion({
       ...question,
@@ -32,11 +44,13 @@ function QuestionForm({ onClose, onSave, initialData }) {
     });
   };
 
+  // Removes an answer field
   const removeAnswer = (index) => {
     const updatedAnswers = question.answers.filter((_, i) => i !== index);
     setQuestion({ ...question, answers: updatedAnswers });
   };
 
+  // Validates input and saves the question
   const handleSave = () => {
     if (question.text.trim() === "" || question.answers.some((a) => a.text.trim() === "")) {
       alert(t("question_form.fill_all_fields"));

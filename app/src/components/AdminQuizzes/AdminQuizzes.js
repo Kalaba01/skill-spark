@@ -5,6 +5,13 @@ import { Loading, TopBar } from "../";
 import axios from "axios";
 import "./AdminQuizzes.scss";
 
+/**
+ * AdminQuizzes component.
+ * - Displays a list of all quizzes across all companies.
+ * - Provides search and filter functionality.
+ * - Fetches quiz data from the backend on component mount.
+ */
+
 const AdminQuizzes = () => {
   const { t } = useTranslation();
   const [quizzes, setQuizzes] = useState([]);
@@ -18,6 +25,7 @@ const AdminQuizzes = () => {
     fetchQuizzes();
   }, []);
 
+  // Fetches all quizzes from the backend
   const fetchQuizzes = async () => {
     try {
       const token = localStorage.getItem("access_token");
@@ -37,6 +45,7 @@ const AdminQuizzes = () => {
     }
   };
 
+  // Extracts unique company names from the quiz data
   const extractUniqueCompanies = (quizzesData) => {
     const uniqueCompanies = [
       ...new Set(quizzesData.map((quiz) => quiz.company_name)),
@@ -44,18 +53,21 @@ const AdminQuizzes = () => {
     setCompanies(uniqueCompanies);
   };
 
+  // Handles search input change and filters quizzes based on the query
   const handleSearch = (e) => {
     const query = e.target.value.toLowerCase();
     setSearchQuery(query);
     filterQuizzes(query, selectedCompany);
   };
 
+  // Handles company filter change and filters quizzes accordingly
   const handleCompanyFilter = (e) => {
     const company = e.target.value;
     setSelectedCompany(company);
     filterQuizzes(searchQuery, company);
   };
 
+  // Filters quizzes based on search query and selected company
   const filterQuizzes = (query, company) => {
     let filtered = quizzes.filter((quiz) =>
       quiz.title.toLowerCase().includes(query)

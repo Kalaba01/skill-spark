@@ -6,8 +6,18 @@ import { showToast } from "../ToastNotification/ToastNotification";
 import axios from "axios";
 import "./UserManagement.scss";
 
+/**
+ * UserManagement Component
+ *
+ * - Allows an admin to manage users.
+ * - Users can be searched, filtered by role, edited, and deleted.
+ * - Provides a popup for adding or editing users.
+ * - Fetches and displays a list of users from the backend.
+ */
+
 const UserManagement = () => {
   const { t } = useTranslation();
+
   const [users, setUsers] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [roleFilter, setRoleFilter] = useState("all");
@@ -21,6 +31,7 @@ const UserManagement = () => {
     fetchUsers();
   }, []);
 
+  // Fetches users from the backend and extracts unique company names
   const fetchUsers = async () => {
     try {
       const token = localStorage.getItem("access_token");
@@ -41,10 +52,12 @@ const UserManagement = () => {
     }
   };
 
+  // Handles the search input change
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
   };
 
+  // Handles the role filter change
   const handleRoleChange = (e) => {
     setRoleFilter(e.target.value);
   };
@@ -59,6 +72,7 @@ const UserManagement = () => {
     setIsPopupOpen(false);
   };
 
+  // Deletes a user from the backend and refreshes the user list
   const deleteUser = async (id) => {
     try {
       const token = localStorage.getItem("access_token");
@@ -73,6 +87,7 @@ const UserManagement = () => {
     }
   };
 
+  // Filters users based on search query and selected role
   const filteredUsers = users.filter((user) => {
     const matchesSearch = `${user.first_name} ${user.last_name}`.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesRole = roleFilter === "all" || user.role === roleFilter;

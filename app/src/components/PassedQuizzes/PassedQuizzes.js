@@ -3,6 +3,13 @@ import { useTranslation } from "react-i18next";
 import { FaTimes } from "react-icons/fa";
 import "./PassedQuizzes.scss";
 
+/**
+ * PassedQuizzes Component
+ *
+ * - Displays a modal listing all quizzes that an employee has passed.
+ * - If there are no passed quizzes, it shows an appropriate message.
+ */
+
 const PassedQuizzes = ({ quizzes = [], onClose }) => {
   const { t } = useTranslation();
 

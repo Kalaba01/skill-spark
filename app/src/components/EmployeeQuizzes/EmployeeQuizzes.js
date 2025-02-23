@@ -5,6 +5,12 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import "./EmployeeQuizzes.scss";
 
+/**
+ * EmployeeQuizzes component.
+ * - Displays the list of quizzes available for employees.
+ * - Provides search and filtering options based on quiz duration.
+ */
+
 const EmployeeQuizzes = () => {
   const { t } = useTranslation();
   const [quizzes, setQuizzes] = useState([]);
@@ -14,6 +20,7 @@ const EmployeeQuizzes = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Fetches quizzes available for employees
     const fetchQuizzes = async () => {
       try {
         const token = localStorage.getItem("access_token");
@@ -36,6 +43,7 @@ const EmployeeQuizzes = () => {
   }, []);
 
   useEffect(() => {
+    // Filters quizzes based on the search term and selected duration filter
     let filtered = quizzes.filter((quiz) =>
       quiz.title.toLowerCase().includes(searchTerm.toLowerCase())
     );

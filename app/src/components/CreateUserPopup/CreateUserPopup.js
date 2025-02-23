@@ -4,6 +4,13 @@ import { showToast } from "../ToastNotification/ToastNotification";
 import axios from "axios";
 import "./CreateUserPopup.scss";
 
+/**
+ * CreateUserPopup component.
+ * - Used for creating and editing users (Admin, Company, Employee).
+ * - Handles form submission for user creation and updates.
+ * - Provides validation and displays error/success messages.
+ */
+
 const CreateUserPopup = ({ user, onClose, refresh, companies }) => {
   const { t } = useTranslation();
   const isEditing = Boolean(user);
@@ -19,6 +26,7 @@ const CreateUserPopup = ({ user, onClose, refresh, companies }) => {
 
   const [roleSelected, setRoleSelected] = useState(isEditing);
 
+  // Update form data if user is being edited
   useEffect(() => {
     if (isEditing) {
       setFormData({
@@ -32,6 +40,7 @@ const CreateUserPopup = ({ user, onClose, refresh, companies }) => {
     }
   }, [isEditing, user]);
 
+  // Handles input field changes
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
@@ -40,6 +49,7 @@ const CreateUserPopup = ({ user, onClose, refresh, companies }) => {
     }
   };
 
+  // Handles form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem("access_token");
@@ -77,6 +87,7 @@ const CreateUserPopup = ({ user, onClose, refresh, companies }) => {
         <h2>{isEditing ? t("userManagement.editUser") : t("userManagement.addUser")}</h2>
 
         <form onSubmit={handleSubmit}>
+          {/* Role Selection (only when creating a new user) */}
           {!isEditing && (
             <select name="role" value={formData.role} onChange={handleChange} required>
               <option value="">{t("userManagement.choseRole")}</option>
@@ -86,6 +97,7 @@ const CreateUserPopup = ({ user, onClose, refresh, companies }) => {
             </select>
           )}
 
+          {/* Admin Role Fields */}
           {roleSelected && formData.role === "admin" && (
             <>
               <input
@@ -109,6 +121,7 @@ const CreateUserPopup = ({ user, onClose, refresh, companies }) => {
             </>
           )}
 
+          {/* Company Role Fields */}
           {roleSelected && formData.role === "company" && (
             <>
               <input
@@ -140,6 +153,7 @@ const CreateUserPopup = ({ user, onClose, refresh, companies }) => {
             </>
           )}
 
+          {/* Employee Role Fields */}
           {roleSelected && formData.role === "employee" && (
             <>
               <input
@@ -176,6 +190,8 @@ const CreateUserPopup = ({ user, onClose, refresh, companies }) => {
                   required
                 />
               )}
+
+              {/* Company selection for employees */}
               <select name="company_name" value={formData.company_name} onChange={handleChange} required>
                 <option value="">{t("userManagement.selectCompany")}</option>
                 {companies.map((company, index) => (

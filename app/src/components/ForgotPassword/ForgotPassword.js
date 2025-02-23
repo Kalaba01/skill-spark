@@ -1,13 +1,22 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { showToast } from "../ToastNotification/ToastNotification";
 import { useTranslation } from "react-i18next";
+import axios from "axios";
 import "./ForgotPassword.scss";
+
+/**
+ * ForgotPassword Component
+ *
+ * - Displays a modal popup for users to request a password reset.
+ * - Sends a password reset request to the backend when the form is submitted.
+ * - Shows success or error messages using toast notifications.
+ */
 
 function ForgotPassword({ isOpen, onClose }) {
   const { t } = useTranslation();
   const [email, setEmail] = useState("");
 
+  // Handles the password reset form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email) {

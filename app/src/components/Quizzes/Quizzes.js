@@ -5,8 +5,18 @@ import { showToast } from "../ToastNotification/ToastNotification";
 import axios from "axios";
 import "./Quizzes.scss";
 
+/**
+ * Quizzes Component
+ *
+ * - Displays a list of quizzes created by the company.
+ * - Provides search and filter functionality based on quiz title and difficulty.
+ * - Allows the company to create, edit, and delete quizzes.
+ * - Uses modals for quiz creation/editing (`QuizForm`) and deletion confirmation (`ConfirmPopup`).
+ */
+
 function Quizzes() {
   const { t } = useTranslation();
+
   const [quizzes, setQuizzes] = useState([]);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [selectedQuiz, setSelectedQuiz] = useState(null);
@@ -22,6 +32,7 @@ function Quizzes() {
     fetchQuizzes();
   }, []);
 
+  // Fetches quizzes from the backend
   const fetchQuizzes = async () => {
     try {
       const token = localStorage.getItem("access_token");
@@ -36,15 +47,18 @@ function Quizzes() {
     }
   };
 
+  // Opens the quiz edit form with selected quiz data
   const handleEdit = (quiz) => {
     setSelectedQuiz(quiz);
     setIsFormOpen(true);
   };
 
+  // Opens the delete confirmation popup
   const handleDeleteClick = (quizId) => {
     setConfirmDelete({ isOpen: true, quizId });
   };
 
+  // Deletes a quiz and refreshes the list
   const handleConfirmDelete = async () => {
     if (!confirmDelete.quizId) return;
 
@@ -63,6 +77,7 @@ function Quizzes() {
     }
   };
 
+  // Filters quizzes based on search term and difficulty
   const filteredQuizzes = quizzes.filter((quiz) => {
     return (
       quiz.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
@@ -139,6 +154,7 @@ function Quizzes() {
           )}
         </div>
 
+        {/* Quiz creation/editing form */}
         {isFormOpen && (
           <QuizForm
             quiz={selectedQuiz}
@@ -150,6 +166,7 @@ function Quizzes() {
           />
         )}
 
+         {/* Quiz delete confirmation popup */}
         {confirmDelete.isOpen && (
           <ConfirmPopup
             message={t("quizzes.delete_message")}

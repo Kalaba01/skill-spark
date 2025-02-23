@@ -1,9 +1,16 @@
 import React, { useState } from "react";
 import { FaTimes, FaSave } from "react-icons/fa";
-import axios from "axios";
 import { useTranslation } from "react-i18next";
 import { showToast } from "../ToastNotification/ToastNotification";
+import axios from "axios";
 import "./CompanyProfileEdit.scss";
+
+/**
+ * CompanyProfileEdit component.
+ * - Allows company users to edit their profile details.
+ * - Sends updated data to the backend.
+ * - Displays success or error messages using toast notifications.
+ */
 
 const CompanyProfileEdit = ({ company, onClose, refreshProfile }) => {
   const { t } = useTranslation();
@@ -13,10 +20,12 @@ const CompanyProfileEdit = ({ company, onClose, refreshProfile }) => {
   });
   const [loading, setLoading] = useState(false);
 
+  // Handles input field changes and updates state
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // Handles form submission to update company profile
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);

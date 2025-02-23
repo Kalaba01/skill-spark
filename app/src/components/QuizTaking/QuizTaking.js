@@ -5,6 +5,15 @@ import { useTranslation } from "react-i18next";
 import axios from "axios";
 import "./QuizTaking.scss";
 
+/**
+ * QuizTaking Component
+ *
+ * - Handles the quiz-taking process for employees.
+ * - Fetches quiz details, shuffles answer options, and tracks user answers.
+ * - Implements a countdown timer and submits answers when time expires.
+ * - Displays quiz results (pass/fail) after submission.
+ */
+
 const QuizTaking = () => {
   const { t } = useTranslation();
   const { id } = useParams();
@@ -16,11 +25,13 @@ const QuizTaking = () => {
   const [timeLeft, setTimeLeft] = useState(null);
   const [result, setResult] = useState(null);
 
+  // Shuffles an array randomly
   const shuffleArray = (array) => {
     return array.sort(() => Math.random() - 0.5);
   };
 
   useEffect(() => {
+    // Fetches quiz data from the backend and initializes the timer
     const fetchQuiz = async () => {
       try {
         const token = localStorage.getItem("access_token");
@@ -53,6 +64,7 @@ const QuizTaking = () => {
     fetchQuiz();
   }, [id, navigate]);
 
+  // Manages the countdown timer and auto-submits the quiz when time runs out
   useEffect(() => {
     if (timeLeft === null || result) return;
 
@@ -68,6 +80,7 @@ const QuizTaking = () => {
     return () => clearInterval(timer);
   }, [timeLeft]);
 
+  // Handles selection and deselection of answers
   const handleAnswerChange = (questionId, answerId) => {
     setAnswers((prev) => {
       const selected = prev[questionId] || [];
@@ -79,6 +92,7 @@ const QuizTaking = () => {
     });
   };
 
+  // Submits the quiz answers to the backend and retrieves the results
   const handleSubmit = async () => {
     try {
       const token = localStorage.getItem("access_token");
@@ -94,6 +108,7 @@ const QuizTaking = () => {
     }
   };
 
+  // Determines the timer's visual class based on remaining time
   const getTimerClass = () => {
     if (timeLeft === null) return "timer blue";
     if (timeLeft <= 60) return "timer red";

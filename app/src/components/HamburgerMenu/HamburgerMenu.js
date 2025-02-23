@@ -4,6 +4,14 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import "./HamburgerMenu.scss";
 
+/**
+ * HamburgerMenu Component
+ *
+ * - Displays a responsive navigation menu for different user roles.
+ * - The menu opens and closes when the hamburger icon is clicked.
+ * - Menu items are dynamically generated based on the `userRole` prop.
+ */
+
 function HamburgerMenu({ userRole }) {
   const { t } = useTranslation();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -12,6 +20,7 @@ function HamburgerMenu({ userRole }) {
     setMenuOpen(!menuOpen);
   };
 
+  // Menu items based on user roles
   const menuItems = {
     admin: [
       { label: t("hamburgerMenu.users_management"), path: "/admin/users-management" },

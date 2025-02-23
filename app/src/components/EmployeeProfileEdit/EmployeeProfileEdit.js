@@ -5,6 +5,12 @@ import { FaTimes } from "react-icons/fa";
 import axios from "axios";
 import "./EmployeeProfileEdit.scss";
 
+/**
+ * EmployeeProfileEdit component.
+ * - Allows employees to edit their profile details.
+ * * - Sends updated profile data to the backend.
+ */
+
 const EmployeeProfileEdit = ({ profile, onClose, refreshProfile }) => {
   const { t } = useTranslation();
   const [formData, setFormData] = useState({
@@ -16,10 +22,12 @@ const EmployeeProfileEdit = ({ profile, onClose, refreshProfile }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  // Handles input changes and updates the form state
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // Handles form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);

@@ -5,14 +5,23 @@ import { FaChevronDown } from "react-icons/fa";
 import { ReactTyped } from "react-typed";
 import "./LandingPage.scss";
 
+/**
+ * LandingPage Component
+ *
+ * - Serves as the main landing page for the application.
+ * - Includes a hero section with animated text, feature highlights, and a FAQ section.
+ * - Provides login, registration, and password recovery popups.
+ */
+
 function LandingPage() {
+  const { t } = useTranslation();
+
   const [faqOpen, setFaqOpen] = useState(null);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
   const [isForgotPasswordOpen, setIsForgotPasswordOpen] = useState(false);
 
-  const { t } = useTranslation();
-
+  // Toggles FAQ item visibility
   const toggleFaq = (index) => {
     setFaqOpen(faqOpen === index ? null : index);
   };

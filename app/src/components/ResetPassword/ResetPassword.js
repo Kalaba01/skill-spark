@@ -5,9 +5,18 @@ import { useTranslation } from "react-i18next";
 import axios from "axios";
 import "./ResetPassword.scss";
 
+/**
+ * ResetPassword Component
+ *
+ * - Allows users to reset their password using a token from the password reset email.
+ * - Handles form validation (missing fields, password mismatch).
+ * - Sends a request to the backend to update the password.
+ * - Displays success/error messages based on the response.
+ */
+
 function ResetPassword() {
-  const { uidb64, token } = useParams();
   const { t } = useTranslation();
+  const { uidb64, token } = useParams();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -17,10 +26,12 @@ function ResetPassword() {
 
   const [loading, setLoading] = useState(false);
 
+  // Handles input field changes
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // Handles form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 

@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { FaSearch, FaFilter, FaCalendarAlt } from "react-icons/fa";
 import { Loading, TopBar } from "../";
-import axios from "axios";
 import { useTranslation } from "react-i18next";
+import axios from "axios";
 import "./EmployeePassedQuizzes.scss";
+
+/**
+ * EmployeePassedQuizzes component.
+ * - Displays a list of quizzes that the logged-in employee has passed.
+ * - Provides search and filtering options for better user experience.
+ */
 
 const EmployeePassedQuizzes = () => {
   const { t } = useTranslation();
@@ -17,6 +23,7 @@ const EmployeePassedQuizzes = () => {
     fetchPassedQuizzes();
   }, []);
 
+  // Fetches the quizzes that the employee has passed
   const fetchPassedQuizzes = async () => {
     try {
       const token = localStorage.getItem("access_token");
@@ -32,18 +39,21 @@ const EmployeePassedQuizzes = () => {
     }
   };
 
+  // Handles the search input and updates the quiz list accordingly
   const handleSearch = (e) => {
     const query = e.target.value.toLowerCase();
     setSearchQuery(query);
     filterQuizzes(query, difficultyFilter);
   };
 
+  // Handles the difficulty filter selection
   const handleFilterChange = (e) => {
     const difficulty = e.target.value;
     setDifficultyFilter(difficulty);
     filterQuizzes(searchQuery, difficulty);
   };
 
+  // Filters the quiz list based on search query and selected difficulty
   const filterQuizzes = (query, difficulty) => {
     let filtered = quizzes.filter((quiz) =>
       quiz.quiz.title.toLowerCase().includes(query)
