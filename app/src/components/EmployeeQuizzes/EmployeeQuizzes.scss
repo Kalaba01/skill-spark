@@ -50,3 +50,59 @@
     margin-top: 1rem;
   }
 }
+
+@media (max-width: 1024px) {
+  .employee-quizzes {
+    padding: 1.5rem;
+  }
+
+  .toolbox {
+    flex-direction: column;
+    padding: 0 1rem;
+  }
+
+  .quiz-list {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    padding: 0 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .employee-quizzes {
+    padding: 1.2rem;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+  }
+
+  .toolbox {
+    padding: 0 1rem;
+  }
+
+  .quiz-list {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 0;
+  }
+}
+
+@media (max-width: 500px) {
+  .employee-quizzes {
+    padding: 1rem;
+  }
+
+  h1 {
+    font-size: 1.4rem;
+  }
+
+  .toolbox {
+    padding: 0;
+    gap: 0.8rem;
+  }
+
+  .quiz-list {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+}

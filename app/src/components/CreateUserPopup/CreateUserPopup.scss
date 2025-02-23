@@ -69,3 +69,28 @@
     }
   }
 }
+
+@media (max-width: 480px) {
+  .popup-content {
+    width: 90%;
+    padding: 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+
+  form {
+    gap: 10px;
+
+    input, select {
+      padding: 10px;
+      font-size: 0.95rem;
+    }
+
+    button {
+      padding: 10px;
+      font-size: 1rem;
+    }
+  }
+}

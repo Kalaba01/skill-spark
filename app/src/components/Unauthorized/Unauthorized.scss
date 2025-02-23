@@ -52,6 +52,60 @@
   }
 }
 
+@media (max-width: 768px) {
+  .unauthorized {
+    padding: 1.5rem;
+  }
+
+  .warning-icon {
+    font-size: 4rem;
+  }
+
+  h1 {
+    font-size: 4rem;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+  }
+
+  p {
+    font-size: 1.1rem;
+  }
+
+  button {
+    font-size: 1.1rem;
+    padding: 10px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .unauthorized {
+    padding: 1rem;
+  }
+
+  .warning-icon {
+    font-size: 3.5rem;
+  }
+
+  h1 {
+    font-size: 3rem;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+
+  button {
+    font-size: 1rem;
+    padding: 8px 16px;
+  }
+}
+
 /* Animations */
 @keyframes shake {
   0% {

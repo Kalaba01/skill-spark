@@ -64,7 +64,7 @@ function LandingPage() {
         <h2>{t("landingPage.whyChoose")}</h2>
 
         <div className="feature-item">
-          <img src="https://placehold.co/600x400" alt="Feature 1" />
+          <img src="./lp_sec1.jpg" alt="Feature 1" />
           <div>
             <h3>{t("landingPage.feature1Title")}</h3>
             <p>{t("landingPage.feature1Description")}</p>
@@ -72,7 +72,7 @@ function LandingPage() {
         </div>
 
         <div className="feature-item reverse">
-          <img src="https://placehold.co/600x400" alt="Feature 2" />
+          <img src="./lp_sec2.jpg" alt="Feature 2" />
           <div>
             <h3>{t("landingPage.feature2Title")}</h3>
             <p>{t("landingPage.feature2Description")}</p>

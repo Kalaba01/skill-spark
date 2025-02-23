@@ -67,3 +67,42 @@
     }
   }
 }
+
+@media (max-width: 1024px) {
+  .menu-content {
+    width: 250px;
+    left: -250px;
+
+    &.open {
+      transform: translateX(250px);
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .menu-content {
+    width: 100%;
+    left: -100%;
+
+    &.open {
+      transform: translateX(100%);
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .menu-content {
+    width: 100%;
+    left: -100%;
+    padding: 1.5rem;
+
+    &.open {
+      transform: translateX(100%);
+    }
+
+    ul li {
+      padding: 12px;
+      font-size: 1rem;
+    }
+  }
+}

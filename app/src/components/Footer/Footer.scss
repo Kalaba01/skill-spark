@@ -11,3 +11,24 @@
   margin-top: auto;
   z-index: 1000;
 }
+
+@media (max-width: 1024px) {
+  .footer {
+    font-size: 0.9rem;
+    padding: 1.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+    font-size: 0.85rem;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .footer {
+    font-size: 0.8rem;
+    padding: 0.8rem;
+  }
+}

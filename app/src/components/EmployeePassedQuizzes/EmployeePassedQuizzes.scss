@@ -157,3 +157,44 @@
         }
     }
 }
+
+@media (max-width: 1024px) {
+    .toolbar {
+        flex-direction: column;
+        gap: 15px;
+        width: 75%;
+        padding: 15px;
+    }
+
+    .search-container {
+        width: 100%;
+    }
+
+    .filter-container {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .employee-passed-quizzes {
+        padding: 15px;
+        width: 100%;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    .toolbar {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .quiz-list {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+
+    .quiz-card {
+        max-width: 100%;
+    }
+}

@@ -102,4 +102,54 @@
       cursor: not-allowed;
     }
   }
+
+  @media (max-width: 768px) {
+    width: 90%;
+    padding: 20px;
+
+    h2 {
+      font-size: 1.4rem;
+    }
+
+    .input-group {
+      label {
+        font-size: 0.9rem;
+      }
+
+      input {
+        font-size: 0.9rem;
+        padding: 8px;
+      }
+    }
+
+    .save-btn {
+      font-size: 1rem;
+      padding: 8px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    width: 95%;
+    padding: 15px;
+
+    h2 {
+      font-size: 1.3rem;
+    }
+
+    .input-group {
+      label {
+        font-size: 0.85rem;
+      }
+
+      input {
+        font-size: 0.85rem;
+        padding: 7px;
+      }
+    }
+
+    .save-btn {
+      font-size: 0.95rem;
+      padding: 7px;
+    }
+  }
 }

@@ -101,3 +101,57 @@
     }
   }
 }
+
+@media (max-width: 768px) {
+  .quiz-card {
+    max-width: 100%;
+    padding: 1rem;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+    white-space: normal;
+  }
+
+  p {
+    font-size: 0.95rem;
+    white-space: normal;
+  }
+
+  .actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .view-btn,
+  .edit-btn,
+  .delete-btn {
+    width: 100%;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .quiz-card {
+    padding: 0.8rem;
+  }
+
+  h3 {
+    font-size: 1.1rem;
+  }
+
+  p {
+    font-size: 0.9rem;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .view-btn,
+  .edit-btn,
+  .delete-btn {
+    font-size: 0.85rem;
+    padding: 8px;
+  }
+}

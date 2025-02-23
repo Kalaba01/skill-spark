@@ -83,3 +83,87 @@
     color: var(--text-color);
   }
 }
+
+@media (max-width: 1024px) {
+  .profile-container {
+    width: 70%;
+    padding: 1.5rem;
+  }
+
+  .profile-card {
+    padding: 1rem;
+  }
+
+  .profile-avatar {
+    width: 70px;
+    height: 70px;
+  }
+
+  .profile-info p {
+    font-size: 1rem;
+  }
+
+  .edit-btn {
+    padding: 10px 15px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .profile-container {
+    width: 85%;
+    padding: 1.2rem;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  .profile-avatar {
+    width: 65px;
+    height: 65px;
+
+    .avatar-icon {
+      font-size: 2rem;
+    }
+  }
+
+  .profile-info p {
+    font-size: 0.95rem;
+  }
+
+  .edit-btn {
+    font-size: 0.85rem;
+    padding: 9px 14px;
+  }
+}
+
+@media (max-width: 500px) {
+  .profile-container {
+    width: 95%;
+    padding: 1rem;
+    margin-top: 30px;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+  }
+
+  .profile-avatar {
+    width: 60px;
+    height: 60px;
+
+    .avatar-icon {
+      font-size: 1.8rem;
+    }
+  }
+
+  .profile-info p {
+    font-size: 0.9rem;
+  }
+
+  .edit-btn {
+    font-size: 0.8rem;
+    padding: 8px 12px;
+  }
+}

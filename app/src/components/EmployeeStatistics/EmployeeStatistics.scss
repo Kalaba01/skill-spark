@@ -56,14 +56,14 @@
 
     .quiz-date {
       font-size: 0.9rem;
-      color: var(--text-color);
+      color: black;
       display: block;
       margin-top: 5px;
     }
 
     .quiz-description {
       font-size: 0.9rem;
-      color: var(--text-color);
+      color: black;
       display: block;
       margin-top: 5px;
       font-style: italic;
@@ -77,5 +77,65 @@
     text-overflow: ellipsis;
     max-width: 90%;
     display: inline-block;
+  }
+}
+
+@media (max-width: 1024px) {
+  .stats-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .stat-card {
+    min-width: 100%;
+    max-width: 500px;
+  }
+
+  .quiz-summary {
+    min-width: 100%;
+    max-width: 500px;
+  }
+}
+
+@media (max-width: 768px) {
+  .employee-statistics {
+    padding: 15px;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+  }
+
+  .stats-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .stat-card,
+  .quiz-summary {
+    min-width: 100%;
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 500px) {
+  .employee-statistics {
+    padding: 10px;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .stat-card,
+  .quiz-summary {
+    padding: 15px;
+    min-width: 100%;
+    max-width: 350px;
+  }
+
+  .quiz-info p,
+  .quiz-description {
+    max-width: 80%;
   }
 }

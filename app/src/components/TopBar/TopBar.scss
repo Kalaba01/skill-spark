@@ -49,3 +49,55 @@
     }
   }
 }
+
+@media (max-width: 768px) {
+  .top-bar {
+    padding: 0.8rem 1.5rem;
+  }
+
+  .logo-container {
+    gap: 8px;
+
+    .logo-img {
+      height: 35px;
+    }
+
+    .logo-text {
+      font-size: 1.3rem;
+    }
+  }
+
+  .top-bar-icons {
+    gap: 0.8rem;
+
+    .icon {
+      font-size: 1.2rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .top-bar {
+    padding: 0.6rem 1rem;
+  }
+
+  .logo-container {
+    gap: 5px;
+
+    .logo-img {
+      height: 30px;
+    }
+
+    .logo-text {
+      font-size: 1.2rem;
+    }
+  }
+
+  .top-bar-icons {
+    gap: 0.5rem;
+
+    .icon {
+      font-size: 1rem;
+    }
+  }
+}

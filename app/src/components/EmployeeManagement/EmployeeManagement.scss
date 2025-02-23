@@ -81,3 +81,52 @@
     color: var(--text-color);
   }
 }
+
+@media (max-width: 1024px) {
+  .toolbar {
+    flex-direction: column;
+    gap: 10px;
+    max-width: 80%;
+    padding: 15px;
+  }
+
+  .search-container {
+    max-width: 100%;
+  }
+
+  .add-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .employee-management {
+    padding: 2rem 3%;
+    width: 100%;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  .toolbar {
+    max-width: 100%;
+    padding: 10px;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .search-container {
+    padding: 10px;
+  }
+
+  .add-btn {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+
+  .employee-list {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+}

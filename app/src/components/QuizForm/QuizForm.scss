@@ -169,3 +169,54 @@
     flex: 1;
   }
 }
+
+@media (max-width: 768px) {
+  .quiz-form-popup {
+    width: 95%;
+    padding: 1.5rem;
+  }
+
+  .questions {
+    max-height: 250px;
+  }
+
+  .question-card {
+    padding: 10px;
+  }
+
+  .question-text {
+    font-size: 0.95rem;
+  }
+
+  .edit-btn,
+  .delete-btn {
+    font-size: 0.85rem;
+    padding: 6px 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .quiz-form-popup {
+    width: 100%;
+    max-width: 380px;
+    padding: 1.2rem;
+  }
+
+  .questions {
+    max-height: 200px;
+  }
+
+  .question-text {
+    font-size: 0.9rem;
+  }
+
+  .edit-btn,
+  .delete-btn {
+    font-size: 0.8rem;
+    padding: 5px 8px;
+  }
+
+  .form-row {
+    flex-direction: column;
+  }
+}

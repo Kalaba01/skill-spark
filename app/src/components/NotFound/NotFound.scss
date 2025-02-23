@@ -71,6 +71,83 @@
   }
 }
 
+@media (max-width: 1024px) {
+  .not-found-icon {
+    font-size: 5rem;
+  }
+
+  h1 {
+    font-size: 5rem;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+  }
+
+  p {
+    font-size: 1.1rem;
+  }
+
+  button {
+    font-size: 0.95rem;
+    padding: 10px 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .not-found {
+    padding: 1.5rem;
+  }
+
+  .not-found-icon {
+    font-size: 4rem;
+  }
+
+  h1 {
+    font-size: 4rem;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+
+  button {
+    font-size: 0.9rem;
+    padding: 10px 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .not-found {
+    padding: 1rem;
+  }
+
+  .not-found-icon {
+    font-size: 3rem;
+  }
+
+  h1 {
+    font-size: 3rem;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+  }
+
+  p {
+    font-size: 0.9rem;
+  }
+
+  button {
+    font-size: 0.85rem;
+    padding: 8px 16px;
+  }
+}
+
 /* Animations */
 @keyframes fadeIn {
   from {

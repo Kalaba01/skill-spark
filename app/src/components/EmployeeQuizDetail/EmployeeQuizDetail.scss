@@ -95,3 +95,76 @@
     }
   }
 }
+
+@media (max-width: 1024px) {
+  .quiz-detail-container {
+    padding: 1.5rem;
+  }
+
+  .quiz-title {
+    font-size: 1.8rem;
+  }
+
+  .quiz-description {
+    font-size: 1.2rem;
+  }
+
+  .quiz-info p {
+    font-size: 1rem;
+  }
+
+  .start-quiz-btn {
+    font-size: 1.1rem;
+    padding: 12px 18px;
+  }
+}
+
+@media (max-width: 768px) {
+  .quiz-detail-container {
+    width: 95%;
+    padding: 1.2rem;
+  }
+
+  .quiz-title {
+    font-size: 1.6rem;
+  }
+
+  .quiz-description {
+    font-size: 1.1rem;
+  }
+
+  .quiz-info p {
+    font-size: 0.95rem;
+  }
+
+  .start-quiz-btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .quiz-detail-container {
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .quiz-title {
+    font-size: 1.4rem;
+  }
+
+  .quiz-description {
+    font-size: 1rem;
+  }
+
+  .quiz-info p {
+    font-size: 0.9rem;
+  }
+
+  .start-quiz-btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 0.95rem;
+  }
+}

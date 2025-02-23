@@ -97,3 +97,59 @@
     color: var(--text-color);
   }
 }
+
+@media (max-width: 1024px) {
+  .toolbar {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    max-width: 100%;
+    padding: 15px;
+  }
+
+  .search-container {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .role-filter {
+    width: 100%;
+    text-align: center;
+  }
+
+  .add-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .user-list {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .toolbar {
+    padding: 10px;
+  }
+
+  .search-container input {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+
+  .role-filter {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+
+  .add-btn {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+
+  .user-list {
+    grid-template-columns: 1fr;
+  }
+}

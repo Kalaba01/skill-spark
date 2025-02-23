@@ -67,7 +67,6 @@
   }
 }
 
-/* Dugme za zatvaranje */
 .close-btn {
   position: absolute;
   top: 10px;
@@ -84,7 +83,77 @@
   }
 }
 
-/* Animacije */
+@media (max-width: 1024px) {
+  .popup-content {
+    width: 90%;
+    padding: 1.8rem;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+
+  input {
+    font-size: 0.95rem;
+  }
+
+  button {
+    font-size: 0.95rem;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .popup-content {
+    width: 95%;
+    padding: 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  form {
+    gap: 8px;
+  }
+
+  input {
+    font-size: 0.9rem;
+  }
+
+  button {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 500px) {
+  .popup-content {
+    width: 98%;
+    padding: 1.2rem;
+    border-radius: 10px;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+  }
+
+  form {
+    gap: 6px;
+  }
+
+  input {
+    font-size: 0.85rem;
+    padding: 8px;
+  }
+
+  button {
+    font-size: 0.85rem;
+    padding: 8px;
+  }
+}
+
+/* Animations */
 @keyframes fadeIn {
   from {
     opacity: 0;

@@ -24,3 +24,53 @@
     margin: 0 auto;
   }
 }
+
+@media (max-width: 1024px) {
+  .stat-card {
+    height: 350px;
+    padding: 15px;
+  }
+
+  h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+  }
+
+  .pie-chart {
+    max-height: 90%;
+    max-width: 90%;
+  }
+}
+
+@media (max-width: 768px) {
+  .stat-card {
+    height: 300px;
+    padding: 12px;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+  }
+
+  .pie-chart {
+    max-height: 85%;
+    max-width: 85%;
+  }
+}
+
+@media (max-width: 480px) {
+  .stat-card {
+    height: 280px;
+    padding: 10px;
+  }
+
+  h3 {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+  }
+
+  .pie-chart {
+    max-height: 80%;
+    max-width: 80%;
+  }
+}

@@ -66,7 +66,26 @@
   }
 }
 
-/* Animacije */
+@media (max-width: 480px) {
+  .confirm-popup-content {
+    width: 90%;
+    padding: 1.5rem;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+
+  .confirm-popup-actions {
+    flex-direction: column;
+
+    button {
+      width: 100%;
+    }
+  }
+}
+
+/* Animations */
 @keyframes fadeIn {
   from {
     opacity: 0;

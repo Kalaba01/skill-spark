@@ -76,3 +76,48 @@
 
   }
 }
+
+@media (max-width: 768px) {
+  .user-card {
+    padding: 1.2rem;
+    min-width: 200px;
+  }
+
+  .user-info p {
+    font-size: 0.9rem;
+  }
+
+  .actions {
+    justify-content: center;
+    gap: 10px;
+
+    .edit-icon,
+    .delete-icon,
+    .quiz-btn,
+    .pdf-icon {
+      font-size: 1.2rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .user-card {
+    padding: 1rem;
+    min-width: 180px;
+  }
+
+  .user-info p {
+    font-size: 0.85rem;
+  }
+
+  .actions {
+    gap: 8px;
+
+    .edit-icon,
+    .delete-icon,
+    .quiz-btn,
+    .pdf-icon {
+      font-size: 1.1rem;
+    }
+  }
+}
