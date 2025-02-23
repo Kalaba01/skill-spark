@@ -4,6 +4,11 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 class PasswordResetRequestSerializer(serializers.Serializer):
+    """
+    Serializer for password reset request.
+    - Validates that the email exists in the system.
+    - Prevents revealing whether an email is registered.
+    """
     email = serializers.EmailField()
 
     def validate_email(self, value):

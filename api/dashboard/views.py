@@ -6,6 +6,10 @@ from authentication.models import User, Company, Employee
 from quizzes.models import Quiz, PassedQuizzes
 
 class AdminDashboardStatsView(APIView):
+    """
+    API view for retrieving statistics for the admin dashboard.
+    Only accessible to users with the ADMIN role.
+    """
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
@@ -22,6 +26,10 @@ class AdminDashboardStatsView(APIView):
         return Response(stats)
 
 class CompanyDashboardStatsView(APIView):
+    """
+    API view for retrieving statistics for a company's dashboard.
+    Only accessible to users with the COMPANY role.
+    """
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
@@ -38,6 +46,10 @@ class CompanyDashboardStatsView(APIView):
         return Response(stats)
 
 class EmployeeDashboardStatsView(APIView):
+    """
+    API view for retrieving statistics for an employee's dashboard.
+    Only accessible to users with the EMPLOYEE role.
+    """
     permission_classes = [IsAuthenticated]
 
     def get(self, request):

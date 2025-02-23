@@ -4,6 +4,10 @@ from rest_framework.response import Response
 from rest_framework import status
 
 class RegisterCompanyView(generics.CreateAPIView):
+    """
+    API view for registering a company.
+    Uses RegisterCompanySerializer to validate and create a new company user.
+    """
     serializer_class = RegisterCompanySerializer
 
     def create(self, request, *args, **kwargs):
@@ -16,6 +20,10 @@ class RegisterCompanyView(generics.CreateAPIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class LoginView(generics.GenericAPIView):
+    """
+    API view for user login.
+    Uses LoginSerializer to authenticate users and return JWT tokens.
+    """
     serializer_class = LoginSerializer
 
     def post(self, request, *args, **kwargs):

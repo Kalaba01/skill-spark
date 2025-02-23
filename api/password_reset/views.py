@@ -15,6 +15,11 @@ from .serializers import PasswordResetRequestSerializer
 User = get_user_model()
 
 class RequestPasswordResetView(APIView):
+    """
+    API view for requesting a password reset link.
+    - Generates a unique token and encodes the user's ID.
+    - Sends an email containing the password reset link.
+    """
     def post(self, request):
         serializer = PasswordResetRequestSerializer(data=request.data)
 
@@ -39,6 +44,11 @@ class RequestPasswordResetView(APIView):
         return Response({"message": "A password reset link has been sent to your email."}, status=status.HTTP_200_OK)
 
 class PasswordResetConfirmView(APIView):
+    """
+    API view for confirming a password reset.
+    - Verifies the provided token and user ID.
+    - Updates the user's password upon successful validation.
+    """
     def post(self, request, uidb64, token):
         try:
             uid = urlsafe_base64_decode(uidb64).decode()

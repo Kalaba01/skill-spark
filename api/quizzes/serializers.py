@@ -2,11 +2,13 @@ from rest_framework import serializers
 from .models import Quiz, Question, Answer, PassedQuizzes
 
 class AnswerSerializer(serializers.ModelSerializer):
+    """Serializer for quiz answers."""
     class Meta:
         model = Answer
         fields = ["id", "text", "is_correct"]
 
 class QuestionSerializer(serializers.ModelSerializer):
+    """Serializer for quiz questions, including nested answers."""
     answers = AnswerSerializer(many=True)
 
     class Meta:
@@ -35,6 +37,7 @@ class QuestionSerializer(serializers.ModelSerializer):
         return instance
 
 class QuizSerializer(serializers.ModelSerializer):
+    """Serializer for quizzes, including nested questions and answers."""
     questions = QuestionSerializer(many=True)
 
     class Meta:
@@ -79,6 +82,11 @@ class QuizSerializer(serializers.ModelSerializer):
         return instance
 
 class QuizDetailSerializer(serializers.ModelSerializer):
+    """
+    Serializer for retrieving quiz details.
+    - Includes basic quiz information.
+    - Adds a computed field `question_count` to display the number of questions in the quiz.
+    """
     question_count = serializers.SerializerMethodField()
 
     class Meta:
@@ -89,6 +97,11 @@ class QuizDetailSerializer(serializers.ModelSerializer):
         return obj.questions.count()
 
 class QuizTakeSerializer(serializers.ModelSerializer):
+    """
+    Serializer for retrieving quiz questions when an employee takes a quiz.
+    - Includes the quiz title and duration.
+    - Fetches all questions and their possible answers.
+    """
     questions = serializers.SerializerMethodField()
 
     class Meta:
@@ -106,6 +119,7 @@ class QuizTakeSerializer(serializers.ModelSerializer):
         ]
 
 class PassedQuizSerializer(serializers.ModelSerializer):
+    """Serializer for tracking passed quizzes."""
     passed_date = serializers.DateTimeField(format="%Y-%m-%d", read_only=True)
 
     class Meta:
@@ -114,6 +128,7 @@ class PassedQuizSerializer(serializers.ModelSerializer):
         depth = 1
 
 class AdminQuizSerializer(serializers.ModelSerializer):
+    """Serializer for quizzes in the admin panel, including company details."""
     company_name = serializers.CharField(source="company.company_name", read_only=True)
 
     class Meta:

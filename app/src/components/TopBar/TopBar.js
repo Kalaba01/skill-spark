@@ -1,5 +1,5 @@
 import React from "react";
-import { FaUserCircle, FaBell, FaComments } from "react-icons/fa";
+import { FaUserCircle } from "react-icons/fa";
 import { Language, Theme, HamburgerMenu, Logout } from "../index";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
@@ -42,8 +42,6 @@ function TopBar({ openLogin, variant = "default" }) {
           </>
         ) : (
           <>
-            <FaBell size={24} className="icon" />
-            <FaComments size={24} className="icon" />
             <Theme />
             <Language />
             <Logout />

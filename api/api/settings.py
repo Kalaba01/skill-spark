@@ -2,10 +2,11 @@ from pathlib import Path
 from decouple import config
 from datetime import timedelta
 
-BASE_DIR = Path(__file__).resolve().parent.parent
-SECRET_KEY = config("SECRET_KEY")
+BASE_DIR = Path(__file__).resolve().parent.parent # Base directory of the project
+SECRET_KEY = config("SECRET_KEY") # Secret key for Django security
 DEBUG = config("DEBUG")
 
+# Email configuration (used for password reset, notifications, etc.)
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
@@ -16,6 +17,7 @@ DEFAULT_FROM_EMAIL = config("SMTP_FROM")
 
 ALLOWED_HOSTS = []
 
+# Installed applications: Django built-in and custom apps
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -23,6 +25,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Custom applications
     'authentication',
     'rest_framework',
     'corsheaders',
@@ -33,13 +37,15 @@ INSTALLED_APPS = [
     "dashboard"
 ]
 
+# REST Framework settings
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication', # Use JWT authentication
     ),
     'DEFAULT_PERMISSION_CLASSES': [],
 }
 
+# Simple JWT configuration
 SIMPLE_JWT = {
     'SIGNING_KEY': SECRET_KEY,
     'ALGORITHM': 'HS256',
@@ -48,6 +54,7 @@ SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('Bearer',),
 }
 
+# Middleware settings
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'corsheaders.middleware.CorsMiddleware',
@@ -59,8 +66,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware'
 ]
 
+# Root URL configuration
 ROOT_URLCONF = 'api.urls'
 
+# Django templates configuration
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -77,8 +86,10 @@ TEMPLATES = [
     }
 ]
 
+# WSGI application configuration
 WSGI_APPLICATION = 'api.wsgi.application'
 
+# Database configuration
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -90,6 +101,7 @@ DATABASES = {
     }
 }
 
+# Password validation settings
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'
@@ -105,8 +117,10 @@ AUTH_PASSWORD_VALIDATORS = [
     }
 ]
 
+# Custom user model
 AUTH_USER_MODEL = "authentication.User"
 
+# Localization settings
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
@@ -114,6 +128,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+# CORS configuration
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000"
 ]

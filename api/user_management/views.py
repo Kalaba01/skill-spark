@@ -19,6 +19,10 @@ from .serializers import (
 )
 
 class EmployeeListCreateView(generics.ListCreateAPIView):
+    """
+    API view for listing and creating employees.
+    - Company users can view and add employees under their company.
+    """
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
@@ -32,7 +36,26 @@ class EmployeeListCreateView(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         serializer.save(company=self.request.user.company_profile)
 
+class EmployeeDetailView(generics.RetrieveUpdateDestroyAPIView):
+    """
+    API view for retrieving, updating, or deleting an employee.
+    - Restricted to company users who own the employee's profile.
+    """
+    permission_classes = [permissions.IsAuthenticated]
+    queryset = Employee.objects.all()
+    serializer_class = UpdateEmployeeSerializer
+
+    def get_object(self):
+        employee = super().get_object()
+        if employee.company != self.request.user.company_profile:
+            raise PermissionDenied("Nemate dozvolu da upravljate ovim zaposlenim.")
+        return employee
+
 class UserListCreateView(generics.ListCreateAPIView):
+    """
+    API view for listing and creating users.
+    - Only admin users can access this endpoint.
+    """
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
@@ -50,18 +73,11 @@ class UserListCreateView(generics.ListCreateAPIView):
             raise PermissionDenied("Samo administratori mogu kreirati korisnike.")
         serializer.save()
 
-class EmployeeDetailView(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = [permissions.IsAuthenticated]
-    queryset = Employee.objects.all()
-    serializer_class = UpdateEmployeeSerializer
-
-    def get_object(self):
-        employee = super().get_object()
-        if employee.company != self.request.user.company_profile:
-            raise PermissionDenied("Nemate dozvolu da upravljate ovim zaposlenim.")
-        return employee
-
 class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
+    """
+    API view for retrieving, updating, or deleting a user.
+    - Only admins can access this endpoint.
+    """
     permission_classes = [permissions.IsAuthenticated]
     queryset = User.objects.all()
     serializer_class = UpdateUserSerializer
@@ -73,6 +89,10 @@ class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
         return user
 
 class EmployeeProfileView(generics.RetrieveUpdateAPIView):
+    """
+    API view for retrieving and updating an employee's profile.
+    - Only authenticated employees can access their own profile.
+    """
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = EmployeeProfileSerializer
 
@@ -94,6 +114,11 @@ class EmployeeProfileView(generics.RetrieveUpdateAPIView):
         return Response(serializer.data)
 
 class GenerateEmployeeReportView(APIView):
+    """
+    API view for generating a PDF report of an employee's activity.
+    - Restricted to company users.
+    - Includes employee details and passed quizzes.
+    """
     permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request, pk):
@@ -136,6 +161,10 @@ class GenerateEmployeeReportView(APIView):
         return response
 
 class CompanyProfileView(generics.RetrieveUpdateAPIView):
+    """
+    API view for retrieving and updating a company's profile.
+    - Only authenticated company users can access and modify their profile.
+    """
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = CompanyProfileSerializer
 

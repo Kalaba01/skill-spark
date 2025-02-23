@@ -7,11 +7,21 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from .models import User, Company
 
 class UserSerializer(serializers.ModelSerializer):
+    """
+    Serializer for the User model.
+    Returns user-related information.
+    """
     class Meta:
         model = User
         fields = ["id", "email", "role", "first_name", "last_name", "is_active", "date_joined"]
 
 class RegisterCompanySerializer(serializers.ModelSerializer):
+    """
+    Serializer for registering a new company.
+    - Creates a user with the COMPANY role.
+    - Creates an associated Company object.
+    - Sends a welcome email upon successful registration.
+    """
     company_name = serializers.CharField(write_only=True)
 
     class Meta:
@@ -35,6 +45,9 @@ class RegisterCompanySerializer(serializers.ModelSerializer):
         return user
 
     def send_welcome_email(self, email, company_name):
+        """
+        Sends a welcome email to the newly registered company.
+        """
         subject = "Welcome to SkillSpark!"
         email_content = render_to_string("welcome_email.html", {"company_name": company_name})
         
@@ -48,6 +61,11 @@ class RegisterCompanySerializer(serializers.ModelSerializer):
         )
 
 class LoginSerializer(serializers.Serializer):
+    """
+    Serializer for user authentication.
+    - Validates user credentials.
+    - Generates and returns JWT tokens upon successful login.
+    """
     email = serializers.EmailField()
     password = serializers.CharField(write_only=True)
 

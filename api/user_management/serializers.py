@@ -3,6 +3,10 @@ from authentication.models import User, Employee, Company, Admin
 from quizzes.models import PassedQuizzes, Quiz
 
 class EmployeeSerializer(serializers.ModelSerializer):
+    """
+    Serializer for employee data.
+    - Includes basic employee details and a list of passed quizzes.
+    """
     email = serializers.EmailField(source="user.email", read_only=True)
     passed_quizzes = serializers.SerializerMethodField()
 
@@ -17,6 +21,11 @@ class EmployeeSerializer(serializers.ModelSerializer):
         return list(quizzes)
 
 class CreateEmployeeSerializer(serializers.ModelSerializer):
+    """
+    Serializer for creating an employee.
+    - Requires email and password input.
+    - Associates the employee with the company of the authenticated user.
+    """
     email = serializers.EmailField(write_only=True)
     password = serializers.CharField(write_only=True)
 
@@ -47,6 +56,10 @@ class CreateEmployeeSerializer(serializers.ModelSerializer):
         return employee
 
 class UpdateEmployeeSerializer(serializers.ModelSerializer):
+    """
+    Serializer for updating employee details.
+    - Allows modification of first name, last name, and email.
+    """
     email = serializers.EmailField(required=False)
 
     class Meta:
@@ -66,6 +79,10 @@ class UpdateEmployeeSerializer(serializers.ModelSerializer):
         return instance
 
 class UserSerializer(serializers.ModelSerializer):
+    """
+    Serializer for retrieving user details.
+    - Includes company name and workplace information.
+    """
     company_name = serializers.SerializerMethodField()
     working_at = serializers.SerializerMethodField()
 
@@ -84,6 +101,11 @@ class UserSerializer(serializers.ModelSerializer):
         return None
 
 class CreateUserSerializer(serializers.ModelSerializer):
+    """
+    Serializer for creating new users.
+    - Supports multiple roles (Admin, Company, Employee).
+    - Employees must be assigned to a company.
+    """
     password = serializers.CharField(write_only=True)
     company_name = serializers.CharField(write_only=True, required=False)
 
@@ -116,6 +138,10 @@ class CreateUserSerializer(serializers.ModelSerializer):
         return user
 
 class UpdateUserSerializer(serializers.ModelSerializer):
+    """
+    Serializer for updating user details.
+    - Allows modification of email, name, and company assignment.
+    """
     company_name = serializers.CharField(required=False)
 
     class Meta:
@@ -150,6 +176,10 @@ class UpdateUserSerializer(serializers.ModelSerializer):
         return instance
 
 class EmployeeProfileSerializer(serializers.ModelSerializer):
+    """
+    Serializer for retrieving and updating an employee's profile.
+    - Includes email and company information.
+    """
     email = serializers.EmailField(source="user.email", read_only=False)
     working_at = serializers.CharField(source="company.company_name", read_only=True)
 
@@ -169,6 +199,10 @@ class EmployeeProfileSerializer(serializers.ModelSerializer):
         return instance
 
 class CompanyProfileSerializer(serializers.ModelSerializer):
+    """
+    Serializer for company profile data.
+    - Includes company name, email, number of employees, and number of quizzes.
+    """
     email = serializers.EmailField(source="user.email", read_only=False)
     employee_count = serializers.SerializerMethodField()
     quiz_count = serializers.SerializerMethodField()
