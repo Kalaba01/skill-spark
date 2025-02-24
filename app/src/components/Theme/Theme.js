@@ -5,7 +5,6 @@ import { toggleTheme } from "../../store/themeSlice";
 
 /**
  * Theme Component
- *
  * - Allows users to toggle between light and dark themes.
  * - Uses Redux state to track the current theme.
  * - Dispatches an action to update the theme in Redux store when clicked.

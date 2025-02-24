@@ -5,7 +5,6 @@ import "./PassedQuizzes.scss";
 
 /**
  * PassedQuizzes Component
- *
  * - Displays a modal listing all quizzes that an employee has passed.
  * - If there are no passed quizzes, it shows an appropriate message.
  */

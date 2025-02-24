@@ -7,7 +7,6 @@ import "./QuizTaking.scss";
 
 /**
  * QuizTaking Component
- *
  * - Handles the quiz-taking process for employees.
  * - Fetches quiz details, shuffles answer options, and tracks user answers.
  * - Implements a countdown timer and submits answers when time expires.

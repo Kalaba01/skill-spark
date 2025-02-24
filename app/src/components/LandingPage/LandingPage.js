@@ -7,7 +7,6 @@ import "./LandingPage.scss";
 
 /**
  * LandingPage Component
- *
  * - Serves as the main landing page for the application.
  * - Includes a hero section with animated text, feature highlights, and a FAQ section.
  * - Provides login, registration, and password recovery popups.
@@ -44,10 +43,8 @@ function LandingPage() {
 
   return (
     <div className="landing-page">
-      {/* Top Bar */}
       <TopBar openLogin={openLogin} />
 
-      {/* Hero Section */}
       <section className="hero">
       <h1>
           <ReactTyped
@@ -59,7 +56,6 @@ function LandingPage() {
         </h1>
       </section>
 
-      {/* Features Section */}
       <section id="features" className="features">
         <h2>{t("landingPage.whyChoose")}</h2>
 

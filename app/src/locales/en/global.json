@@ -321,7 +321,7 @@
     "total_quizzes": "Total Quizzes",
     "employee_distribution": "Employee Distribution"
   },
-    "employee_statistics": {
+  "employee_statistics": {
     "dashboard": "Employee Dashboard",
     "quiz_progress": "Quiz Progress",
     "passed": "Passed",

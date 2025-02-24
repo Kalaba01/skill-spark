@@ -7,7 +7,14 @@ from rest_framework.response import Response
 from rest_framework.exceptions import NotFound, PermissionDenied, ValidationError
 from authentication.models import User
 from .models import Quiz, Question, Answer, PassedQuizzes
-from .serializers import QuizSerializer, QuizDetailSerializer, QuizTakeSerializer, PassedQuizSerializer, AdminQuizSerializer
+from .serializers import (
+    QuizSerializer,
+    QuizDetailSerializer,
+    QuizTakeSerializer,
+    PassedQuizSerializer,
+    AdminQuizSerializer
+)
+
 
 class QuizListCreateView(generics.ListCreateAPIView):
     """
@@ -15,6 +22,7 @@ class QuizListCreateView(generics.ListCreateAPIView):
     - Only authenticated users can access.
     - Company users can create quizzes for their employees.
     """
+
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = QuizSerializer
 
@@ -24,11 +32,13 @@ class QuizListCreateView(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         serializer.save(company=self.request.user.company_profile)
 
+
 class QuizDetailView(generics.RetrieveUpdateDestroyAPIView):
     """
     API view for retrieving, updating, or deleting a quiz.
     - Only company users can modify their own quizzes.
     """
+
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = QuizSerializer
     queryset = Quiz.objects.all()
@@ -36,18 +46,25 @@ class QuizDetailView(generics.RetrieveUpdateDestroyAPIView):
     def get_queryset(self):
         return Quiz.objects.filter(company=self.request.user.company_profile)
 
+
 class EmployeeQuizListView(generics.ListAPIView):
     """
     API view for employees to list quizzes they haven't taken yet.
     """
+
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = QuizSerializer
 
     def get_queryset(self):
         employee = self.request.user.employee_profile
-        passed_quizzes = PassedQuizzes.objects.filter(employee=employee).values_list("quiz_id", flat=True)
+        passed_quizzes = PassedQuizzes.objects.filter(employee=employee).values_list(
+            "quiz_id", flat=True
+        )
 
-        return Quiz.objects.filter(company=employee.company).exclude(id__in=passed_quizzes)
+        return Quiz.objects.filter(company=employee.company).exclude(
+            id__in=passed_quizzes
+        )
+
 
 class QuizDetailPublicView(generics.RetrieveAPIView):
     """
@@ -55,6 +72,7 @@ class QuizDetailPublicView(generics.RetrieveAPIView):
     - Employees can only access quizzes from their own company.
     - Companies can only access their own quizzes.
     """
+
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = QuizDetailSerializer
 
@@ -75,12 +93,14 @@ class QuizDetailPublicView(generics.RetrieveAPIView):
 
         return quiz
 
+
 class QuizTakeView(generics.GenericAPIView):
     """
     API view for employees to take a quiz.
     - Validates answers and records the result.
     - Sends an email with quiz results.
     """
+
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = QuizTakeSerializer
 
@@ -104,6 +124,13 @@ class QuizTakeView(generics.GenericAPIView):
         return Response(serializer.data)
 
     def post(self, request, *args, **kwargs):
+        """
+        Handles quiz submission.
+
+        - Compares submitted answers with correct answers.
+        - Determines pass/fail status.
+        - Sends an email with the results.
+        """
         quiz = self.get_object()
         data = request.data
         employee = request.user.employee_profile
@@ -118,7 +145,9 @@ class QuizTakeView(generics.GenericAPIView):
             if not set(selected_answers).issubset(valid_answer_ids):
                 raise ValidationError({"error": "Invalid answer selected."})
 
-            correct_choices = list(question.answers.filter(is_correct=True).values_list("id", flat=True))
+            correct_choices = list(
+                question.answers.filter(is_correct=True).values_list("id", flat=True)
+            )
 
             if set(selected_answers) == set(correct_choices):
                 correct_answers += 1
@@ -136,9 +165,13 @@ class QuizTakeView(generics.GenericAPIView):
         }
 
         if passed:
-            PassedQuizzes.objects.get_or_create(employee=request.user.employee_profile, quiz=quiz)
-        
-        email_html = render_to_string(f"quiz_{"passed" if passed else "failed"}.html", context)
+            PassedQuizzes.objects.get_or_create(
+                employee=request.user.employee_profile, quiz=quiz
+            )
+
+        email_html = render_to_string(
+            f"quiz_{"passed" if passed else "failed"}.html", context
+        )
         email_text = strip_tags(email_html)
 
         send_mail(
@@ -146,14 +179,18 @@ class QuizTakeView(generics.GenericAPIView):
             email_text,
             settings.DEFAULT_FROM_EMAIL,
             [employee.user.email],
-            html_message=email_html
+            html_message=email_html,
         )
 
-        return Response({
-            "correct_answers": correct_answers,
-            "total_questions": total_questions,
-            "passed": passed
-        }, status=status.HTTP_200_OK)
+        return Response(
+            {
+                "correct_answers": correct_answers,
+                "total_questions": total_questions,
+                "passed": passed,
+            },
+            status=status.HTTP_200_OK,
+        )
+
 
 class EmployeePassedQuizzesView(generics.ListAPIView):
     """
@@ -161,28 +198,41 @@ class EmployeePassedQuizzesView(generics.ListAPIView):
     - Only authenticated users can access.
     - Employees can only see quizzes they have completed.
     """
+
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = PassedQuizSerializer
 
     def get_queryset(self):
         user = self.request.user
         if not hasattr(user, "employee_profile"):
-            raise PermissionDenied("You do not have permission to access this resource.")
-        
+            raise PermissionDenied(
+                "You do not have permission to access this resource."
+            )
+
         employee = self.request.user.employee_profile
-        passed_quizzes = PassedQuizzes.objects.filter(employee=employee).values_list("quiz_id", flat=True)
-        
-        return PassedQuizzes.objects.filter(employee=employee).select_related("quiz").order_by("-passed_date")
+        passed_quizzes = PassedQuizzes.objects.filter(employee=employee).values_list(
+            "quiz_id", flat=True
+        )
+
+        return (
+            PassedQuizzes.objects.filter(employee=employee)
+            .select_related("quiz")
+            .order_by("-passed_date")
+        )
+
 
 class AdminQuizListView(generics.ListAPIView):
     """
     API view for admins to list all quizzes from all companies.
     """
+
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = AdminQuizSerializer
 
     def get_queryset(self):
         user = self.request.user
         if user.role != User.ADMIN:
-            raise PermissionDenied("You do not have permission to access this resource.")
+            raise PermissionDenied(
+                "You do not have permission to access this resource."
+            )
         return Quiz.objects.all()

@@ -7,7 +7,6 @@ import "./Language.scss";
 
 /**
  * Language Component
- *
  * - Provides a language selection dropdown for switching between English and Bosnian.
  * - Uses Redux to store the selected language globally.
  * - Updates the `i18next` instance to apply the language change.

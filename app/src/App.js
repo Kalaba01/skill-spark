@@ -36,7 +36,6 @@ function App() {
         {/* Unauthorized and Not Found Routes */}
         <Route path="/unauthorized" element={<Unauthorized />} />
         <Route path="*" element={<NotFound />} />
-
       </Routes>
       
       {/* Global UI Components */}

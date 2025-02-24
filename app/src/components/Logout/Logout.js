@@ -5,7 +5,6 @@ import "./Logout.scss";
 
 /**
  * Logout Component
- *
  * - Provides a logout button that removes authentication tokens from local storage.
  * - Redirects the user to the home page after logout.
  * - Uses React Router's `useNavigate` for navigation.

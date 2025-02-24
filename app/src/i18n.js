@@ -12,7 +12,7 @@ import bsTranslation from "./locales/bs/global.json";
 
 const resources = {
     en: { translation: enTranslation },
-    bs: { translation: bsTranslation },
+    bs: { translation: bsTranslation }
   };
 
 i18n.use(initReactI18next).init({

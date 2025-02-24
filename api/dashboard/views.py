@@ -13,6 +13,16 @@ class AdminDashboardStatsView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
+        """
+        Retrieves platform-wide statistics.
+
+        - Ensures the user has the ADMIN role.
+        - Returns a JSON response containing:
+          - Total number of admins
+          - Total number of companies
+          - Total number of employees
+          - Total number of quizzes
+        """
         if request.user.role != User.ADMIN:
             raise PermissionDenied("Unauthorized access")
 
@@ -33,6 +43,14 @@ class CompanyDashboardStatsView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
+        """
+        Retrieves statistics for the authenticated company.
+
+        - Ensures the user has the COMPANY role.
+        - Returns a JSON response containing:
+          - Total number of employees in the company
+          - Total number of quizzes created by the company
+        """
         if request.user.role != User.COMPANY:
             raise PermissionDenied("Unauthorized access")
 
@@ -53,20 +71,34 @@ class EmployeeDashboardStatsView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
+        """
+        Retrieves statistics for the authenticated employee.
+
+        - Ensures the user has the EMPLOYEE role.
+        - Returns a JSON response containing:
+          - Total number of quizzes taken (passed_quizzes)
+          - Total number of quizzes in the company
+          - Details of the last quiz taken (title, date)
+          - Recommended quiz for the employee
+        """
         if request.user.role != User.EMPLOYEE:
             raise PermissionDenied("Unauthorized access")
 
         employee = request.user.employee_profile
         passed_quizzes = PassedQuizzes.objects.filter(employee=employee).order_by("-passed_date")
 
+        # Get the last quiz taken
         last_quiz = passed_quizzes.first()
         last_quiz_data = {
             "title": last_quiz.quiz.title if last_quiz else None,
             "date": last_quiz.passed_date.strftime("%Y-%m-%d") if last_quiz else None
         }
 
+        # Get all quizzes from the employee's company
         all_quizzes = Quiz.objects.filter(company=employee.company)
         total_quizzes = all_quizzes.count()
+
+        # Get a recommended quiz (a first quiz the employee has not taken yet)
         passed_quiz_ids = passed_quizzes.values_list("quiz_id", flat=True)
         recommended_quiz = all_quizzes.exclude(id__in=passed_quiz_ids).first()
 

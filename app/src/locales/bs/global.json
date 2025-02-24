@@ -322,7 +322,7 @@
     "total_quizzes": "Ukupno kvizova",
     "employee_distribution": "Distribucija zaposlenih"
   },
-    "employee_statistics": {
+  "employee_statistics": {
     "dashboard": "Dashboard Zaposlenog",
     "quiz_progress": "Napredak u Kvizovima",
     "passed": "Položeno",

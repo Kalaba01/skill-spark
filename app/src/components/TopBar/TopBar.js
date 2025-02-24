@@ -7,7 +7,6 @@ import "./TopBar.scss";
 
 /**
  * TopBar Component
- *
  * - Displays the top navigation bar of the application.
  * - Includes the logo, menu, language settings, theme switch, and login/logout options.
  */

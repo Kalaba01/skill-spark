@@ -7,7 +7,6 @@ import "./QuizForm.scss";
 
 /**
  * QuizForm Component
- *
  * - Allows users to create or edit a quiz.
  * - Supports adding, editing, and removing questions.
  * - Includes form validation and API calls for quiz creation/update.

@@ -16,6 +16,9 @@ class QuestionSerializer(serializers.ModelSerializer):
         fields = ["id", "text", "answers"]
 
     def create(self, validated_data):
+        """
+        Handles the creation of a question with multiple answers.
+        """
         answers_data = validated_data.pop("answers")
         question = Question.objects.create(**validated_data)
         
@@ -25,12 +28,18 @@ class QuestionSerializer(serializers.ModelSerializer):
         return question
 
     def update(self, instance, validated_data):
+        """
+        Handles updating a question along with its answers.
+        - Deletes existing answers and replaces them with new ones.
+        """
         answers_data = validated_data.pop("answers", [])
 
         instance.text = validated_data.get("text", instance.text)
         instance.save()
 
+        # Remove old answers before adding new ones
         instance.answers.all().delete()
+
         for answer_data in answers_data:
             Answer.objects.create(question=instance, **answer_data)
 
@@ -45,11 +54,17 @@ class QuizSerializer(serializers.ModelSerializer):
         fields = ["id", "title", "description", "difficulty", "questions", "duration"]
 
     def validate_questions(self, value):
+        """
+        Ensures that a quiz has at least one question.
+        """
         if not value:
             raise serializers.ValidationError("Quiz must contain at least one question.")
         return value
 
     def create(self, validated_data):
+        """
+        Handles the creation of a quiz with nested questions and answers.
+        """
         questions_data = validated_data.pop("questions")
         quiz = Quiz.objects.create(**validated_data)
 
@@ -63,6 +78,10 @@ class QuizSerializer(serializers.ModelSerializer):
         return quiz
 
     def update(self, instance, validated_data):
+        """
+        Handles updating a quiz.
+        - Updates quiz details and replaces all questions with new ones.
+        """
         questions_data = validated_data.pop("questions", [])
 
         instance.title = validated_data.get("title", instance.title)
@@ -71,7 +90,9 @@ class QuizSerializer(serializers.ModelSerializer):
         instance.duration = validated_data.get("duration", instance.duration)
         instance.save()
 
+        # Remove old questions before adding new ones
         instance.questions.all().delete()
+
         for question_data in questions_data:
             answers_data = question_data.pop("answers", [])
             question = Question.objects.create(quiz=instance, **question_data)
@@ -87,6 +108,7 @@ class QuizDetailSerializer(serializers.ModelSerializer):
     - Includes basic quiz information.
     - Adds a computed field `question_count` to display the number of questions in the quiz.
     """
+
     question_count = serializers.SerializerMethodField()
 
     class Meta:
@@ -94,6 +116,9 @@ class QuizDetailSerializer(serializers.ModelSerializer):
         fields = ["id", "title", "description", "difficulty", "duration", "question_count"]
 
     def get_question_count(self, obj):
+        """
+        Returns the number of questions in the quiz.
+        """
         return obj.questions.count()
 
 class QuizTakeSerializer(serializers.ModelSerializer):
@@ -109,6 +134,11 @@ class QuizTakeSerializer(serializers.ModelSerializer):
         fields = ["id", "title", "duration", "questions"]
 
     def get_questions(self, obj):
+        """
+        Returns a structured list of questions and possible answers.
+        - Only provides answer text, not whether it is correct.
+        """
+        
         return [
             {
                 "id": question.id,

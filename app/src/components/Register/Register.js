@@ -6,7 +6,6 @@ import "./Register.scss";
 
 /**
  * Register Component
- *
  * - Provides a registration form for companies.
  * - Handles validation, including password confirmation.
  * - Sends registration data to the backend API.

@@ -8,7 +8,6 @@ import "./UserManagement.scss";
 
 /**
  * UserManagement Component
- *
  * - Allows an admin to manage users.
  * - Users can be searched, filtered by role, edited, and deleted.
  * - Provides a popup for adding or editing users.

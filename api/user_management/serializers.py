@@ -15,6 +15,9 @@ class EmployeeSerializer(serializers.ModelSerializer):
         fields = ["id", "first_name", "last_name", "email", "passed_quizzes"]
 
     def get_passed_quizzes(self, obj):
+        """
+        Retrieves a list of quizzes an employee has passed.
+        """
         quizzes = Quiz.objects.filter(
             passed_by_employees__employee=obj
         ).values("id", "title")
@@ -34,6 +37,10 @@ class CreateEmployeeSerializer(serializers.ModelSerializer):
         fields = ["first_name", "last_name", "email", "password"]
 
     def create(self, validated_data):
+        """
+        Creates an employee with a new user account.
+        - Links the employee to the requesting company's profile.
+        """
         company = self.context["request"].user.company_profile
         email = validated_data.pop("email")
         password = validated_data.pop("password")
@@ -67,6 +74,9 @@ class UpdateEmployeeSerializer(serializers.ModelSerializer):
         fields = ["first_name", "last_name", "email"]
 
     def update(self, instance, validated_data):
+        """
+        Updates the employee's information.
+        """
         user_data = validated_data.pop("email", None)
 
         if user_data:
@@ -91,11 +101,17 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ["id", "email", "first_name", "last_name", "role", "company_name", "working_at"]
 
     def get_company_name(self, obj):
+        """
+        Retrieves the company name for a company user.
+        """
         if hasattr(obj, "company_profile"):
             return obj.company_profile.company_name
         return None
 
     def get_working_at(self, obj):
+        """
+        Retrieves the company where an employee is working.
+        """
         if hasattr(obj, "employee_profile"):
             return obj.employee_profile.company.company_name
         return None
@@ -114,6 +130,11 @@ class CreateUserSerializer(serializers.ModelSerializer):
         fields = ["email", "password", "first_name", "last_name", "role", "company_name"]
 
     def create(self, validated_data):
+        """
+        Creates a new user with the given role.
+        - Admins and Companies can be created directly.
+        - Employees must be linked to an existing company.
+        """
         password = validated_data.pop("password")
         role = validated_data.get("role")
         company_name = validated_data.pop("company_name", None)
@@ -149,6 +170,10 @@ class UpdateUserSerializer(serializers.ModelSerializer):
         fields = ["email", "first_name", "last_name", "company_name"]
 
     def update(self, instance, validated_data):
+        """
+        Updates user details based on role.
+        - Employees and companies can modify their company assignments.
+        """
         instance.email = validated_data.get("email", instance.email)
         instance.first_name = validated_data.get("first_name", instance.first_name)
         instance.last_name = validated_data.get("last_name", instance.last_name)
@@ -188,6 +213,9 @@ class EmployeeProfileSerializer(serializers.ModelSerializer):
         fields = ["first_name", "last_name", "email", "working_at"]
 
     def update(self, instance, validated_data):
+        """
+        Updates the employee profile.
+        """
         user_data = validated_data.pop("user", {})
         if "email" in user_data:
             instance.user.email = user_data["email"]
@@ -212,9 +240,15 @@ class CompanyProfileSerializer(serializers.ModelSerializer):
         fields = ["company_name", "email", "employee_count", "quiz_count"]
 
     def get_employee_count(self, obj):
+        """
+        Retrieves the number of employees in the company.
+        """
         return obj.employees.count()
 
     def get_quiz_count(self, obj):
+        """
+        Retrieves the number of quizzes created by the company.
+        """
         return Quiz.objects.filter(company=obj).count()
 
     def update(self, instance, validated_data):

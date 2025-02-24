@@ -6,7 +6,6 @@ import "./HamburgerMenu.scss";
 
 /**
  * HamburgerMenu Component
- *
  * - Displays a responsive navigation menu for different user roles.
  * - The menu opens and closes when the hamburger icon is clicked.
  * - Menu items are dynamically generated based on the `userRole` prop.

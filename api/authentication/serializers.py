@@ -22,6 +22,8 @@ class RegisterCompanySerializer(serializers.ModelSerializer):
     - Creates an associated Company object.
     - Sends a welcome email upon successful registration.
     """
+
+    # Company name field
     company_name = serializers.CharField(write_only=True)
 
     class Meta:
@@ -30,16 +32,20 @@ class RegisterCompanySerializer(serializers.ModelSerializer):
         extra_kwargs = {"password": {"write_only": True}}
 
     def create(self, validated_data):
+        # Extract the company name before creating the user
         company_name = validated_data.pop("company_name")
 
+        # Create a user with the role of COMPANY
         user = User.objects.create_user(
             email=validated_data["email"],
             password=validated_data["password"],
             role=User.COMPANY
         )
         
+        # Create an associated company record
         company = Company.objects.create(user=user, company_name=company_name)
 
+        # Send a welcome email to the company
         self.send_welcome_email(user.email, company_name)
 
         return user
@@ -66,6 +72,8 @@ class LoginSerializer(serializers.Serializer):
     - Validates user credentials.
     - Generates and returns JWT tokens upon successful login.
     """
+
+    # User's email for login
     email = serializers.EmailField()
     password = serializers.CharField(write_only=True)
 
@@ -73,13 +81,16 @@ class LoginSerializer(serializers.Serializer):
         email = data.get("email")
         password = data.get("password")
 
+        # Authenticate user using Django's built-in authentication
         user = authenticate(email=email, password=password)
 
         if not user:
             raise serializers.ValidationError("Invalid email or password.")
 
+        # Generate JWT tokens for the authenticated user
         refresh = RefreshToken.for_user(user)
 
+        # Include user details inside the token payload
         refresh["user"] = UserSerializer(user).data
 
         return {

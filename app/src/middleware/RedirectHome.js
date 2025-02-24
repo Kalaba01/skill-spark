@@ -5,7 +5,6 @@ import { LandingPage } from "../components/index";
 
 /**
  * RedirectHome middleware
- *
  * - Redirects authenticated users to their respective dashboards based on role.
  * - If no valid authentication token is found, renders the LandingPage.
  * - Handles invalid or corrupted tokens safely.

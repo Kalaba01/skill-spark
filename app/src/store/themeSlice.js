@@ -8,7 +8,6 @@ document.body.classList.toggle("dark-mode", storedTheme === "dark");
 
 /**
  * Redux slice for managing the application's theme (light/dark mode).
- *
  * - Persists theme preference in localStorage.
  * - Dynamically toggles between "light" and "dark" themes.
  * - Applies the selected theme to the document body.
@@ -29,6 +28,5 @@ const themeSlice = createSlice({
   }
 });
 
-// Export actions and reducer
 export const { toggleTheme } = themeSlice.actions;
 export default themeSlice.reducer;

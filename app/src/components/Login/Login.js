@@ -8,7 +8,6 @@ import "./Login.scss";
 
 /**
  * Login Component
- *
  * - Displays a login form for user authentication.
  * - Uses Axios to send login credentials to the backend.
  * - Stores JWT tokens in local storage upon successful login.

@@ -4,10 +4,8 @@ import { jwtDecode } from "jwt-decode";
 
 /**
  * ProtectedRoute middleware
- *
  * - Restricts access to specific routes based on user roles.
  * - Checks if the user is authenticated via a JWT token.
- * - Validates the token expiration.
  * - Redirects unauthorized users to the appropriate pages.
  */
 

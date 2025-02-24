@@ -4,7 +4,6 @@ import "./QuestionForm.scss";
 
 /**
  * QuestionForm Component
- *
  * - Allows users to create or edit a quiz question.
  * - Supports multiple answers with the ability to mark correct ones.
  * - Provides form validation to ensure all fields are filled.

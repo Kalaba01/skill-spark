@@ -5,7 +5,6 @@ const storedLanguage = localStorage.getItem("language") || "en";
 
 /**
  * Redux slice for managing the application's language state.
- *
  * - Persists language preference in localStorage.
  * - Allows users to dynamically switch between languages.
  */
@@ -22,6 +21,5 @@ const languageSlice = createSlice({
   }
 });
 
-// Export actions and reducer
 export const { setLanguage } = languageSlice.actions;
 export default languageSlice.reducer;

@@ -7,7 +7,6 @@ import "./ResetPassword.scss";
 
 /**
  * ResetPassword Component
- *
  * - Allows users to reset their password using a token from the password reset email.
  * - Handles form validation (missing fields, password mismatch).
  * - Sends a request to the backend to update the password.

@@ -7,7 +7,6 @@ import "./Quizzes.scss";
 
 /**
  * Quizzes Component
- *
  * - Displays a list of quizzes created by the company.
  * - Provides search and filter functionality based on quiz title and difficulty.
  * - Allows the company to create, edit, and delete quizzes.

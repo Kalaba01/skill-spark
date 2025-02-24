@@ -6,7 +6,6 @@ import "./ForgotPassword.scss";
 
 /**
  * ForgotPassword Component
- *
  * - Displays a modal popup for users to request a password reset.
  * - Sends a password reset request to the backend when the form is submitted.
  * - Shows success or error messages using toast notifications.
