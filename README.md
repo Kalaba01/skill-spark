@@ -1,6 +1,6 @@
 # SkillSpark
 
-SkillSpark is a comprehensive educational and employee management platform built using Django and Django REST Framework for the backend, React.js with Redux Toolkit for the frontend, and PostgreSQL as the database. It enables companies to efficiently manage their workforce, organize internal training, quizzes, and courses, while employees have the opportunity to improve their skills through personalized educational resources.
+SkillSpark is an advanced educational and employee management platform built using Django and Django REST Framework for the backend, React.js with Redux Toolkit for the frontend, and PostgreSQL as the database. It enables companies to efficiently manage their workforce, organize internal training, quizzes, and courses, while employees have the opportunity to improve their skills through personalized educational resources.
 
 The platform offers an intuitive user interface, detailed analytics, and multi-role user support, including administrators, companies, and employees. It leverages JWT-based authentication, PDF generation for detailed reports. The goal is to enhance employee productivity and competencies through interactive learning, evaluation, and performance tracking.
 
